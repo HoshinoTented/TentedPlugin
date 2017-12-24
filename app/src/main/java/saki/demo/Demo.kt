@@ -14,6 +14,7 @@ import com.tented.demo.kotlin.R
 import com.saki.aidl.AppInterface.Stub
 import com.saki.aidl.PluginMsg
 import com.saki.aidl.Type
+import java.util.Random
 
 class Demo : Service()
 {
@@ -25,13 +26,37 @@ class Demo : Service()
         private val AUTHOR = "星野天忆"
         private val INFO = "使用Kotlin语言制作插件"
 
+        private var connection : SQConnection? = null
+
+        private var checkCode : Long? = null
+
         fun debug(obj: Any?) : Any?
         {
             PluginMsg.send(PluginMsg.TYPE_DEBUG, message = obj.toString())
             return obj
         }
 
-        private var connection : SQConnection? = null
+        fun doCheck( msg : PluginMsg )
+        {
+            if( msg.msg == "获取验证码" && checkCode == null )
+            {
+                this.checkCode = debug(Random().nextLong()) as? Long
+
+                msg.clearMsg()
+                msg.addMsg(Type.MSG, "验证码已发送到运行日志")
+                msg.send()
+            }
+
+            else if( msg.msg.matches(Regex("-?[0-9]+")) && checkCode.toString() == msg.msg)
+            {
+                msg.member.master = true
+                checkCode = null            //置null
+
+                msg.clearMsg()
+                msg.addMsg(Type.MSG, "验证成功")
+                msg.send()
+            }
+        }
 
         /**
          * 对主程序发送一个消息包
@@ -63,6 +88,7 @@ class Demo : Service()
                 return
             }
 
+            doCheck(msg)
             tented.handle.HandlerLoader.handleMessage(msg)
         }
 

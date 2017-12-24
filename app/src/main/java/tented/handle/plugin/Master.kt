@@ -18,10 +18,11 @@ object Master : MessageHandler
     val message : String =
             """
                 |$name
-                |${"-" * 9}
+                |${"-" * Main.splitTimes}
                 |[MASTER]添加主人@
                 |[MASTER]删除主人@
                 |主人列表
+                |${"-" * Main.splitTimes}
             """.trimMargin()
 
     init
@@ -49,12 +50,12 @@ object Master : MessageHandler
     {
         if (msg.msg == name)
         {
-            msg.addMsg(Type.MSG, message)
+            msg.addMsg(Type.MSG, message + "\n你${if(msg.member.master) "" else "不"}是主人")
         }
         else if (msg.msg == "主人列表")
         {
             val list : List<Any> = getMasterList(msg.group)
-            val builder : StringBuilder = StringBuilder("主人列表如下\n${"-" * 9}\n")
+            val builder : StringBuilder = StringBuilder("主人列表如下\n${"-" * Main.splitTimes}\n")
 
             for (element in list)
             {

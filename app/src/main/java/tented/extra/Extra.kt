@@ -27,13 +27,13 @@ fun deepClone( obj : Any ) : Any
     return oi.readObject()
 }
 
-operator fun String.times( times : Int ) : String
+operator fun String.times( times : Number ) : String
 {
-    if( times < 0 ) throw IllegalArgumentException("times: $times can not lower than zero")
+    if( times.toLong() < 0 ) throw IllegalArgumentException("times: $times can not lower than zero")
 
     val builder : StringBuilder = StringBuilder("")
 
-    for( i in 1..times ) builder.append(this)
+    for( i in 1..times.toLong() ) builder.append(this)
 
     return builder.toString()
 }

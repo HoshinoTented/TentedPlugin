@@ -25,11 +25,11 @@ object Money : MessageHandler
     val message : String =
             """
                     |$name
-                    |${"-" * 9}
+                    |${"-" * Main.splitTimes}
                     |钱包
                     |修改货币名称 [NAME]
                     |修改货币单位 [NAME]
-                    |${"-" * 9}
+                    |${"-" * Main.splitTimes}
                     |货币名称: $moneyName
                     |货币单位: $moneyUnit
                 """.trimMargin()

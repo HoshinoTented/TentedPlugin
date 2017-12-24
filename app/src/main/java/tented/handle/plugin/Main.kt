@@ -9,6 +9,7 @@ import tented.handle.MessageHandler
  */
 object Main : MessageHandler
 {
+    val splitTimes : Long = 9L
     val list : ArrayList<String> = ArrayList()
 
     fun makeMenu() : String
