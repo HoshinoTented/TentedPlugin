@@ -23,8 +23,8 @@ class Member ( val group : Long , val uin : Long , val name : String? = null ) :
         set(value) = setMoney("bank", value)
 
     var master : Boolean
-        get() = get("master") == "true"
-        set(value) = set("master", value.toString())
+        get() = File.read(File.getPath("$group/Master.cfg"), this.uin.toString(), "false") == "true"
+        set(value) = File.write(File.getPath("$group/Master.cfg"), this.uin.toString(), value.toString())
 
     operator fun set(key : String, value : Any?) = File.write(File.getPath("$group/$uin/config.cfg"), key, value.toString())
     operator fun get(key : String) : String = File.read(File.getPath("$group/$uin/config.cfg"), key, "null")
