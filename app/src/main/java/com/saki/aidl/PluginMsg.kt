@@ -69,7 +69,7 @@ class PluginMsg : Parcelable, Serializable
     private var data = HashMap<String, ArrayList<String>>()
 
     var msg : String = ""
-    var member : tented.member.Member = tented.member.Member.EMPTY
+    var member : tented.member.Member = tented.member.Member.EMPTY          //干脆搞一个member对象下去得了, 不然Kotlin的null判断很烦, 而且就算放一个空Member下去也改不了什么...
     var ats : List<tented.member.Member> = arrayListOf()
     var textMsg : String
         get() = getTextMsg(Type.MSG)

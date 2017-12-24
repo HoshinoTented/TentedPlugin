@@ -70,6 +70,21 @@ class Master : MessageHandler
 
             msg.addMsg(Type.MSG, builder.toString())
         }
+
+        else if( msg.member.master )
+        {
+            if( msg.msg.matches(Regex("(添加|删除)主人@.+")) )
+            {
+                if( msg.ats.isNotEmpty() )      //防止文本at导致出错
+                {
+                    val action : String = msg.msg.substring(0, 2)       //获取动作
+
+                    msg.ats[0].master = action == "添加"
+
+                    msg.addMsg(Type.MSG, "${action}成功")
+                }
+            }
+        }
     }
 
 }
