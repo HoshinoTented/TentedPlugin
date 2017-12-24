@@ -6,7 +6,7 @@ android {
     buildToolsVersion "27.0.0"
 
     defaultConfig {
-        applicationId "com.tented.demo.kotlin"
+        applicationId "com.tented.plugin.kotlin"
         minSdkVersion 8
         targetSdkVersion 21
     }
