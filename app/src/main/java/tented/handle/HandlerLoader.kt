@@ -5,12 +5,12 @@ package tented.handle
  */
 object HandlerLoader
 {
-    private val handlerList = arrayListOf<MessageHandler>   (
-                                                                //TODO some handler
-                                                                tented.handle.plugin.Main,
-                                                                tented.handle.plugin.Master,
-                                                                tented.handle.plugin.Money
-                                                            )
+    private val handlerList = arrayListOf(
+                                            //TODO some handler
+                                            tented.handle.plugin.Main,
+                                            tented.handle.plugin.Master,
+                                            tented.handle.plugin.Money
+                                        )
 
     fun pluginCount() : Int = handlerList.size
 
