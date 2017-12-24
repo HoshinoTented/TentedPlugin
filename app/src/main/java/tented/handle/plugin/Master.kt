@@ -11,57 +11,52 @@ import java.util.Properties
 /**
  * Created by Hoshino Tented on 2017/12/25.
  */
-class Master : MessageHandler
+object Master : MessageHandler
 {
-    companion object
+    val name : String = "主人系统"
+
+    val message : String =
+            """
+                |$name
+                |${"-" * 9}
+                |[MASTER]添加主人@
+                |[MASTER]删除主人@
+                |主人列表
+            """.trimMargin()
+
+    init
     {
-        val name : String = "主人系统"
+        Main.list.add(name)
+    }
 
-        val message : String =
-                """
-                    |$name
-                    |${"-" * 9}
-                    |[MASTER]添加主人@
-                    |[MASTER]删除主人@
-                    |主人列表
-                """.trimMargin()
+    fun getMasterList( group : Long ) : List<Any>
+    {
+        val file : java.io.File = java.io.File(tented.file.File.getPath("$group/Master.cfg"))
 
-        init
+        if( file.exists() )
         {
-            Main.list.add(name)
+            val properties : Properties = Properties()
+
+            properties.load(FileInputStream(file))
+
+            return properties.keys.filter { properties.getProperty(it.toString(), "false") == "true" }
         }
 
-        fun getMasterList( group : Long ) : List<Any>
-        {
-            val file : java.io.File = java.io.File(tented.file.File.getPath("$group/Master.cfg"))
-
-            if( file.exists() )
-            {
-                val properties : Properties = Properties()
-
-                properties.load(FileInputStream(file))
-
-                return properties.keys.filter { properties.getProperty(it.toString(), "false") == "true" }
-            }
-
-            return arrayListOf()
-        }
-
+        return arrayListOf()
     }
 
     override fun handle(msg : PluginMsg)
     {
-        if( msg.msg == name )
+        if (msg.msg == name)
         {
             msg.addMsg(Type.MSG, message)
         }
-
-        else if( msg.msg == "主人列表" )
+        else if (msg.msg == "主人列表")
         {
             val list : List<Any> = getMasterList(msg.group)
             val builder : StringBuilder = StringBuilder("主人列表如下\n${"-" * 9}")
 
-            for( element in list )
+            for (element in list)
             {
                 builder.append(">>$element<<\n")
             }
@@ -70,12 +65,11 @@ class Master : MessageHandler
 
             msg.addMsg(Type.MSG, builder.toString())
         }
-
-        else if( msg.member.master )
+        else if (msg.member.master)
         {
-            if( msg.msg.matches(Regex("(添加|删除)主人@.+")) )
+            if (msg.msg.matches(Regex("(添加|删除)主人@.+")))
             {
-                if( msg.ats.isNotEmpty() )      //防止文本at导致出错
+                if (msg.ats.isNotEmpty())      //防止文本at导致出错
                 {
                     val action : String = msg.msg.substring(0, 2)       //获取动作
 
@@ -85,6 +79,6 @@ class Master : MessageHandler
                 }
             }
         }
-    }
 
+    }
 }

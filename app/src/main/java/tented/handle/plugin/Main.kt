@@ -7,26 +7,23 @@ import tented.handle.MessageHandler
 /**
  * Created by Hoshino Tented on 2017/12/24.
  */
-class Main : MessageHandler
+object Main : MessageHandler
 {
-    companion object
+    val list : ArrayList<String> = ArrayList()
+
+    fun makeMenu() : String
     {
-        val list : ArrayList<String> = ArrayList()
+        val builder : StringBuilder = StringBuilder("")
 
-        fun makeMenu() : String
+        for( (index, element) in list.withIndex() )
         {
-            val builder : StringBuilder = StringBuilder("")
+            builder.append(element)
 
-            for( (index, element) in list.withIndex() )
-            {
-                builder.append(element)
-
-                if( index % 2 == 0 ) builder.append("   ")
-                else builder.append("\n")
-            }
-
-            return builder.substring(0, builder.length - 1)
+            if( index % 2 == 0 ) builder.append("   ")
+            else builder.append("\n")
         }
+
+        return builder.substring(0, builder.length - 1)
     }
 
     override fun handle(msg : PluginMsg)
