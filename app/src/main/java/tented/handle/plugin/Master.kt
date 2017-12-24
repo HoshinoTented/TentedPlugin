@@ -54,7 +54,7 @@ object Master : MessageHandler
         else if (msg.msg == "主人列表")
         {
             val list : List<Any> = getMasterList(msg.group)
-            val builder : StringBuilder = StringBuilder("主人列表如下\n${"-" * 9}")
+            val builder : StringBuilder = StringBuilder("主人列表如下\n${"-" * 9}\n")
 
             for (element in list)
             {

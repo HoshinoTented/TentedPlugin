@@ -27,6 +27,11 @@ object Money : MessageHandler
                     |$name
                     |${"-" * 9}
                     |钱包
+                    |修改货币名称 [NAME]
+                    |修改货币单位 [NAME]
+                    |${"-" * 9}
+                    |货币名称: $moneyName
+                    |货币单位: $moneyUnit
                 """.trimMargin()
 
     init
@@ -45,12 +50,20 @@ object Money : MessageHandler
         {
             val member : tented.member.Member = if( msg.ats.isNotEmpty() ) msg.ats[0] else msg.member
 
-            msg.addMsg(Type.MSG, "${member.name}的钱包...\n${"-" * 9}$moneyName: 有${member.money}${moneyUnit}呢")
+            msg.addMsg(Type.MSG, "${member.name}的钱包...\n${"-" * 9}\n$moneyName: 有${member.money}${moneyUnit}呢")
         }
 
-        else if( msg.msg.matches(Regex("修改货币名称 .+")) )
+        else if( msg.member.master )
         {
+            if (msg.msg.matches(Regex("修改货币(名称|单位) .+")))
+            {
+                val action : String = msg.msg.substring(4, 6)
+                val value : String = msg.msg.substring(7)
 
+                if( action == "名称" ) this.moneyName = value else this.moneyUnit = value
+
+                msg.addMsg(Type.MSG, "操作成功!!!")
+            }
         }
     }
 
