@@ -1,7 +1,5 @@
 package tented.handle
 
-import tented.handle.plugin.Master
-
 /**
  * Created by Hoshino Tented on 2017/12/24.
  */
@@ -9,7 +7,9 @@ object HandlerLoader
 {
     private val handlerList = arrayListOf<MessageHandler>   (
                                                                 //TODO some handler
-                                                                Master
+                                                                tented.handle.plugin.Main,
+                                                                tented.handle.plugin.Master,
+                                                                tented.handle.plugin.Money
                                                             )
 
     fun pluginCount() : Int = handlerList.size
