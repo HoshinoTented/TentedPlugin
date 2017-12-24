@@ -18,7 +18,7 @@ class Member ( val group : Long , val uin : Long , val name : String? = null ) :
         get() = getMoney("money")
         set(value) = setMoney("money", value)
 
-    var bank : Long
+    var bank : Long         //可能没有什么用处
         get() = getMoney("bank")
         set(value) = setMoney("bank", value)
 
