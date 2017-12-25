@@ -52,7 +52,6 @@ object Main : Handler("插件版本", "1.0")
     {
         if( msg.msg == "菜单" ) msg.addMsg(Type.MSG, Main.makeMenu())
         else if( msg.msg == name ) msg.addMsg(Type.MSG, message)
-
     }
 
 }
