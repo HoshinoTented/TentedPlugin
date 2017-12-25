@@ -18,14 +18,15 @@ object PluginLoader
                                             tented.handle.plugin.Manager,
                                             tented.handle.plugin.translate.Translate,
                                             tented.handle.plugin.ban.Ban,
-                                            tented.handle.plugin.photo.Photo
+                                            tented.handle.plugin.photo.Photo,
+                                            tented.handle.plugin.shop.system.SystemShop
                                         )
 
     fun pluginCount() : Int = pluginList.size
 
     private fun checkBan( msg : com.saki.aidl.PluginMsg ) : Boolean
     {
-        if( msg.member.master ) return false
+        if( msg.member.master ) return false                //Master will never be shuted up
 
         val touches : List<String> = tented.handle.plugin.ban.Banner.getWords(msg.group).filter { msg.msg.matches(Regex(".*$it.*")) }
 
