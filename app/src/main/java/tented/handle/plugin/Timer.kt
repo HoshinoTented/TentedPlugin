@@ -61,10 +61,10 @@ object Timer : MessageHandler
         Main.list.add(name)
     }
 
-    operator fun get( group : Long ) : Boolean = File.read(File.getPath("$group/Config.cfg"), "timer", "false") == "true"
+    operator fun get( group : Long ) : Boolean = File.read(File.getPath("Timer.cfg"), group.toString(), "false") == "true"
     operator fun set( group : Long , mode : Boolean )
     {
-        File.write(File.getPath("$group/Config.cfg"), "timer", mode.toString())
+        File.write(File.getPath("Timer.cfg"), group.toString(), mode.toString())
 
         groupSet.add(group)
     }
@@ -88,5 +88,4 @@ object Timer : MessageHandler
             }
         }
     }
-
 }
