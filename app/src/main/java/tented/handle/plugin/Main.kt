@@ -5,7 +5,6 @@ import com.saki.aidl.Type
 import tented.extra.times
 import tented.handle.Handler
 import tented.handle.PluginLoader
-import tented.handle.Plugin
 
 /**
  * Created by Hoshino Tented on 2017/12/24.
@@ -24,7 +23,7 @@ object Main : Handler("插件版本", "1.0")
 
                 for( plugin in PluginLoader.pluginList ) builder.append("${plugin.name} 版本: ${plugin.version}\n")
 
-                builder.append("-" * 9)
+                builder.append("-" * splitTimes)
 
                 return builder.toString()
             }
