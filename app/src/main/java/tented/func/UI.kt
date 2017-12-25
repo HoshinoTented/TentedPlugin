@@ -15,5 +15,7 @@ class UI : Activity()
         super.onCreate(bundle)
 
         setContentView(R.layout.layout)
+
+        finish()        //立即关闭界面, 千万不要以为是闪退噢
     }
 }

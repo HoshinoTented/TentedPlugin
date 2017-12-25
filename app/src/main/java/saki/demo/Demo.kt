@@ -21,10 +21,10 @@ class Demo : Service()
     companion object
     {
 
-        private val JUMP = true
+        private val JUMP = false
 
         private val AUTHOR = "星野天忆"
-        private val INFO = "使用Kotlin语言制作插件"
+        private val INFO = "Tented Plugin"
 
         private var connection : SQConnection? = null
 
