@@ -44,7 +44,7 @@
       </configuration>
     </facet>
   </component>
-  <component name="NewModuleRootManager">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_6">
     <output url="file://$MODULE_DIR$/build/intermediates/classes/debug" />
     <output-test url="file://$MODULE_DIR$/build/intermediates/classes/test/debug" />
     <exclude-output />
@@ -137,13 +137,12 @@
       <excludeFolder url="file://$MODULE_DIR$/build/reports" />
       <excludeFolder url="file://$MODULE_DIR$/build/tmp" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="Android API 19 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="org.jetbrains.kotlin:kotlin-stdlib-jre7:1.2.10@jar" level="project" />
     <orderEntry type="library" name="org.jetbrains:annotations:13.0@jar" level="project" />
     <orderEntry type="library" name="__local_aars__:E.\Projects\AndroidStudio\TentedPlugin\app\libs\InternetRequest.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="__local_aars__:E.\Projects\AndroidStudio\TentedPlugin\app\libs\File.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="org.jetbrains.kotlin:kotlin-stdlib:1.2.10@jar" level="project" />
-    <orderEntry type="library" name="android-android-19" level="project" />
   </component>
 </module>

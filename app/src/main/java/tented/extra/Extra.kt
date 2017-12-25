@@ -12,6 +12,8 @@ import java.io.ObjectOutputStream
  * Created by Hoshino Tented on 2017/12/24.
  */
 
+infix fun Number.randomTo( to : Number ) : Long = this.toLong() + (Math.random() * (to.toLong() - this.toLong())).toLong()
+
 fun File.getPath(more : String) : String = android.os.Environment.getExternalStorageDirectory().toString() + "/Tented/TentedPlugin/$more"
 
 fun deepClone( obj : Any ) : Any

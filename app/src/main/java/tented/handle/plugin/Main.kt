@@ -9,7 +9,7 @@ import tented.handle.PluginLoader
 /**
  * Created by Hoshino Tented on 2017/12/24.
  */
-object Main : Handler("插件版本", "1.3")
+object Main : Handler("插件版本", "1.4")
 {
     val splitTimes : Long = 9L
     val splitChar : String = "-"
@@ -24,7 +24,7 @@ object Main : Handler("插件版本", "1.3")
 
                 for( plugin in PluginLoader.pluginList ) builder.append("${plugin.name} 版本: ${plugin.version}\n")
 
-                builder.append(splitChar * splitTimes)
+                builder.append(splitChar * splitTimes + "\n本插件源码仓库: https://github.com/LimbolRain/TentedPlugin.git\n如果可以的话star一下啦...")
 
                 return builder.toString()
             }

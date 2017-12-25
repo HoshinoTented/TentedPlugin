@@ -17,7 +17,8 @@ object PluginLoader
                                             tented.handle.plugin.Timer,
                                             tented.handle.plugin.Manager,
                                             tented.handle.plugin.translate.Translate,
-                                            tented.handle.plugin.ban.Ban
+                                            tented.handle.plugin.ban.Ban,
+                                            tented.handle.plugin.photo.Photo
                                         )
 
     fun pluginCount() : Int = pluginList.size

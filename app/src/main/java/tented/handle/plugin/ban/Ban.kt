@@ -9,7 +9,7 @@ import tented.handle.plugin.Main
 /**
  * Created by Hoshino Tented on 2017/12/25.
  */
-object Ban : Plugin("违禁系统", "1.1")
+object Ban : Plugin("违禁系统", "1.2")
 {
     val message : String =
             """
@@ -17,6 +17,7 @@ object Ban : Plugin("违禁系统", "1.1")
                 |${Main.splitChar * Main.splitTimes}
                 |[MASTER]添加违禁词[WORD]
                 |[MASTER]删除违禁词[WORD]
+                |[MASTER]设置违禁禁言时长[TIME]
                 |违禁词列表
                 |${Main.splitChar * Main.splitTimes}
             """.trimMargin()
@@ -25,7 +26,7 @@ object Ban : Plugin("违禁系统", "1.1")
     {
         if( msg.msg == name )
         {
-            msg.addMsg(Type.MSG, message)
+            msg.addMsg(Type.MSG, message + "\n本群违禁禁言时长为: ${Banner[msg.group]}")
         }
 
         else if( msg.msg == "违禁词列表" )
@@ -66,6 +67,15 @@ object Ban : Plugin("违禁系统", "1.1")
 
                     msg.addMsg(Type.MSG, "删除成功~")
                 }
+            }
+
+            else if( msg.msg.matches(Regex("设置违禁禁言时长[0-9]{1,5}")) )
+            {
+                val time : Int = Integer.parseInt(msg.msg.substring(8))
+
+                Banner[msg.group] = time
+
+                msg.addMsg(Type.MSG, "设置完毕")
             }
         }
     }
