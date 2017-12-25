@@ -1,6 +1,6 @@
 <resources>
 
-    <string name="app_name">Kotlin Plugin</string>
-    <string name="text">Kotlin Plugin (Lite ver.)</string>
+    <string name="app_name">Tented Plugin</string>
+    <string name="text">You never see this message</string>
 
 </resources>
