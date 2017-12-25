@@ -24,13 +24,13 @@ object Master : Plugin("主人系统", "1.0")
                     |${Main.splitChar * Main.splitTimes}
                 """.trimMargin()
 
-    fun getMasterList( group : Long ) : List<Any>
+    private fun getMasterList( group : Long ) : List<Any>
     {
         val file : java.io.File = java.io.File(tented.file.File.getPath("$group/Master.cfg"))
 
         if( file.exists() )
         {
-            val properties : Properties = Properties()
+            val properties = Properties()
 
             properties.load(FileInputStream(file))
 
@@ -50,7 +50,7 @@ object Master : Plugin("主人系统", "1.0")
         else if (msg.msg == "主人列表")
         {
             val list : List<Any> = getMasterList(msg.group)
-            val builder : StringBuilder = StringBuilder("主人列表如下\n${Main.splitChar * Main.splitTimes}\n")
+            val builder = StringBuilder("主人列表如下\n${Main.splitChar * Main.splitTimes}\n")
 
             for (element in list)
             {

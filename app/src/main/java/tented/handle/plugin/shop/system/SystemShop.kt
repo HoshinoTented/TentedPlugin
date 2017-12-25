@@ -2,7 +2,6 @@ package tented.handle.plugin.shop.system
 
 import com.saki.aidl.PluginMsg
 import com.saki.aidl.Type
-import org.json.JSONArray
 import org.json.JSONObject
 import tented.bag.Bag
 import tented.extra.getPath
@@ -27,7 +26,7 @@ object SystemShop : Plugin("系统商店", "1.0")
         if( msg.msg == name )
         {
             val shop : Shop = get(msg.group)
-            val builder : StringBuilder = StringBuilder("$name\n${Main.splitChar * Main.splitTimes}\n")
+            val builder = StringBuilder("$name\n${Main.splitChar * Main.splitTimes}\n")
 
             for( item in shop ) builder.append(item.name).append("(${item.id})").append("\n").append(item.info["info"]).append("\n").append(Main.splitChar * Main.splitTimes).append("\n")
 
@@ -40,7 +39,7 @@ object SystemShop : Plugin("系统商店", "1.0")
         {
             val bagPath : String = tented.file.File.getPath("${msg.group}/Bag/${msg.uin}.json")
 
-            val bag : Bag = Bag(bagPath)
+            val bag = Bag(bagPath)
             val shop : Shop = get(msg.group)
 
             val space : Int = msg.msg.lastIndexOf(' ')
@@ -69,10 +68,10 @@ object SystemShop : Plugin("系统商店", "1.0")
 
         else if( msg.msg == "背包" )
         {
-            val bag : Bag = Bag(tented.file.File.getPath("${msg.group}/Bag/${msg.uin}.json"))
+            val bag = Bag(tented.file.File.getPath("${msg.group}/Bag/${msg.uin}.json"))
             val items : JSONObject = bag.items
 
-            val builder : StringBuilder = StringBuilder("${msg.uinName}背包中的物品有...\n${Main.splitChar * Main.splitTimes}\n")
+            val builder = StringBuilder("${msg.uinName}背包中的物品有...\n${Main.splitChar * Main.splitTimes}\n")
 
             for( item in items.keys() )
             {
@@ -88,14 +87,15 @@ object SystemShop : Plugin("系统商店", "1.0")
 
         else if( msg.msg.matches(Regex("使用.+")) )
         {
-            val id : String = msg.msg.substring(2)
-            val function : ((tented.member.Member) -> Unit)? = SystemItems.items[id]
+            val space : Int = msg.msg.indexOf(' ')
+            val id : String = msg.msg.substring(2, if( space == -1 ) msg.msg.length else space)     //截取id, 到最近的一个空格, 按照规定, id不能包含空格( 使用_代替 ), 这个是为了适应某些道具使用需要参数...
+            val function : ((PluginMsg) -> Unit)? = SystemItems.items[id]
 
             if( function == null ) msg.addMsg(Type.MSG, "哎呀, 好像这个物品无法使用呢...")
             else
             {
                 val bagPath = tented.file.File.getPath("${msg.group}/Bag/${msg.uin}.json")
-                val bag : Bag = Bag(bagPath)
+                val bag = Bag(bagPath)
 
                 if( bag.items.has(id) && bag.items.getInt(id) > 0 )
                 {
@@ -106,7 +106,7 @@ object SystemShop : Plugin("系统商店", "1.0")
 
                     Data.save(bagPath, bag.toString())
 
-                    function(msg.member)
+                    function(msg)       //进行使用处理
 
                     msg.addMsg(Type.MSG, "使用完毕")
                 }

@@ -34,6 +34,19 @@ object Manager : Plugin("群管系统", "1.0")
             msg.addMsg(Type.MSG, message)
         }
 
+        else if( msg.msg.matches(Regex("赞(自己|我)?")) )
+        {
+            val date : String = SimpleDateFormat("yyyy/MM/dd").format(Date())
+
+            if( msg.member["favourite"] != date )       //如果已经赞过直接不回复
+            {
+                msg.member.favourite()
+                msg.member["favourite"] = date
+
+                Manager.successfulMessage(msg)
+            }
+        }
+
         else if( msg.member.master )
         {
             if( msg.ats.isNotEmpty() )
@@ -67,19 +80,6 @@ object Manager : Plugin("群管系统", "1.0")
 
                         Manager.successfulMessage(msg)
                     }
-                }
-            }
-
-            if( msg.msg.matches(Regex("赞(自己|我)?")) )
-            {
-                val date : String = SimpleDateFormat("yyyy/MM/dd").format(Date())
-
-                if( msg.member["favourite"] != date )
-                {
-                    msg.member.favourite()
-                    msg.member["favourite"] = date
-
-                    Manager.successfulMessage(msg)
                 }
             }
         }

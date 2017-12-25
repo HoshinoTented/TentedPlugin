@@ -41,7 +41,7 @@ object Money : Plugin("货币系统", "1.1")
     {
         val file : java.io.File = java.io.File(tented.file.File.getPath("$group/Money.cfg"))
         val properties : java.util.Properties = java.util.Properties()
-        val builder : StringBuilder = StringBuilder("")
+        val builder = StringBuilder("")
         val members : List<Long> = getMembers(group)
 
         if( ! file.exists() )
@@ -61,7 +61,7 @@ object Money : Plugin("货币系统", "1.1")
 
         //do setWords
 
-        val writer : BufferedWriter = BufferedWriter(FileWriter(file))
+        val writer = BufferedWriter(FileWriter(file))
 
         writer.write(builder.toString())
         writer.close()

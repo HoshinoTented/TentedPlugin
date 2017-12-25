@@ -18,7 +18,7 @@ object Main : Handler("插件版本", "1.4")
     val message : String
             get()
             {
-                val builder : StringBuilder = StringBuilder("$name\n${splitChar * splitTimes}\n")
+                val builder = StringBuilder("$name\n${splitChar * splitTimes}\n")
 
                 builder.append("插件作者: 星野 天忆\n")
 
@@ -36,7 +36,7 @@ object Main : Handler("插件版本", "1.4")
 
     private fun makeMenu() : String
     {
-        val builder : StringBuilder = StringBuilder("")
+        val builder = StringBuilder("")
 
         for( (index, element) in list.withIndex() )
         {
