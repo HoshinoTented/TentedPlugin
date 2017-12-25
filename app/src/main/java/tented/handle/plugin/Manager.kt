@@ -3,17 +3,15 @@ package tented.handle.plugin
 import com.saki.aidl.PluginMsg
 import com.saki.aidl.Type
 import tented.extra.times
-import tented.handle.MessageHandler
+import tented.handle.Plugin
 import java.text.SimpleDateFormat
 import java.util.Date
 
 /**
  * Created by Hoshino Tented on 2017/12/25.
  */
-object Manager : MessageHandler
+object Manager : Plugin("群管系统", "1.0")
 {
-    val name : String = "群管系统"
-
     val message : String =
             """
                 |$name
@@ -23,11 +21,6 @@ object Manager : MessageHandler
                 |改@
                 |赞
             """.trimMargin()
-
-    init
-    {
-        Main.list.add(name)
-    }
 
     private fun successfulMessage(msg : PluginMsg)
     {

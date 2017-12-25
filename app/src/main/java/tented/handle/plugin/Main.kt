@@ -2,15 +2,31 @@ package tented.handle.plugin
 
 import com.saki.aidl.PluginMsg
 import com.saki.aidl.Type
-import tented.handle.MessageHandler
+import tented.extra.times
+import tented.handle.PluginLoader
+import tented.handle.Plugin
 
 /**
  * Created by Hoshino Tented on 2017/12/24.
  */
-object Main : MessageHandler
+object Main : Plugin("插件版本", "1.0")
 {
     val splitTimes : Long = 9L
     val list : HashSet<String> = HashSet()
+
+    val message : String
+            get()
+            {
+                val builder : StringBuilder = StringBuilder("$name\n${"-" * splitTimes}\n")
+
+                builder.append("插件作者: 星野 天忆\n")
+
+                for( plugin in PluginLoader.pluginList ) builder.append("${plugin.name} 版本: ${plugin.version}\n")
+
+                builder.append("-" * 9)
+
+                return builder.toString()
+            }
 
     fun makeMenu() : String
     {
@@ -30,6 +46,8 @@ object Main : MessageHandler
     override fun handle(msg : PluginMsg)
     {
         if( msg.msg == "菜单" ) msg.addMsg(Type.MSG, Main.makeMenu())
+        else if( msg.msg == name ) msg.addMsg(Type.MSG, message)
+
     }
 
 }

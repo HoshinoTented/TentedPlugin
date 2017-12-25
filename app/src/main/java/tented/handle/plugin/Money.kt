@@ -6,19 +6,16 @@ import tented.extra.getMembers
 import tented.extra.getPath
 import tented.extra.times
 import tented.file.File
-import tented.handle.MessageHandler
+import tented.handle.Plugin
 import java.io.BufferedWriter
 import java.io.FileInputStream
-import java.io.FileOutputStream
 import java.io.FileWriter
 
 /**
  * Created by Hoshino Tented on 2017/12/24.
  */
-object Money : MessageHandler
+object Money : Plugin("货币系统", "")
 {
-    val name : String = "货币系统"
-
     var moneyUnit : String
         get() = File.read(File.getPath("config.cfg"), "money::unit", "枚")
         set(value) = File.write(File.getPath("config.cfg"), "money::unit", value)
@@ -39,11 +36,6 @@ object Money : MessageHandler
                         |货币名称: $moneyName
                         |货币单位: $moneyUnit
                     """.trimMargin()
-
-    init
-    {
-        Main.list.add(name)
-    }
 
     private fun giveMoneyToEveryone( group : Long , change : Long )
     {

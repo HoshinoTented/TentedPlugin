@@ -89,7 +89,7 @@ class Demo : Service()
             }
 
             doCheck(msg)
-            tented.handle.HandlerLoader.handleMessage(msg)
+            tented.handle.PluginLoader.handleMessage(msg)
         }
 
         /**

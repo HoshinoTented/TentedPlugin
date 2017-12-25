@@ -5,16 +5,15 @@ import com.saki.aidl.Type
 import tented.extra.getPath
 import tented.extra.times
 import tented.file.File
-import tented.handle.MessageHandler
+import tented.handle.Plugin
 import java.text.SimpleDateFormat
 import java.util.Date
 
 /**
  * Created by Hoshino Tented on 2017/12/25.
  */
-object Timer : MessageHandler
+object Timer : Plugin("整点报时", "1.0")
 {
-    val name : String = "整点报时"
     val groupSet : HashSet<Long> = HashSet()        /*为什么要使用Set?
                                                      * Set集合的特性是 不可重复值
                                                      * 而这个报时系统的缓存正是需要这一点
@@ -55,11 +54,6 @@ object Timer : MessageHandler
                                                 }
                                             }
                                 )
-
-    init
-    {
-        Main.list.add(name)
-    }
 
     operator fun get( group : Long ) : Boolean = File.read(File.getPath("Timer.cfg"), group.toString(), "false") == "true"
     operator fun set( group : Long , mode : Boolean )

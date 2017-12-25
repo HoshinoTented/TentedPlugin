@@ -3,9 +3,9 @@ package tented.handle
 /**
  * Created by Hoshino Tented on 2017/12/24.
  */
-object HandlerLoader
+object PluginLoader
 {
-    private val handlerList = arrayListOf(
+    val pluginList = arrayListOf(
                                             //TODO some handler
                                             tented.handle.plugin.Main,
                                             tented.handle.plugin.Master,
@@ -14,11 +14,11 @@ object HandlerLoader
                                             tented.handle.plugin.Manager
                                         )
 
-    fun pluginCount() : Int = handlerList.size
+    fun pluginCount() : Int = pluginList.size
 
     fun handleMessage( msg : com.saki.aidl.PluginMsg )
     {
-        for ( handler in handlerList )
+        for ( handler in pluginList)
         {
             msg.clearMsg()
             handler.handle(msg)
