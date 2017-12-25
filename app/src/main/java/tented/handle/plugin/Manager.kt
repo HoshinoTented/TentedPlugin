@@ -29,7 +29,7 @@ object Manager : MessageHandler
         Main.list.add(name)
     }
 
-    private fun succfulMessage( msg : PluginMsg )
+    private fun successfulMessage(msg : PluginMsg)
     {
         msg.addMsg(Type.MSG, "操作成功")
     }
@@ -53,14 +53,14 @@ object Manager : MessageHandler
 
                         msg.ats[0].shut(time)
 
-                        Manager.succfulMessage(msg)
+                        Manager.successfulMessage(msg)
                     }
 
                     msg.msg.matches(Regex("踢@.+")) ->
                     {
                         msg.ats[0].remove()
 
-                        Manager.succfulMessage(msg)
+                        Manager.successfulMessage(msg)
                     }
 
                     msg.msg.matches(Regex("改@.+ .+")) ->
@@ -72,7 +72,7 @@ object Manager : MessageHandler
 
                         member.rename(newName)
 
-                        Manager.succfulMessage(msg)
+                        Manager.successfulMessage(msg)
                     }
                 }
             }
@@ -86,7 +86,7 @@ object Manager : MessageHandler
                     msg.member.favourite()
                     msg.member["favourite"] = date
 
-                    Manager.succfulMessage(msg)
+                    Manager.successfulMessage(msg)
                 }
             }
         }
