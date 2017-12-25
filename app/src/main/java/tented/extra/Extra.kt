@@ -1,7 +1,7 @@
 package tented.extra
 
+import com.saki.aidl.PluginMsg
 import tented.file.File
-import org.apache.http.util.EntityUtils.toByteArray
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import java.io.ObjectInputStream
@@ -26,6 +26,8 @@ fun deepClone( obj : Any ) : Any
 
     return oi.readObject()
 }
+
+fun getMembers( group : Long ) : List<Long> = PluginMsg.send(type = PluginMsg.TYPE_GET_GROUP_MEMBER, group = group)!!.getData()["member"]!!.map { java.lang.Long.parseLong(it) }
 
 operator fun String.times( times : Number ) : String
 {

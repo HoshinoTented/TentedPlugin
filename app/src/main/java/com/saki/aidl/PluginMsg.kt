@@ -23,11 +23,11 @@ class PluginMsg : Parcelable, Serializable
             override fun newArray(size : Int) : Array<PluginMsg?> = arrayOfNulls(size)
         }
 
-        fun send(type : Int = 0, groupId : Long = 0, uin : Long = 0, msgType : Type = Type.MSG, message : String = "", value : Int = 0) : PluginMsg?
+        fun send(type : Int = 0, group : Long = 0, uin : Long = 0, msgType : Type = Type.MSG, message : String = "", value : Int = 0) : PluginMsg?
         {
             val msg : PluginMsg = PluginMsg(type)
 
-            msg.group = groupId
+            msg.group = group
             msg.uin = uin
             msg.value = value
 

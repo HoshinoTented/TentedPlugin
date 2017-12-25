@@ -52,6 +52,7 @@ object Master : MessageHandler
         {
             msg.addMsg(Type.MSG, message + "\n你${if(msg.member.master) "" else "不"}是主人")
         }
+
         else if (msg.msg == "主人列表")
         {
             val list : List<Any> = getMasterList(msg.group)
@@ -66,6 +67,7 @@ object Master : MessageHandler
 
             msg.addMsg(Type.MSG, builder.toString())
         }
+
         else if (msg.member.master)
         {
             if (msg.msg.matches(Regex("(添加|删除)主人@.+")))
