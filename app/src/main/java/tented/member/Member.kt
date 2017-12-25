@@ -1,5 +1,6 @@
 package tented.member
 
+import com.saki.aidl.PluginMsg
 import tented.extra.getPath
 import tented.file.File
 import java.io.Serializable
@@ -31,4 +32,9 @@ class Member ( val group : Long , val uin : Long , val name : String? = null ) :
 
     private fun getMoney( type : String ) : Long = java.lang.Long.parseLong(File.read(File.getPath("$group/Money.cfg"), this.uin.toString(), "0"))
     private fun setMoney( type : String , value : Long ) = File.write(File.getPath("$group/Money.cfg"), this.uin.toString(), value.toString())
+
+    fun shut( time : Int ) = PluginMsg.send(type = PluginMsg.TYPE_SET_MEMBER_SHUTUP, group = group, uin = uin, value = time * 60)
+    fun remove() = PluginMsg.send(type = PluginMsg.TYPE_DELETE_MEMBER, group = group, uin = uin)
+    fun rename( newName : String ) = PluginMsg.send(type = PluginMsg.TYPE_SET_MEMBER_CARD, group = group, uin = uin, title = newName)
+    fun favourite( times : Int = 10 ) = PluginMsg.send(type = PluginMsg.TYPE_FAVOURITE, group = group, uin = uin, value = times)
 }

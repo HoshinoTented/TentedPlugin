@@ -10,7 +10,7 @@ import tented.handle.MessageHandler
 object Main : MessageHandler
 {
     val splitTimes : Long = 9L
-    val list : ArrayList<String> = ArrayList()
+    val list : HashSet<String> = HashSet()
 
     fun makeMenu() : String
     {

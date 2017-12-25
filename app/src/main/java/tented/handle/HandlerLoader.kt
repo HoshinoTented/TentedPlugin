@@ -10,7 +10,8 @@ object HandlerLoader
                                             tented.handle.plugin.Main,
                                             tented.handle.plugin.Master,
                                             tented.handle.plugin.Money,
-                                            tented.handle.plugin.Timer
+                                            tented.handle.plugin.Timer,
+                                            tented.handle.plugin.Manager
                                         )
 
     fun pluginCount() : Int = handlerList.size
