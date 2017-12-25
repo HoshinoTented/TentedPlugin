@@ -17,11 +17,11 @@ object Master : Plugin("主人系统", "1.0")
             get() =
                 """
                     |$name
-                    |${"-" * Main.splitTimes}
+                    |${Main.splitChar * Main.splitTimes}
                     |[MASTER]添加主人@
                     |[MASTER]删除主人@
                     |主人列表
-                    |${"-" * Main.splitTimes}
+                    |${Main.splitChar * Main.splitTimes}
                 """.trimMargin()
 
     fun getMasterList( group : Long ) : List<Any>
@@ -50,14 +50,14 @@ object Master : Plugin("主人系统", "1.0")
         else if (msg.msg == "主人列表")
         {
             val list : List<Any> = getMasterList(msg.group)
-            val builder : StringBuilder = StringBuilder("主人列表如下\n${"-" * Main.splitTimes}\n")
+            val builder : StringBuilder = StringBuilder("主人列表如下\n${Main.splitChar * Main.splitTimes}\n")
 
             for (element in list)
             {
                 builder.append(">>$element<<\n")
             }
 
-            builder.append("-" * 9)
+            builder.append(Main.splitChar * 9)
 
             msg.addMsg(Type.MSG, builder.toString())
         }

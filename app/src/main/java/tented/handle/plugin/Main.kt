@@ -12,18 +12,19 @@ import tented.handle.PluginLoader
 object Main : Handler("插件版本", "1.2")
 {
     val splitTimes : Long = 9L
+    val splitChar : String = "-"
     val list : HashSet<String> = HashSet()
 
     val message : String
             get()
             {
-                val builder : StringBuilder = StringBuilder("$name\n${"-" * splitTimes}\n")
+                val builder : StringBuilder = StringBuilder("$name\n${splitChar * splitTimes}\n")
 
                 builder.append("插件作者: 星野 天忆\n")
 
                 for( plugin in PluginLoader.pluginList ) builder.append("${plugin.name} 版本: ${plugin.version}\n")
 
-                builder.append("-" * splitTimes)
+                builder.append(splitChar * splitTimes)
 
                 return builder.toString()
             }

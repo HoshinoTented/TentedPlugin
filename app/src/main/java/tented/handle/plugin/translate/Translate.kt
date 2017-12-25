@@ -14,10 +14,10 @@ object Translate : Plugin("百度翻译", "1.0")
     val message : String =
             """
                 |$name
-                |${"-" * Main.splitTimes}
+                |${Main.splitChar * Main.splitTimes}
                 |翻译[QUERY]
                 |语言代码[QUERY]
-                |${"-" * Main.splitTimes}
+                |${Main.splitChar * Main.splitTimes}
             """.trimMargin()
 
     override fun handle(msg : PluginMsg)
@@ -32,7 +32,7 @@ object Translate : Plugin("百度翻译", "1.0")
             val query : String = msg.msg.substring(2)
             val result : String = Translation.translate(query)
 
-            msg.addMsg(Type.MSG, "百度翻译...\n请求: $query\n${"-" * Main.splitTimes}\n返回: $result")
+            msg.addMsg(Type.MSG, "百度翻译...\n请求: $query\n${Main.splitChar * Main.splitTimes}\n返回: $result")
         }
 
         else if ( msg.msg.matches(Regex("语言代码.+")) )
@@ -40,7 +40,7 @@ object Translate : Plugin("百度翻译", "1.0")
             val query : String = msg.msg.substring(4)
             val result : String = Translation.getLanguage(query)
 
-            msg.addMsg(Type.MSG, "语言代码...\n请求: $query\n${"-" * Main.splitTimes}\n返回: $result")
+            msg.addMsg(Type.MSG, "语言代码...\n请求: $query\n${Main.splitChar * Main.splitTimes}\n返回: $result")
         }
     }
 }

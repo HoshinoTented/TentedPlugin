@@ -24,10 +24,10 @@ object Timer : Plugin("整点报时", "1.0")
             get() =
                 """
                     |$name
-                    |${"-" * Main.splitTimes}
+                    |${Main.splitChar * Main.splitTimes}
                     |开启报时
                     |关闭报时
-                    |${"-" * Main.splitTimes}
+                    |${Main.splitChar * Main.splitTimes}
                 """.trimMargin()
 
     val thread : Thread = Thread(

@@ -15,7 +15,7 @@ object Manager : Plugin("群管系统", "1.0")
     val message : String =
             """
                 |$name
-                |${"-" * Main.splitTimes}
+                |${Main.splitChar * Main.splitTimes}
                 |禁@ [TIME]
                 |踢@
                 |改@

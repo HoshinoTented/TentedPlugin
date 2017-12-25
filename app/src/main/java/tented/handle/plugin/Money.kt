@@ -28,11 +28,11 @@ object Money : Plugin("货币系统", "1.1")
             get() =
                 """
                         |$name
-                        |${"-" * Main.splitTimes}
+                        |${Main.splitChar * Main.splitTimes}
                         |钱包
                         |修改货币名称 [NAME]
                         |修改货币单位 [NAME]
-                        |${"-" * Main.splitTimes}
+                        |${Main.splitChar * Main.splitTimes}
                         |货币名称: $moneyName
                         |货币单位: $moneyUnit
                     """.trimMargin()
@@ -59,7 +59,7 @@ object Money : Plugin("货币系统", "1.1")
             builder.append("$member=$money\n")     //add map to the builder
         }
 
-        //do write
+        //do setWords
 
         val writer : BufferedWriter = BufferedWriter(FileWriter(file))
 
@@ -78,7 +78,7 @@ object Money : Plugin("货币系统", "1.1")
         {
             val member : tented.member.Member = if( msg.ats.isNotEmpty() ) msg.ats[0] else msg.member
 
-            msg.addMsg(Type.MSG, "${member.name}的钱包...\n${"-" * 9}\n$moneyName: 有${member.money}${moneyUnit}呢")
+            msg.addMsg(Type.MSG, "${member.name}的钱包...\n${Main.splitChar * 9}\n$moneyName: 有${member.money}${moneyUnit}呢")
         }
 
         else if( msg.member.master )
