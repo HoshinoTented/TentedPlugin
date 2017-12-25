@@ -3,13 +3,14 @@ package tented.handle.plugin
 import com.saki.aidl.PluginMsg
 import com.saki.aidl.Type
 import tented.extra.times
+import tented.handle.Handler
 import tented.handle.PluginLoader
 import tented.handle.Plugin
 
 /**
  * Created by Hoshino Tented on 2017/12/24.
  */
-object Main : Plugin("插件版本", "1.0")
+object Main : Handler("插件版本", "1.0")
 {
     val splitTimes : Long = 9L
     val list : HashSet<String> = HashSet()
@@ -28,7 +29,12 @@ object Main : Plugin("插件版本", "1.0")
                 return builder.toString()
             }
 
-    fun makeMenu() : String
+    init
+    {
+        list.add(name)
+    }
+
+    private fun makeMenu() : String
     {
         val builder : StringBuilder = StringBuilder("")
 
