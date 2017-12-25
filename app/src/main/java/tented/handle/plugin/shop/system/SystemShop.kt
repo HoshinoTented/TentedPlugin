@@ -9,6 +9,7 @@ import tented.extra.getPath
 import tented.extra.times
 import tented.handle.Plugin
 import tented.handle.plugin.Main
+import tented.handle.plugin.Money
 import tented.io.Data
 import tented.shop.Item
 import tented.shop.Shop
@@ -44,20 +45,20 @@ object SystemShop : Plugin("系统商店", "1.0")
 
             val space : Int = msg.msg.lastIndexOf(' ')
             val id : String = msg.msg.substring(2, space)
-            val count : Int = Integer.parseInt(msg.msg.substring(space + 1))
+            val count : Long = java.lang.Long.parseLong(msg.msg.substring(space + 1))
 
             val item : Item? = shop[id]
 
             if( item != null )
             {
-                val price : Int = item.info.getInt("price")
+                val price : Long = item.info.getLong("price")
 
-                if( msg.member.money < (price * count) ) msg.addMsg(Type.MSG, "金币不足${price}噢")
+                if( msg.member.money < (price * count) ) msg.addMsg(Type.MSG, "${Money.moneyName}不足${price * count}噢")
                 else
                 {
                     msg.member.money -= (price * count)
 
-                    bag.add(item.id, count.toLong())
+                    bag.add(item.id, count)
                     Data.save(bagPath, bag.toString())
 
                     msg.addMsg(Type.MSG, "购买成功")
