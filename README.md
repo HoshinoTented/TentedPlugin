@@ -9,6 +9,14 @@
 tented.handle.plugin是各个功能的Handler实现类<br>
 大概就这样了
 
+-----------------------
+
+# JAR库在哪里?
+你猜啊
+就在我Github里, 自己慢慢找
+File, InternetRequest和ShopSystem都有...
+不过不保证是最新的
+
 ------------------------
 
 ### 然后是版权?
