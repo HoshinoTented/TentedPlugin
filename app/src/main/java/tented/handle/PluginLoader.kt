@@ -11,7 +11,8 @@ object PluginLoader
                                             tented.handle.plugin.Master,
                                             tented.handle.plugin.Money,
                                             tented.handle.plugin.Timer,
-                                            tented.handle.plugin.Manager
+                                            tented.handle.plugin.Manager,
+                                            tented.handle.plugin.translate.Translate
                                         )
 
     fun pluginCount() : Int = pluginList.size

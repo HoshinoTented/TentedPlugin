@@ -9,7 +9,7 @@ import tented.handle.PluginLoader
 /**
  * Created by Hoshino Tented on 2017/12/24.
  */
-object Main : Handler("插件版本", "1.0")
+object Main : Handler("插件版本", "1.2")
 {
     val splitTimes : Long = 9L
     val list : HashSet<String> = HashSet()

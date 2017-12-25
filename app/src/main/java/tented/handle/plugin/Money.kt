@@ -14,7 +14,7 @@ import java.io.FileWriter
 /**
  * Created by Hoshino Tented on 2017/12/24.
  */
-object Money : Plugin("货币系统", "1.0")
+object Money : Plugin("货币系统", "1.1")
 {
     var moneyUnit : String
         get() = File.read(File.getPath("config.cfg"), "money::unit", "枚")
