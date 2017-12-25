@@ -15,15 +15,16 @@ object Master : MessageHandler
 {
     val name : String = "主人系统"
 
-    val message : String =
-            """
-                |$name
-                |${"-" * Main.splitTimes}
-                |[MASTER]添加主人@
-                |[MASTER]删除主人@
-                |主人列表
-                |${"-" * Main.splitTimes}
-            """.trimMargin()
+    val message : String
+            get() =
+                """
+                    |$name
+                    |${"-" * Main.splitTimes}
+                    |[MASTER]添加主人@
+                    |[MASTER]删除主人@
+                    |主人列表
+                    |${"-" * Main.splitTimes}
+                """.trimMargin()
 
     init
     {

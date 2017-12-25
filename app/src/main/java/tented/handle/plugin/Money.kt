@@ -27,24 +27,25 @@ object Money : MessageHandler
         get() = File.read(File.getPath("config.cfg"), "money::name", "水晶")
         set(value) = File.write(File.getPath("config.cfg"), "money::name", value)
 
-    val message : String =
-            """
-                    |$name
-                    |${"-" * Main.splitTimes}
-                    |钱包
-                    |修改货币名称 [NAME]
-                    |修改货币单位 [NAME]
-                    |${"-" * Main.splitTimes}
-                    |货币名称: $moneyName
-                    |货币单位: $moneyUnit
-                """.trimMargin()
+    val message : String
+            get() =
+                """
+                        |$name
+                        |${"-" * Main.splitTimes}
+                        |钱包
+                        |修改货币名称 [NAME]
+                        |修改货币单位 [NAME]
+                        |${"-" * Main.splitTimes}
+                        |货币名称: $moneyName
+                        |货币单位: $moneyUnit
+                    """.trimMargin()
 
     init
     {
         Main.list.add(name)
     }
 
-    fun giveMoneyToEveryone( group : Long , change : Long )
+    private fun giveMoneyToEveryone( group : Long , change : Long )
     {
         val file : java.io.File = java.io.File(tented.file.File.getPath("$group/Money.cfg"))
         val properties : java.util.Properties = java.util.Properties()
