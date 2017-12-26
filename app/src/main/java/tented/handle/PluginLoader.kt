@@ -20,7 +20,8 @@ object PluginLoader
                                             tented.handle.plugin.ban.Ban,
                                             tented.handle.plugin.photo.Photo,
                                             tented.handle.plugin.shop.system.SystemShop,
-                                            tented.handle.plugin.Settings
+                                            tented.handle.plugin.Settings,
+                                            tented.handle.plugin.wiki.BaiduWiki
                                         )
 
     fun pluginCount() : Int = pluginList.size

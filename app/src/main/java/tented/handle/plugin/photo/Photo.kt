@@ -29,7 +29,7 @@ object Photo : Plugin("百度搜图", "1.0")
         else if( msg.msg.matches(Regex("搜图.+")) )
         {
             val keyWord : String = msg.msg.substring(2)
-            val url : String = Seacher.search(keyWord)
+            val url : String = Searcher.search(keyWord)
 
             msg.addMsg(Type.IMAGE, url)
         }

@@ -20,7 +20,6 @@ class Demo : Service()
 {
     companion object
     {
-
         private val JUMP = false
 
         private val AUTHOR = "星野天忆"
