@@ -2,7 +2,9 @@ package tented.handle.plugin
 
 import com.saki.aidl.PluginMsg
 import com.saki.aidl.Type
+import tented.extra.getPath
 import tented.extra.times
+import tented.file.File
 import tented.handle.Handler
 import tented.handle.PluginLoader
 import java.text.SimpleDateFormat
@@ -13,8 +15,8 @@ import java.util.Date
  */
 object Main : Handler("插件版本", "1.5")
 {
-    val splitTimes : Long = 9L
-    val splitChar : String = "-"
+    val splitTimes : Long = java.lang.Long.parseLong(File.read(File.getPath("config.cfg"), "st", "9"))
+    val splitChar : String = File.read(File.getPath("config.cfg"), "sc", "-")
     val list : HashSet<String> = HashSet()
 
     val message : String
