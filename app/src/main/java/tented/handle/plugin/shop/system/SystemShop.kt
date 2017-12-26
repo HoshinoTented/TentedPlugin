@@ -16,7 +16,7 @@ import tented.shop.Shop
 /**
  * Created by Hoshino Tented on 2017/12/26.
  */
-object SystemShop : Plugin("系统商店", "1.0")
+object SystemShop : Plugin("系统商店", "1.1")
 {
     operator fun get(group : Long) : Shop = Shop(tented.file.File.getPath("$group/Shop/shop.json"))
     operator fun set(group : Long , shop : Shop) = Data.save(tented.file.File.getPath("$group/Shop/shop.json"), shop.toString())

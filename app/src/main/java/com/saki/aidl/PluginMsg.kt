@@ -25,12 +25,13 @@ class PluginMsg : Parcelable, Serializable
 
         fun send(type : Int = 0, group : Long = 0, uin : Long = 0, msgType : Type = Type.MSG, message : String = "", value : Int = 0 , title : String? = null) : PluginMsg?
         {
-            val msg : PluginMsg = PluginMsg(type)
+            val msg = PluginMsg(type)
 
             msg.group = group
             msg.uin = uin
             msg.value = value
             msg.title = title
+            msg.code = group
 
             msg.addMsg(msgType, message)
             return msg.send()

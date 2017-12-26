@@ -75,6 +75,13 @@ object Master : Plugin("主人系统", "1.0")
                     msg.addMsg(Type.MSG, "${action}成功")
                 }
             }
+
+            else if( msg.msg == "退出插件" )
+            {
+                msg.addMsg(Type.MSG, "开始执行...")
+
+                System.exit(0)
+            }
         }
 
     }

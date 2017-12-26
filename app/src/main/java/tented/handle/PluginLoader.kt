@@ -19,7 +19,8 @@ object PluginLoader
                                             tented.handle.plugin.translate.Translate,
                                             tented.handle.plugin.ban.Ban,
                                             tented.handle.plugin.photo.Photo,
-                                            tented.handle.plugin.shop.system.SystemShop
+                                            tented.handle.plugin.shop.system.SystemShop,
+                                            tented.handle.plugin.Settings
                                         )
 
     fun pluginCount() : Int = pluginList.size
@@ -52,7 +53,7 @@ object PluginLoader
 
     fun handleMessage( msg : com.saki.aidl.PluginMsg )
     {
-        if( checkBan(msg) ) return
+        if( checkBan(msg) || ! tented.handle.plugin.Settings.doInit(msg) ) return
 
         for ( handler in pluginList)
         {

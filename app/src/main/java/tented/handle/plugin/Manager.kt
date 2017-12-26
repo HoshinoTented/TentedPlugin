@@ -53,7 +53,7 @@ object Manager : Plugin("群管系统", "1.0")
             {
                 when
                 {
-                    msg.msg.matches(Regex("禁@.+ [0-9]+")) ->
+                    msg.msg.matches(Regex("禁言?@.+ [0-9]+")) ->
                     {
                         val time : Int = Integer.parseInt(msg.msg.substring(msg.msg.lastIndexOf(' ') + 1))
 
@@ -62,7 +62,7 @@ object Manager : Plugin("群管系统", "1.0")
                         Manager.successfulMessage(msg)
                     }
 
-                    msg.msg.matches(Regex("踢@.+")) ->
+                    msg.msg.matches(Regex("踢[人出]?@.+")) ->
                     {
                         msg.ats[0].remove()
 

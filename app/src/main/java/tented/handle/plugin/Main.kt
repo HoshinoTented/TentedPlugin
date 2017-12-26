@@ -5,11 +5,13 @@ import com.saki.aidl.Type
 import tented.extra.times
 import tented.handle.Handler
 import tented.handle.PluginLoader
+import java.text.SimpleDateFormat
+import java.util.Date
 
 /**
  * Created by Hoshino Tented on 2017/12/24.
  */
-object Main : Handler("插件版本", "1.4")
+object Main : Handler("插件版本", "1.5")
 {
     val splitTimes : Long = 9L
     val splitChar : String = "-"
@@ -51,8 +53,24 @@ object Main : Handler("插件版本", "1.4")
 
     override fun handle(msg : PluginMsg)
     {
-        if( msg.msg == "菜单" ) msg.addMsg(Type.MSG, Main.makeMenu())
-        else if( msg.msg == name ) msg.addMsg(Type.MSG, message)
+        when
+        {
+            msg.msg == "菜单" -> msg.addMsg (Type.MSG, Main.makeMenu())
+            msg.msg == name -> msg.addMsg(Type.MSG, message)
+            msg.ats.isNotEmpty() ->
+            {
+                val message =
+                        """
+                            |****Tented*Plugin****
+                            |${msg.uinName}在${SimpleDateFormat("yyyy年MM月dd日 HH时mm分ss秒").format(Date())}at了你
+                            |内容为:
+                            |${msg.msg}
+                            |****Tented*Plugin****
+                        """.trimMargin()
+
+                PluginMsg.send(type = PluginMsg.TYPE_SESS_MSG, group = msg.group, uin = msg.ats[0].uin, message = message)
+            }
+        }
     }
 
 }
