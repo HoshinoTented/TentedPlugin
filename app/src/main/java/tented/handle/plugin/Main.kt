@@ -16,6 +16,7 @@ import java.util.Date
  */
 object Main : Handler("插件版本", "1.5")
 {
+    //像这些什么分隔符之类的, 都是一开始就载入, 不然每一次get都要读取一次, 很卡的
     val splitTimes : Long = java.lang.Long.parseLong(File.read(File.getPath("config.cfg"), "st", "9"))
     val splitChar : String = File.read(File.getPath("config.cfg"), "sc", "-")
 
@@ -32,7 +33,7 @@ object Main : Handler("插件版本", "1.5")
             {
                 val builder = StringBuilder("$name\n${splitChar * splitTimes}\n")
 
-                builder.append("插件作者: 星野 天忆\n")
+                builder.append("插件作者: 星野 天`忆\n")
 
                 for( plugin in PluginLoader.pluginList ) builder.append("${plugin.name} 版本: ${plugin.version}\n")
 
@@ -91,25 +92,20 @@ object Main : Handler("插件版本", "1.5")
 
         val message : MessageCount? = msgMap[msg.group]
 
-        if( msg.uin == message?.uin )
+        if( msg.uin == message?.uin )       //如果发送者为上个消息包的发送者(隐含null判断
         {
-            message.count ++
+            message.count ++        //消息包计数 + 1
 
-
-            if( message.count >= Main.shutUpCount )
+            if( message.count >= Main.shutUpCount )     //警告线和禁言线判断
             {
                 msg.member.shut(Banner[msg.group])
 
                 msg.reAt()
                 msg.addMsg(Type.MSG, "\n你已经连续发了${message.count}条消息了!静一静...")
             }
-
-            else if( message.count >= Main.warningCount )
-            {
-                msg.addMsg(Type.MSG, "小心一点噢!已经连续发送了${message.count}条消息了!")
-            }
+            else if( message.count >= Main.warningCount ) msg.addMsg(Type.MSG, "小心一点噢!已经连续发送了${message.count}条消息了!")
         }
-        else msgMap[msg.group] = MessageCount(msg.uin, 1)
+        else msgMap[msg.group] = MessageCount(msg.uin, 1)       //如果不是就覆盖
     }
 
 }
