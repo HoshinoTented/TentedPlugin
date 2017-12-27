@@ -14,6 +14,8 @@ import java.io.ObjectOutputStream
 
 infix fun Number.randomTo( to : Number ) : Long = this.toLong() + (Math.random() * (to.toLong() - this.toLong())).toLong()
 
+fun String.isNumber() : Boolean = this.matches(Regex("[+\\-]?[0-9]+"))
+
 fun File.getPath(more : String) : String = android.os.Environment.getExternalStorageDirectory().toString() + "/Tented/TentedPlugin/$more"
 
 fun deepClone( obj : Any ) : Any

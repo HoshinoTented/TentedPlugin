@@ -3,6 +3,7 @@ package tented.handle.plugin
 import com.saki.aidl.PluginMsg
 import com.saki.aidl.Type
 import tented.extra.getPath
+import tented.extra.isNumber
 import tented.extra.times
 import tented.file.File
 import tented.handle.Plugin
@@ -36,6 +37,8 @@ object Settings : Plugin("系统设置", "1.1")
         return get(msg.group, "open", "true") == "true"
     }
 
+    private fun globalSuccess( msg : PluginMsg ) = msg.addMsg(Type.MSG, "操作成功, 重启插件后生效\n此次操作为全局操作")
+
 
     override fun handle(msg : PluginMsg)
     {
@@ -48,8 +51,10 @@ object Settings : Plugin("系统设置", "1.1")
                             |$name
                             |${Main.splitChar * Main.splitTimes}
                             |(开|关)机  >>  ${if(get(msg.group, "open", "true") == "true") "开启" else "关闭"}
-                            |[GLOBAL]设置分隔符符号  >> ${Main.splitChar}
-                            |[GLOBAL]设置分隔符数量  >> ${Main.splitTimes}
+                            |[GLOBAL]设置分隔符符号[CHAR]  >> ${Main.splitChar}
+                            |[GLOBAL]设置分隔符数量[COUNT]  >> ${Main.splitTimes}
+                            |[GLOBAL]设置刷屏警告上限[NUMBER]  >> ${Main.warningCount}
+                            |[GLOBAL]设置刷屏禁言上限[NUMBER]  >> ${Main.shutUpCount}
                             |退出插件
                             |${Main.splitChar * Main.splitTimes}
                         """.trimMargin()
@@ -66,9 +71,24 @@ object Settings : Plugin("系统设置", "1.1")
                         val action = msg.msg.substring(5, 7)
                         val key = if( action == "符号" ) "sc" else "st"
 
-                        File.write(File.getPath("config.cfg"), key, value)
+                        if( key == "st" && ! value.isNumber() ) msg.addMsg(Type.MSG, "修改失败")
+                        else
+                        {
+                            File.write(File.getPath("config.cfg"), key, value)
 
-                        msg.addMsg(Type.MSG, "操作成功, 重启插件后生效\n此次操作为全局操作")
+                            globalSuccess(msg)
+                        }
+                    }
+
+                    msg.msg.matches(Regex("设置刷屏(警告|禁言)上限[0-9]+")) ->
+                    {
+                        val value = msg.msg.substring(8)
+                        val action = msg.msg.subSequence(4, 6)
+                        val key = if (action == "警告") "wc" else "suc"
+
+                        Main[key] = value
+
+                        globalSuccess(msg)
                     }
 
                     msg.msg == "退出插件" -> System.exit(0)
