@@ -68,9 +68,12 @@ class PluginMsg : Parcelable, Serializable
     var groupName : String? = null
     var uinName : String? = null
     var title : String? = null
-    private var data = HashMap<String, ArrayList<String>>()
+    var data = HashMap<String, ArrayList<String>>()
 
     var msg : String = ""
+    var xml : String = ""
+    var json : String = ""
+
     var member : tented.member.Member = tented.member.Member.EMPTY          //干脆搞一个member对象下去得了, 不然Kotlin的null判断很烦, 而且就算放一个空Member下去也改不了什么...
     var ats : List<tented.member.Member> = arrayListOf()
     var textMsg : String
@@ -94,15 +97,6 @@ class PluginMsg : Parcelable, Serializable
     fun clearMsg()
     {
         data = HashMap()
-    }
-
-    fun getData() : HashMap<String, ArrayList<String>> = data
-    fun setData(data : HashMap<String, ArrayList<String>>?)
-    {
-        if (data != null)
-        {
-            this.data = data
-        }
     }
 
     fun getTextMsg(type : Type) : String = getTextMsg(type.toString().toLowerCase())
@@ -167,6 +161,9 @@ class PluginMsg : Parcelable, Serializable
         source.readMap(data, javaClass.classLoader)
 
         msg = this.textMsg
+        xml = this.getTextMsg(com.saki.aidl.Type.XML)
+        json = this.getTextMsg(com.saki.aidl.Type.JSON)
+
         ats = this.data["at"]?.map {
                                         val index : Int = it.indexOf('@')
                                         val uin : Long = java.lang.Long.parseLong(it.substring(0, index))

@@ -16,6 +16,8 @@ import java.util.Date
  */
 object Main : Handler("插件版本", "1.5")
 {
+    private val msgMap = HashMap<Long, MessageCount>()      //存储各群上一条消息的发送者, 作为一个缓存吧
+
     //像这些什么分隔符之类的, 都是一开始就载入, 不然每一次get都要读取一次, 很卡的
     val splitTimes : Long = java.lang.Long.parseLong(File.read(File.getPath("config.cfg"), "st", "9"))
     val splitChar : String = File.read(File.getPath("config.cfg"), "sc", "-")
@@ -24,9 +26,7 @@ object Main : Handler("插件版本", "1.5")
     val warningCount : Int = Integer.parseInt(get("wc", "5"))
     val shutUpCount : Int = Integer.parseInt(get("suc", "10"))
 
-    val list : HashSet<String> = HashSet()
-
-    val msgMap = HashMap<Long, MessageCount>()      //存储各群上一条消息的发送者, 作为一个缓存吧
+    val list : HashSet<String> = HashSet()          //菜单来着
 
     val message : String
             get()
@@ -35,7 +35,7 @@ object Main : Handler("插件版本", "1.5")
 
                 builder.append("插件作者: 星野 天`忆\n")
 
-                for( plugin in PluginLoader.pluginList ) builder.append("${plugin.name} 版本: ${plugin.version}\n")
+                for( plugin in PluginLoader.pluginList ) builder.append("${plugin.name} 版本: ${plugin.version}\n")       //添加功能版本
 
                 builder.append(splitChar * splitTimes + "\n本插件源码仓库: https://github.com/LimbolRain/TentedPlugin.git\n如果可以的话star一下啦...")
 

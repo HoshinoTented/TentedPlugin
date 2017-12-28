@@ -21,7 +21,8 @@ object PluginLoader
                                             tented.handle.plugin.photo.Photo,
                                             tented.handle.plugin.shop.system.SystemShop,
                                             tented.handle.plugin.Settings,
-                                            tented.handle.plugin.wiki.BaiduWiki
+                                            tented.handle.plugin.wiki.BaiduWiki,
+                                            tented.handle.plugin.CodeViewer
                                         )
 
     fun pluginCount() : Int = pluginList.size
