@@ -33,7 +33,7 @@ object Main : Handler("插件版本", "1.5")
             {
                 val builder = StringBuilder("$name\n${splitChar * splitTimes}\n")
 
-                builder.append("插件作者: 星野 天`忆\n")
+                builder.append("插件作者: 星野 天忆\n")
 
                 for( plugin in PluginLoader.pluginList ) builder.append("${plugin.name} 版本: ${plugin.version}\n")       //添加功能版本
 

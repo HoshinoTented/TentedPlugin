@@ -2,6 +2,7 @@ package tented.handle.plugin
 
 import com.saki.aidl.PluginMsg
 import com.saki.aidl.Type
+import tented.extra.times
 import tented.handle.Plugin
 
 /**
@@ -9,18 +10,42 @@ import tented.handle.Plugin
  */
 object CodeViewer : Plugin("代码查看", "1.0")           //xml和json代码的查看, 懒得写复读
 {
-    override fun handle(msg : PluginMsg)
+    val message =
+            """
+                |$name
+                |${Main.splitChar * Main.splitTimes}
+                |暂无指令
+                |${Main.splitChar * Main.splitTimes}
+            """.trimMargin()
+
+    private fun send( message : String )        //以后再搞群发送和控制台发送的切换, 反正现在是懒得要死
+    {
+        saki.demo.Demo.debug(message)
+    }
+
+    private fun doView( msg : PluginMsg )       //执行获取xml或json代码
     {
         val code =
-            when
-            {
-                msg.xml != "" -> msg.xml
-                msg.json != "" -> msg.json
+                when
+                {
+                    msg.xml != "" -> msg.xml
+                    msg.json != "" -> msg.json
 
-                else -> null
-            }
+                    else -> null
+                }
 
-        if( code != null ) saki.demo.Demo.debug(code)
+        if( code != null ) send(code)
+    }
+
+
+    override fun handle(msg : PluginMsg)
+    {
+        doView(msg)
+
+        when
+        {
+            msg.msg == name -> msg.addMsg(Type.MSG, message)
+        }
     }
 
 }
