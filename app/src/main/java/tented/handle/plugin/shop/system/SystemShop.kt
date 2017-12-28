@@ -15,6 +15,14 @@ import tented.shop.Shop
 
 /**
  * Created by Hoshino Tented on 2017/12/26.
+ *
+ * 系统商店
+ * item json基本格式
+ * {
+ *      "id":"id", "name":"name",
+ *      "price":Long[,
+ *      ...more properties]
+ * }
  */
 object SystemShop : Plugin("系统商店", "1.1")
 {
@@ -28,8 +36,16 @@ object SystemShop : Plugin("系统商店", "1.1")
             val shop : Shop = get(msg.group)
             val builder = StringBuilder("$name\n${Main.splitChar * Main.splitTimes}\n")
 
-            for( item in shop ) builder.append(item.name).append("(${item.id})").append("\n").append(item.info["info"]).append("\n").append(Main.splitChar * Main.splitTimes).append("\n")
-
+            for( item in shop )
+                builder.append(
+                                    """
+                                        |${item.name}(${item.id})
+                                        |价格: ${item.info.getLong("price")}
+                                        |${item.info.getString("info")}
+                                        |${Main.splitChar * Main.splitTimes}
+                                        |
+                                    """.trimMargin()
+                              )
             builder.append("购买[ID] [COUNT]\n背包")
 
             msg.addMsg(Type.MSG, builder.toString())
@@ -97,12 +113,11 @@ object SystemShop : Plugin("系统商店", "1.1")
                 val bagPath = tented.file.File.getPath("${msg.group}/Bag/${msg.uin}.json")
                 val bag = Bag(bagPath)
 
-                if( bag.items.has(id) && bag.items.getInt(id) > 0 )
+                if( bag.remove(id, 1) )     //更新了ShopSystem, remove具有返回值, 是否删除成功, 所以直接这样写就好了, 而且还会自动清理0count的item
                 {
+                    //bag.remove(id, 1)
 
-                    bag.remove(id, 1)
-
-                    if( bag.items.getInt(id) == 0 ) bag.items.remove(id)        //clear zero item
+                    //if( bag.items.getInt(id) == 0 ) bag.items.remove(id)        //clear zero item
 
                     Data.save(bagPath, bag.toString())
 
