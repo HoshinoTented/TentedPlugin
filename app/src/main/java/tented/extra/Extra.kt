@@ -37,7 +37,7 @@ operator fun String.times( times : Number ) : String
 {
     if( times.toLong() < 0 ) throw IllegalArgumentException("times: $times can not lower than zero")
 
-    val builder : StringBuilder = StringBuilder("")
+    val builder = StringBuilder("")
 
     for( i in 1..times.toLong() ) builder.append(this)
 

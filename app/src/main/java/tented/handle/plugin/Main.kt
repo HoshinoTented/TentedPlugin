@@ -16,6 +16,8 @@ import java.util.Date
  */
 object Main : Handler("插件版本", "1.5")
 {
+    data class MessageCount( val uin : Long , var count : Int )      //只作为一个数据存储类而已
+
     private val msgMap = HashMap<Long, MessageCount>()      //存储各群上一条消息的发送者, 作为一个缓存吧
 
     //像这些什么分隔符之类的, 都是一开始就载入, 不然每一次get都要读取一次, 很卡的
@@ -41,8 +43,6 @@ object Main : Handler("插件版本", "1.5")
 
                 return builder.toString()
             }
-
-    data class MessageCount( val uin : Long , var count : Int )      //只作为一个数据存储类而已
 
     init
     {

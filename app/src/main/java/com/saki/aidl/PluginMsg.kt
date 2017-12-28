@@ -70,11 +70,11 @@ class PluginMsg : Parcelable, Serializable
     var title : String? = null
     var data = HashMap<String, ArrayList<String>>()
 
-    var msg : String = ""
-    var xml : String = ""
-    var json : String = ""
+    lateinit var msg : String
+    lateinit var xml : String
+    lateinit var json : String
 
-    var member : tented.member.Member = tented.member.Member.EMPTY          //干脆搞一个member对象下去得了, 不然Kotlin的null判断很烦, 而且就算放一个空Member下去也改不了什么...
+    lateinit var member : tented.member.Member//使用lateinit关键字       // = tented.member.Member.EMPTY          //干脆搞一个member对象下去得了, 不然Kotlin的null判断很烦, 而且就算放一个空Member下去也改不了什么...
     var ats : List<tented.member.Member> = arrayListOf()
     var textMsg : String
         get() = getTextMsg(Type.MSG)
