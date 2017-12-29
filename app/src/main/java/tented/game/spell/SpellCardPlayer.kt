@@ -6,6 +6,7 @@ import tented.file.File
 import tented.game.spell.cards.Card
 import tented.game.spell.exceptions.NoCardFoundException
 import tented.game.exceptions.PlayerDiedException
+import tented.game.exceptions.PlayerFrozenException
 import tented.member.Member
 import kotlin.reflect.KProperty
 
@@ -24,7 +25,7 @@ class SpellCardPlayer private constructor(group : Long, uin : Long, name : Strin
                                                                                                             when(properties.name)       //根据properties name来决定默认值
                                                                                                             {
                                                                                                                 "health", "maxHealth" -> "100"
-                                                                                                                "missing", "killCount", "deathCount" -> "0"
+                                                                                                                "missing", "killCount", "deathCount", "frozen" -> "0"
                                                                                                                 "reliveTime" -> "120"
 
                                                                                                                 else -> throw IllegalArgumentException("${properties.name} is not a correct property name")
@@ -47,18 +48,59 @@ class SpellCardPlayer private constructor(group : Long, uin : Long, name : Strin
     var reliveTime : Int by InfoManager()
     var killCount : Int by InfoManager()
     var deathCount : Int by InfoManager()
+    var frozen : Int by InfoManager()
 
     private fun isMissing() : Boolean = 1 randomTo 101 in 0..missing
-    private fun relive()            //复活函数, 死亡时才会被调用
+    private fun relive( time : Long = reliveTime.toLong() )            //复活函数, 死亡时才会被调用
     {
         Thread(
                     Runnable
                     {
-                        Thread.sleep(reliveTime * 1000L)
+                        Thread.sleep(time * 1000)
 
                         health = maxHealth
                     }
               ).start()
+    }
+
+    private fun freeze( time : Long )       //使角色冻结, 无法使用符卡
+    {
+        Thread(
+                    Runnable
+                    {
+                        frozen = 1
+
+                        Thread.sleep(time * 1000)
+
+                        frozen = 0
+                    }
+              ).start()
+    }
+
+    private fun extra( other : SpellCardPlayer , card : Card ) : Map<String, Any>
+    {
+        val info = HashMap<String, Any>()
+
+        if(card.info.has("freeze"))
+        {
+            val freezeTime = card.info.getLong("freeze")
+
+            other.freeze(freezeTime)
+
+            info["freeze"] = freezeTime
+        }
+
+        if(card.info.has("health"))
+        {
+            val health = card.info.getInt("health")
+            val newHealth = other.health + health
+
+            other.health = if( newHealth > other.maxHealth ) other.maxHealth else newHealth
+
+            info["health"] = health
+        }
+
+        return info
     }
 
     /**
@@ -67,40 +109,47 @@ class SpellCardPlayer private constructor(group : Long, uin : Long, name : Strin
      * @param card Card object
      */
     @Throws(NoCardFoundException::class)
-    fun useCard( other : SpellCardPlayer , card : Card ) : Map<String, String>
+    fun useCard( other : SpellCardPlayer , card : Card ) : Map<String, Any>
     {
         if( health > 0 && other.health > 0 )
         {
-            val bag = this.bag
-
-            if (bag.remove(card.id, 1))
+            if( frozen == 0 )
             {
-                this.bag = bag      //保存...
+                val bag = this.bag
 
-                return  if( ! other.isMissing() )
+                if (bag.remove(card.id, 1))
+                {
+                    this.bag = bag      //保存...
+
+                    return if (! other.isMissing())
+                    {
+                        val hurt = card.lowHurt randomTo (card.highHurt + 1)
+
+                        other.health -= hurt.toInt()            //写入生命值
+
+                        val extra = extra(other, card)          //执行拓展函数
+
+                        val death = other.health < 1
+
+                        if (death)       //如果对方死亡
                         {
-                            val hurt = card.lowHurt randomTo (card.highHurt + 1)
+                            other.relive()    //调用relive复活函数
+                            other.deathCount ++     //自增对方的deathCount
 
-                            other.health -= hurt.toInt()
-
-                            val death = other.health < 1
-
-                            if(death)       //如果对方死亡
-                            {
-                                other.relive()    //调用relive复活函数
-                                other.deathCount ++     //自增对方的deathCount
-
-                                killCount ++      //自增本身的killCount
-                            }
-
-                            mapOf(
-                                    "hurt" to hurt.toString(),
-                                    "death" to death.toString()
-                                 )
+                            killCount ++      //自增本身的killCount
                         }
-                        else mapOf( "missing" to "true" )
+
+                        mapOf(
+                                "hurt" to hurt,
+                                "death" to death,
+                                "extra" to extra
+                             )
+                    }
+                    else mapOf("missing" to "true")
+                }
+                else throw NoCardFoundException(card.id)
             }
-            else throw NoCardFoundException(card.id)
+            else throw PlayerFrozenException(this)
         }
         else throw PlayerDiedException(this)
     }
