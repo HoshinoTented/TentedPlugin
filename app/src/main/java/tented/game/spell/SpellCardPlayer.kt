@@ -77,11 +77,20 @@ class SpellCardPlayer private constructor(group : Long, uin : Long, name : Strin
               ).start()
     }
 
-    private fun extra( other : SpellCardPlayer , card : Card ) : Map<String, Any>
+    private fun extra(other : SpellCardPlayer , card : Card ) : Map<String, Any>
     {
         val info = HashMap<String, Any>()
 
-        if(card.info.has("freeze"))
+        //进行伤害
+
+        val hurt = (card.lowHurt randomTo (card.highHurt + 1)).toInt()
+        other.health -= hurt
+
+        info["hurt"] = hurt
+
+        //额外技能
+
+        if(card.info.has("freeze"))         //冻结
         {
             val freezeTime = card.info.getLong("freeze")
 
@@ -90,7 +99,7 @@ class SpellCardPlayer private constructor(group : Long, uin : Long, name : Strin
             info["freeze"] = freezeTime
         }
 
-        if(card.info.has("health"))
+        if(card.info.has("health"))         //治愈
         {
             val health = card.info.getInt("health")
             val newHealth = other.health + health
@@ -99,6 +108,29 @@ class SpellCardPlayer private constructor(group : Long, uin : Long, name : Strin
 
             info["health"] = health
         }
+
+        if( card.info.has("hardAttack") )   //暴击
+        {
+            val hardAttack = 1 randomTo 101 in 0..card.info.getInt("hardAttack")
+
+            other.health -= hurt
+
+            info["hardAttack"] = hurt
+        }
+
+        //判断死亡
+
+        val death = other.health < 1
+
+        if (death)       //如果对方死亡
+        {
+            other.relive()    //调用relive复活函数
+            other.deathCount ++     //自增对方的deathCount
+
+            killCount ++      //自增本身的killCount
+        }
+
+        info["death"] = death
 
         return info
     }
@@ -123,27 +155,7 @@ class SpellCardPlayer private constructor(group : Long, uin : Long, name : Strin
 
                     return if (! other.isMissing())
                     {
-                        val hurt = card.lowHurt randomTo (card.highHurt + 1)
-
-                        other.health -= hurt.toInt()            //写入生命值
-
-                        val extra = extra(other, card)          //执行拓展函数
-
-                        val death = other.health < 1
-
-                        if (death)       //如果对方死亡
-                        {
-                            other.relive()    //调用relive复活函数
-                            other.deathCount ++     //自增对方的deathCount
-
-                            killCount ++      //自增本身的killCount
-                        }
-
-                        mapOf(
-                                "hurt" to hurt,
-                                "death" to death,
-                                "extra" to extra
-                             )
+                        return extra(other, card)          //执行拓展函数
                     }
                     else mapOf("missing" to "true")
                 }

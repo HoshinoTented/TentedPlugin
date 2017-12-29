@@ -38,6 +38,7 @@ object SpellCard : Plugin("符卡游戏", "1.0")
     {
         if( extra["freeze"] != null ) msg.addMsg(Type.MSG, "\n${other.name}被你冻结了${extra["freeze"]}秒")
         if( extra["health"] != null ) msg.addMsg(Type.MSG, "\n${other.name}被你治疗了${extra["health"]}点生命值")
+        if( extra["hardAttack"] != null ) msg.addMsg(Type.MSG, "\n你的攻击暴击了, 对${other.name}造成了${extra["hardAttack"]}点额外伤害")
     }
 
     override fun handle(msg : PluginMsg)
@@ -67,16 +68,14 @@ object SpellCard : Plugin("符卡游戏", "1.0")
                             {
                                 msg.addMsg(Type.MSG, "你造成了${result["hurt"]}点伤害\n${otherPlayer.name}的生命值: ${otherPlayer.health}/${otherPlayer.maxHealth}")
 
-                                if(result["death"].toString() == "true")
+                                if (result["death"].toString() == "true")
                                 {
                                     msg.addMsg(Type.MSG, "\n你使用${card.name}击倒了${otherPlayer.name}!!!")       //以后再写赏金吧...
 
                                     //TODO give money or other item....
                                 }
 
-                                val extra = result["extra"]
-
-                                if( extra is Map<*, *> ) extraHandle(otherPlayer, extra, card, msg)    //判断类型, 隐式判断null
+                                extraHandle(otherPlayer, result, card, msg)
                             }
                             else msg.addMsg(Type.MSG, "${otherPlayer.name}闪避了你的符卡攻击")
                         }
