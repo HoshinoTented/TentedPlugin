@@ -46,7 +46,7 @@ object SystemShop : Plugin("系统商店", "1.1")
                                         |
                                     """.trimMargin()
                               )
-            builder.append("购买[ID] [COUNT]\n背包")
+            builder.append("购买[ID] [COUNT]\n使用物品[ID] [ARGS]\n背包")
 
             msg.addMsg(Type.MSG, builder.toString())
         }
@@ -101,10 +101,10 @@ object SystemShop : Plugin("系统商店", "1.1")
             msg.addMsg(Type.MSG, builder.toString())
         }
 
-        else if( msg.msg.matches(Regex("使用.+")) )
+        else if( msg.msg.matches(Regex("使用物品.+")) )
         {
             val space : Int = msg.msg.indexOf(' ')
-            val id : String = msg.msg.substring(2, if( space == -1 ) msg.msg.length else space)     //截取id, 到最近的一个空格, 按照规定, id不能包含空格( 使用_代替 ), 这个是为了适应某些道具使用需要参数...
+            val id : String = msg.msg.substring(4, if( space == -1 ) msg.msg.length else space)     //截取id, 到最近的一个空格, 按照规定, id不能包含空格( 使用_代替 ), 这个是为了适应某些道具使用需要参数...
             val function : ((PluginMsg) -> Unit)? = SystemItems.items[id]
 
             if( function == null ) msg.addMsg(Type.MSG, "哎呀, 好像这个物品无法使用呢...")

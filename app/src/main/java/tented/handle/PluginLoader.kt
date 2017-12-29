@@ -18,7 +18,8 @@ object PluginLoader
                                             tented.handle.plugin.shop.system.SystemShop,
                                             tented.handle.plugin.Settings,
                                             tented.handle.plugin.wiki.BaiduWiki,
-                                            tented.handle.plugin.CodeViewer
+                                            tented.handle.plugin.CodeViewer,
+                                            tented.handle.plugin.game.SpellCard
                                         )
 
     fun pluginCount() : Int = pluginList.size

@@ -30,8 +30,8 @@ object Money : Plugin("货币系统", "1.1")
                         |$name
                         |${Main.splitChar * Main.splitTimes}
                         |钱包
-                        |修改货币名称 [NAME]
-                        |修改货币单位 [NAME]
+                        |[GLOBAL]修改货币名称 [NAME]
+                        |[GLOBAL]修改货币单位 [NAME]
                         |${Main.splitChar * Main.splitTimes}
                         |货币名称: $moneyName
                         |货币单位: $moneyUnit
@@ -39,22 +39,22 @@ object Money : Plugin("货币系统", "1.1")
 
     private fun giveMoneyToEveryone( group : Long , change : Long )
     {
-        val file : java.io.File = java.io.File(tented.file.File.getPath("$group/Money.cfg"))
-        val properties : java.util.Properties = java.util.Properties()
-        val builder = StringBuilder("")
-        val members : List<Long> = getMembers(group)
+        val file : java.io.File = java.io.File(tented.file.File.getPath("$group/Money.cfg"))        //get group money file
+        val properties : java.util.Properties = java.util.Properties()      //new a Properties object
+        val builder = StringBuilder("")                     //new a builder
+        val members : List<Long> = getMembers(group)            //get group members
 
-        if( ! file.exists() )
-        {
+        if( ! file.exists() )       //if the file is not exists
+        {                           //create parent dictionaries and file
             file.parentFile.mkdirs()
             file.createNewFile()
         }
 
-        properties.load(FileInputStream(file))
+        properties.load(FileInputStream(file))          //load properties
 
-        for( member in members )
+        for( member in members )            //iterate members
         {
-            val money : Long = java.lang.Long.parseLong(properties.getProperty(member.toString(), "0")) + change
+            val money : Long = java.lang.Long.parseLong(properties.getProperty(member.toString(), "0")) + change        //get money and add change money
 
             builder.append("$member=$money\n")     //add map to the builder
         }
@@ -64,7 +64,7 @@ object Money : Plugin("货币系统", "1.1")
         val writer = BufferedWriter(FileWriter(file))
 
         writer.write(builder.toString())
-        writer.close()
+        writer.close()      //close, this step is very important!!! if not do, the money chance will no write into the file
     }
 
     override fun handle(msg : PluginMsg)
