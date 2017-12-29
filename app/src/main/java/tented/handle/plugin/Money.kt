@@ -4,12 +4,15 @@ import com.saki.aidl.PluginMsg
 import com.saki.aidl.Type
 import tented.extra.getMembers
 import tented.extra.getPath
+import tented.extra.randomTo
 import tented.extra.times
 import tented.file.File
 import tented.handle.Plugin
 import java.io.BufferedWriter
 import java.io.FileInputStream
 import java.io.FileWriter
+import java.text.SimpleDateFormat
+import java.util.Date
 
 /**
  * Created by Hoshino Tented on 2017/12/24.
@@ -79,6 +82,22 @@ object Money : Plugin("货币系统", "1.1")
             val member : tented.member.Member = if( msg.ats.isNotEmpty() ) msg.ats[0] else msg.member
 
             msg.addMsg(Type.MSG, "${member.name}的钱包...\n${Main.splitChar * 9}\n$moneyName: 有${member.money}${moneyUnit}呢")
+        }
+
+        else if( msg.msg == "签到")
+        {
+            val date = SimpleDateFormat("yyyy/MM/dd").format(Date())
+
+            if( msg.member["check"] != date )
+            {
+                val random = 0 randomTo 10000
+
+                msg.member.money += random
+                msg.member["check"] = date
+
+                msg.addMsg(Type.MSG, "签到成功~\n获得了...诶...$random$moneyUnit${moneyName}呢")
+            }
+            else msg.addMsg(Type.MSG, "你签到过了啦!")
         }
 
         else if( msg.member.master )
