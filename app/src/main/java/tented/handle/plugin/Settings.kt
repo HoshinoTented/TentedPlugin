@@ -6,12 +6,12 @@ import tented.extra.getPath
 import tented.extra.isNumber
 import tented.extra.times
 import tented.file.File
-import tented.handle.Plugin
+import tented.handle.Handler
 
 /**
  * Created by Hoshino Tented on 2017/12/26.
  */
-object Settings : Plugin("系统设置", "1.1")
+object Settings : Handler("系统设置", "1.1")
 {
     operator fun get( group : Long , key : String , default : String = "null") : String = File.read(File.getPath("$group/config.cfg"), key, default)
     operator fun set( group : Long , key : String , value : String ) = File.write(File.getPath("$group/config.cfg"), key, value)

@@ -7,7 +7,7 @@ import tented.extra.getPath
 import tented.extra.randomTo
 import tented.extra.times
 import tented.file.File
-import tented.handle.Plugin
+import tented.handle.Handler
 import java.io.BufferedWriter
 import java.io.FileInputStream
 import java.io.FileWriter
@@ -17,7 +17,7 @@ import java.util.Date
 /**
  * Created by Hoshino Tented on 2017/12/24.
  */
-object Money : Plugin("货币系统", "1.1")
+object Money : Handler("货币系统", "1.1")
 {
     var moneyUnit : String
         get() = File.read(File.getPath("config.cfg"), "money::unit", "枚")

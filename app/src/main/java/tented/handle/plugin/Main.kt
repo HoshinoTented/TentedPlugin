@@ -28,8 +28,6 @@ object Main : Handler("插件版本", "1.6")
     val warningCount : Int = get("wc", "5").toInt()
     val shutUpCount : Int = get("suc", "10").toInt()
 
-    val menuSet : HashSet<String> = HashSet()          //菜单来着
-
     val message : String
             get()
             {
@@ -44,11 +42,6 @@ object Main : Handler("插件版本", "1.6")
                 return builder.toString()
             }
 
-    init
-    {
-        menuSet.add(name)
-    }
-
     operator fun get( key : String , default : String = "null " ) : String = File.read(File.getPath("config.cfg"), key, default)
     operator fun set( key : String , value : String ) = File.write(File.getPath("config.cfg"), key, value)
 
@@ -56,9 +49,9 @@ object Main : Handler("插件版本", "1.6")
     {
         val builder = StringBuilder("")
 
-        for( (index, element) in menuSet.withIndex() )
+        for( (index, element) in tented.handle.PluginLoader.pluginArray.withIndex() )
         {
-            builder.append(element)
+            builder.append(element.name)
 
             if( index % 2 == 0 ) builder.append("   ")
             else builder.append("\n")
@@ -77,11 +70,11 @@ object Main : Handler("插件版本", "1.6")
             {
                 val message =
                         """
-                            |****Tented*Plugin****
+                            |****Tented*Handler****
                             |${msg.uinName}在${SimpleDateFormat("yyyy年MM月dd日 HH时mm分ss秒").format(Date())}at了你
                             |内容为:
                             |${msg.msg}
-                            |****Tented*Plugin****
+                            |****Tented*Handler****
                         """.trimMargin()
 
                 PluginMsg.send(type = PluginMsg.TYPE_SESS_MSG, group = msg.group, uin = msg.ats[0].uin, message = message)

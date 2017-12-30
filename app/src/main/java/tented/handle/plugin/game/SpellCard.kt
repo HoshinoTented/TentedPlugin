@@ -9,13 +9,13 @@ import tented.game.spell.SpellCardPlayer
 import tented.game.spell.SpellCardShop
 import tented.game.spell.cards.Card
 import tented.game.spell.exceptions.NoCardFoundException
-import tented.handle.Plugin
+import tented.handle.Handler
 import tented.handle.plugin.Main
 
 /**
  * Created by Hoshino Tented on 2017/12/29.
  */
-object SpellCard : Plugin("符卡游戏", "1.0")
+object SpellCard : Handler("符卡游戏", "1.0")
 {
     val message =
             """
@@ -34,7 +34,7 @@ object SpellCard : Plugin("符卡游戏", "1.0")
      * @param card 使用的符卡
      * @param msg 被处理的消息包
      */
-    private fun extraHandle( other : SpellCardPlayer , extra : Map<*, *> , card : Card , msg : PluginMsg )
+    private fun extraHandle( other : SpellCardPlayer , extra : Map<*, *> , msg : PluginMsg )
     {
         if( extra["freeze"] != null ) msg.addMsg(Type.MSG, "\n${other.name}被你冻结了${extra["freeze"]}秒")
         if( extra["health"] != null ) msg.addMsg(Type.MSG, "\n${other.name}被你治疗了${extra["health"]}点生命值")
@@ -75,7 +75,7 @@ object SpellCard : Plugin("符卡游戏", "1.0")
                                     //TODO give money or other item....
                                 }
 
-                                extraHandle(otherPlayer, result, card, msg)
+                                extraHandle(otherPlayer, result, msg)
                             }
                             else msg.addMsg(Type.MSG, "${otherPlayer.name}闪避了你的符卡攻击")
                         }

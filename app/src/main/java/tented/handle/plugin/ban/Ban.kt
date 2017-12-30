@@ -3,13 +3,13 @@ package tented.handle.plugin.ban
 import com.saki.aidl.PluginMsg
 import com.saki.aidl.Type
 import tented.extra.times
-import tented.handle.Plugin
+import tented.handle.Handler
 import tented.handle.plugin.Main
 
 /**
  * Created by Hoshino Tented on 2017/12/25.
  */
-object Ban : Plugin("违禁系统", "1.2")
+object Ban : Handler("违禁系统", "1.2")
 {
     val message : String =
             """

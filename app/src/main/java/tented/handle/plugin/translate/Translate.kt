@@ -3,13 +3,13 @@ package tented.handle.plugin.translate
 import com.saki.aidl.PluginMsg
 import com.saki.aidl.Type
 import tented.extra.times
-import tented.handle.Plugin
+import tented.handle.Handler
 import tented.handle.plugin.Main
 
 /**
  * Created by Hoshino Tented on 2017/12/25.
  */
-object Translate : Plugin("百度翻译", "1.0")
+object Translate : Handler("百度翻译", "1.0")
 {
     val message : String =
             """

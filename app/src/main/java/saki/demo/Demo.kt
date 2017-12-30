@@ -23,7 +23,7 @@ class Demo : Service()
         private val JUMP = false
 
         private val AUTHOR = "星野天忆"
-        private val INFO = "Tented Plugin"
+        private val INFO = "Tented Handler"
 
         private var connection : SQConnection? = null
 

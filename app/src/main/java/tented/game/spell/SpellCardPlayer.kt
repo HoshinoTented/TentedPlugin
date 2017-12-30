@@ -110,7 +110,7 @@ class SpellCardPlayer private constructor(group : Long, uin : Long, name : Strin
         {
             val hardAttack = 1 randomTo 101 in 0..card.info.getInt("hardAttack")
 
-            other.health -= hurt
+            if( hardAttack ) other.health -= hurt
 
             info["hardAttack"] = hurt
         }

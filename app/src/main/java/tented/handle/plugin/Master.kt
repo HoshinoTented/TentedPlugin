@@ -4,14 +4,14 @@ import com.saki.aidl.PluginMsg
 import com.saki.aidl.Type
 import tented.extra.getPath
 import tented.extra.times
-import tented.handle.Plugin
+import tented.handle.Handler
 import java.io.FileInputStream
 import java.util.Properties
 
 /**
  * Created by Hoshino Tented on 2017/12/25.
  */
-object Master : Plugin("主人系统", "1.0")
+object Master : Handler("主人系统", "1.0")
 {
     val message : String
             get() =

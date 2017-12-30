@@ -6,7 +6,7 @@ import org.json.JSONObject
 import tented.bag.Bag
 import tented.extra.getPath
 import tented.extra.times
-import tented.handle.Plugin
+import tented.handle.Handler
 import tented.handle.plugin.Main
 import tented.handle.plugin.Money
 import tented.io.Data
@@ -24,7 +24,7 @@ import tented.shop.Shop
  *      ...more properties]
  * }
  */
-object SystemShop : Plugin("系统商店", "1.1")
+object SystemShop : Handler("系统商店", "1.1")
 {
     operator fun get(group : Long) : Shop = Shop(tented.file.File.getPath("$group/Shop/shop.json"))
     operator fun set(group : Long , shop : Shop) = Data.save(tented.file.File.getPath("$group/Shop/shop.json"), shop.toString())

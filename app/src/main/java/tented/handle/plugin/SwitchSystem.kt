@@ -3,12 +3,12 @@ package tented.handle.plugin
 import com.saki.aidl.PluginMsg
 import com.saki.aidl.Type
 import tented.extra.times
-import tented.handle.Plugin
+import tented.handle.Handler
 
 /**
  * Created by Hoshino Tented on 2017/12/31.
  */
-object SwitchSystem : Plugin("插件开关", "1.0")
+object SwitchSystem : Handler("插件开关", "1.0")
 {
     val message =
             """

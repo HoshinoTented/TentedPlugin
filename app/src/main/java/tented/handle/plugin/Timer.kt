@@ -5,14 +5,14 @@ import com.saki.aidl.Type
 import tented.extra.getPath
 import tented.extra.times
 import tented.file.File
-import tented.handle.Plugin
+import tented.handle.Handler
 import java.text.SimpleDateFormat
 import java.util.Date
 
 /**
  * Created by Hoshino Tented on 2017/12/25.
  */
-object Timer : Plugin("整点报时", "1.0")
+object Timer : Handler("整点报时", "1.0")
 {
     val groupSet : HashSet<Long> = HashSet()        /*为什么要使用Set?
                                                      * Set集合的特性是 不可重复值
