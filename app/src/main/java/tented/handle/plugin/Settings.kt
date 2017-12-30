@@ -37,7 +37,7 @@ object Settings : Plugin("系统设置", "1.1")
         return get(msg.group, "open", "true") == "true"
     }
 
-    private fun globalSuccess( msg : PluginMsg ) = msg.addMsg(Type.MSG, "操作成功, 重启插件后生效\n此次操作为全局操作")
+    fun globalSuccess( msg : PluginMsg ) = msg.addMsg(Type.MSG, "操作成功, 重启插件后生效\n此次操作为全局操作")
 
 
     override fun handle(msg : PluginMsg)

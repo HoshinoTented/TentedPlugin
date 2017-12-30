@@ -26,6 +26,8 @@ object Do
 
             properties.keys.map { if( properties.getProperty(it.toString(), "false") == "true" ) tented.handle.plugin.Timer.groupSet.add(java.lang.Long.parseLong(it.toString())) }
         }
+
+        tented.handle.PluginLoader.insertPlugins()      //在一开始才载入
     }
 
     private fun create()

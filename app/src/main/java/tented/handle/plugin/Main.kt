@@ -28,7 +28,7 @@ object Main : Handler("插件版本", "1.6")
     val warningCount : Int = get("wc", "5").toInt()
     val shutUpCount : Int = get("suc", "10").toInt()
 
-    val list : HashSet<String> = HashSet()          //菜单来着
+    val menuSet : HashSet<String> = HashSet()          //菜单来着
 
     val message : String
             get()
@@ -46,7 +46,7 @@ object Main : Handler("插件版本", "1.6")
 
     init
     {
-        list.add(name)
+        menuSet.add(name)
     }
 
     operator fun get( key : String , default : String = "null " ) : String = File.read(File.getPath("config.cfg"), key, default)
@@ -56,7 +56,7 @@ object Main : Handler("插件版本", "1.6")
     {
         val builder = StringBuilder("")
 
-        for( (index, element) in list.withIndex() )
+        for( (index, element) in menuSet.withIndex() )
         {
             builder.append(element)
 

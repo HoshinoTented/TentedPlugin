@@ -10,6 +10,6 @@ abstract class Plugin ( name : String , version : String  ) : Handler(name, vers
 {
     init
     {
-        tented.handle.plugin.Main.list.add(name)
+        tented.handle.plugin.Main.menuSet.add(name)
     }
 }
