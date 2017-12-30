@@ -36,7 +36,7 @@ open class Member ( val group : Long , val uin : Long , val name : String? = nul
     operator fun set(key : String, value : Any?) = File.write(File.getPath("$group/$uin/config.cfg"), key, value.toString())
     operator fun get(key : String) : String = File.read(File.getPath("$group/$uin/config.cfg"), key, "null")
 
-    private fun getMoney( type : String ) : Long = java.lang.Long.parseLong(File.read(File.getPath("$group/$type.cfg"), this.uin.toString(), "0"))
+    private fun getMoney( type : String ) : Long = File.read(File.getPath("$group/$type.cfg"), this.uin.toString(), "0").toLong()
     private fun setMoney( type : String , value : Long ) = File.write(File.getPath("$group/$type.cfg"), this.uin.toString(), value.toString())
 
     fun shut( time : Int ) = PluginMsg.send(type = PluginMsg.TYPE_SET_MEMBER_SHUTUP, group = group, uin = uin, value = time * 60)

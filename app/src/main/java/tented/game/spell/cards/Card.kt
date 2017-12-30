@@ -7,9 +7,17 @@ import tented.shop.Item
 /**
  * Created by Hoshino Tented on 2017/12/29.
  *
+ * item编写方式
  * {
- *      "id":"id", "name":"name", "price":"price", "info":"info", "lowHurt":"lowHurt", "highHurt":"highHurt"[,
- *      ....more properties]
+ *      "code":200,
+ *      "items":
+ *      [
+ *          {
+ *              "id":"id", "name":"name", "info":"info", "price":price, "lowHurt":lowHurt, "highHurt":highHurt[,
+ *              "freeze":冻结时间, "health":治疗的生命值, "hardAttack":暴击几率(百分比)]
+ *          }[,
+ *          ...more items]
+ *      ]
  * }
  */
 class Card : Item

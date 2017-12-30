@@ -46,7 +46,7 @@ class Demo : Service()
                 msg.send()
             }
 
-            else if( msg.msg.matches(Regex("-?[0-9]+")) && checkCode.toString() == msg.msg)
+            else if( msg.msg.matches(Regex("-?[0-9]+")) && checkCode.toString() == msg.msg )
             {
                 msg.member.master = true
                 checkCode = null            //置null

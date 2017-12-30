@@ -57,7 +57,7 @@ object Money : Plugin("货币系统", "1.1")
 
         for( member in members )            //iterate members
         {
-            val money : Long = java.lang.Long.parseLong(properties.getProperty(member.toString(), "0")) + change        //get money and add change money
+            val money : Long = properties.getProperty(member.toString(), "0").toLong() + change        //get money and add change money
 
             builder.append("$member=$money\n")     //add map to the builder
         }

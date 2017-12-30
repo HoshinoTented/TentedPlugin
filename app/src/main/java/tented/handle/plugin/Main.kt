@@ -14,19 +14,19 @@ import java.util.Date
 /**
  * Created by Hoshino Tented on 2017/12/24.
  */
-object Main : Handler("插件版本", "1.5")
+object Main : Handler("插件版本", "1.6")
 {
     data class MessageCount( val uin : Long , var count : Int )      //只作为一个数据存储类而已
 
     private val msgMap = HashMap<Long, MessageCount>()      //存储各群上一条消息的发送者, 作为一个缓存吧
 
     //像这些什么分隔符之类的, 都是一开始就载入, 不然每一次get都要读取一次, 很卡的
-    val splitTimes : Long = java.lang.Long.parseLong(File.read(File.getPath("config.cfg"), "st", "9"))
+    val splitTimes : Long = File.read(File.getPath("config.cfg"), "st", "9").toLong()
     val splitChar : String = File.read(File.getPath("config.cfg"), "sc", "-")
 
     //刷屏检测的警告线和禁言线
-    val warningCount : Int = Integer.parseInt(get("wc", "5"))
-    val shutUpCount : Int = Integer.parseInt(get("suc", "10"))
+    val warningCount : Int = get("wc", "5").toInt()
+    val shutUpCount : Int = get("suc", "10").toInt()
 
     val list : HashSet<String> = HashSet()          //菜单来着
 

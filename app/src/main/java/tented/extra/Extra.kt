@@ -14,7 +14,7 @@ import java.io.ObjectOutputStream
 
 infix fun Number.randomTo( to : Number ) : Long = this.toLong() + (Math.random() * (to.toLong() - this.toLong())).toLong()
 
-fun Any?.toUnit() = Unit
+fun Any?.toUnit() = Unit        //用于把任何对象转化为Unit...因为setters如果使用简单写法的话, 而且那一条表达式还有返回值的话, 就会爆炸
 
 fun String.isNumber() : Boolean = this.matches(Regex("[+\\-]?[0-9]+"))
 

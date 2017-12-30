@@ -15,23 +15,20 @@ import kotlin.reflect.KProperty
  */
 class SpellCardPlayer private constructor(group : Long, uin : Long, name : String?) : Member(group, uin, name)
 {
-    inner class InfoManager
+    inner class InfoManager     //一个委托类, 用作属性获取和保存
     {
-        operator fun getValue( _this : Any? , properties : KProperty<*> ) : Int = Integer.parseInt(
-                                                                                                        File.read
-                                                                                                        (
-                                                                                                            infoPath,
-                                                                                                            properties.name,
-                                                                                                            when(properties.name)       //根据properties name来决定默认值
-                                                                                                            {
-                                                                                                                "health", "maxHealth" -> "100"
-                                                                                                                "missing", "killCount", "deathCount", "frozen" -> "0"
-                                                                                                                "reliveTime" -> "120"
+        operator fun getValue( _this : Any? , properties : KProperty<*> ) : Int = File.read (
+                                                                                                infoPath,
+                                                                                                properties.name,
+                                                                                                when(properties.name)       //根据properties name来决定默认值
+                                                                                                {
+                                                                                                    "health", "maxHealth" -> "100"
+                                                                                                    "missing", "killCount", "deathCount", "frozen" -> "0"
+                                                                                                    "reliveTime" -> "120"
 
-                                                                                                                else -> throw IllegalArgumentException("${properties.name} is not a correct property name")
-                                                                                                            }
-                                                                                                        )
-                                                                                                  )
+                                                                                                    else -> throw IllegalArgumentException("${properties.name} is not a correct property name")
+                                                                                                }
+                                                                                            ).toInt()
         operator fun setValue( _this : Any? , properties : KProperty<*> , value : Int ) = File.write(infoPath, properties.name, value.toString())
     }
 
@@ -140,7 +137,7 @@ class SpellCardPlayer private constructor(group : Long, uin : Long, name : Strin
      * @param other The other player
      * @param card Card object
      */
-    @Throws(NoCardFoundException::class)
+    @Throws(NoCardFoundException::class, PlayerFrozenException::class, PlayerDiedException::class)
     fun useCard( other : SpellCardPlayer , card : Card ) : Map<String, Any>
     {
         if( health > 0 && other.health > 0 )
@@ -153,11 +150,8 @@ class SpellCardPlayer private constructor(group : Long, uin : Long, name : Strin
                 {
                     this.bag = bag      //保存...
 
-                    return if (! other.isMissing())
-                    {
-                        return extra(other, card)          //执行拓展函数
-                    }
-                    else mapOf("missing" to "true")
+                    return  if (! other.isMissing()) extra(other, card)          //执行拓展函数
+                            else mapOf("missing" to "true")
                 }
                 else throw NoCardFoundException(card.id)
             }
