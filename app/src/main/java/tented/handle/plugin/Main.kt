@@ -37,7 +37,7 @@ object Main : Handler("插件版本", "1.6")
 
                 for( plugin in PluginLoader.pluginList ) builder.append("${plugin.name} 版本: ${plugin.version}\n")       //添加功能版本
 
-                builder.append(splitChar * splitTimes + "\n本插件源码仓库: https://github.com/LimbolRain/TentedPlugin.git\n如果可以的话star一下啦...")
+                builder.append(splitChar * splitTimes + "\n已开启的插件: ${PluginLoader.pluginList.size}/${PluginLoader.pluginArray.size}\n本插件源码仓库: https://github.com/LimbolRain/TentedPlugin.git\n如果可以的话star一下啦...")
 
                 return builder.toString()
             }
@@ -49,7 +49,7 @@ object Main : Handler("插件版本", "1.6")
     {
         val builder = StringBuilder("")
 
-        for( (index, element) in tented.handle.PluginLoader.pluginArray.withIndex() )
+        for( (index, element) in tented.handle.PluginLoader.pluginList.withIndex() )
         {
             builder.append(element.name)
 

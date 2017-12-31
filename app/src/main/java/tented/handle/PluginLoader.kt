@@ -9,7 +9,7 @@ import tented.extra.getPath
  */
 object PluginLoader
 {
-    val pluginArray = arrayOf(      //所有的Handler子类的数组
+    val pluginArray = arrayOf(  //所有的Handler子类的数组
                                 tented.handle.plugin.Main,
                                 tented.handle.plugin.Master,
                                 tented.handle.plugin.Money,
