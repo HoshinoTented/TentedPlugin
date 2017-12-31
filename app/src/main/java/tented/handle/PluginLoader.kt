@@ -23,7 +23,8 @@ object PluginLoader
                                 tented.handle.plugin.wiki.BaiduWiki,
                                 tented.handle.plugin.CodeViewer,
                                 tented.handle.plugin.game.SpellCard,
-                                tented.handle.plugin.SwitchSystem
+                                tented.handle.plugin.SwitchSystem,
+                                tented.handle.plugin.game.Fishing
                              )
 
     val pluginList = ArrayList(pluginArray.toList())       //实际加载的一个集合, 和数组分开主要是实现开关系统
