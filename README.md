@@ -6,7 +6,7 @@
 
 咳咳, 说正事<br>
 那个, tented包里面才是主要的代码<br>
-tented.handle.plugin是各个功能的Handler实现类<br>
+tented.handle.plugin是各个功能的Handler字类<br>
 大概就这样了
 
 -----------------------
