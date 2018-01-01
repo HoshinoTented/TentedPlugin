@@ -1,5 +1,6 @@
 package tented.handle.plugin
 
+import android.content.pm.PackageManager
 import com.saki.aidl.PluginMsg
 import com.saki.aidl.Type
 import tented.extra.getPath

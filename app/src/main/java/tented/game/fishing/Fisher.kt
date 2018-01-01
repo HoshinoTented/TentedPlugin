@@ -73,9 +73,13 @@ class Fisher private constructor( group : Long , uin : Long , name : String? ) :
         }.start()
     }
 
+    /**
+     * 鱼已经上钩, 等待接收 起竿 指令
+     * 由 waitingForFish() 调用
+     */
     private fun waitingForTakingUp()
     {
-        Thread{
+        Thread {
             Thread.sleep(9999)      //延迟个接近10秒左右
 
             if( hasFish )
@@ -104,6 +108,7 @@ class Fisher private constructor( group : Long , uin : Long , name : String? ) :
 
     /**
      * 起竿
+     * @return 返回钓起来的Fish对象(其实是Item, 只是搞了个类型别名而已)
      */
     @Throws(NoFishException::class, NoFishingException::class)
     fun takeUp() : Fish
