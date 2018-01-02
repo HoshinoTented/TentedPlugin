@@ -9,6 +9,7 @@ import java.io.FileOutputStream
 import java.io.ObjectInputStream
 import java.io.ObjectOutputStream
 import java.util.Properties
+import java.util.regex.Pattern
 
 
 /**
@@ -23,6 +24,21 @@ fun getMembers( group : Long ) : List<Long> = PluginMsg.send(type = PluginMsg.TY
 fun java.io.File.createFiles() = File.createFiles(this)
 fun Any?.toUnit() = Unit        //用于把任何对象转化为Unit...因为setters如果使用简单写法的话, 而且那一条表达式还有返回值的话, 就会爆炸
 fun String.isNumber() : Boolean = this.matches(Regex("[+\\-]?[0-9]+"))
+fun String.matchGroups( regex : String ) : Array<String>
+{
+    val matcher = Pattern.compile(regex).matcher(this)
+
+    return if(matcher.matches())
+    {
+        Array(
+                matcher.groupCount() + 1,
+                {
+                    matcher.group(it)
+                }
+                                  )
+    }
+    else arrayOf()
+}
 fun File.getPath(more : String) : String = android.os.Environment.getExternalStorageDirectory().toString() + "/Tented/TentedPlugin/$more"
 
 fun deepClone( obj : Any ) : Any
