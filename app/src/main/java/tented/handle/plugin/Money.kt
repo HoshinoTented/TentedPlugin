@@ -30,15 +30,15 @@ object Money : Handler("货币系统", "1.1")
     val message : String
             get() =
                 """
-                        |$name
-                        |${Main.splitChar * Main.splitTimes}
-                        |钱包
-                        |[GLOBAL]修改货币名称 [NAME]
-                        |[GLOBAL]修改货币单位 [NAME]
-                        |${Main.splitChar * Main.splitTimes}
-                        |货币名称: $moneyName
-                        |货币单位: $moneyUnit
-                    """.trimMargin()
+                    |$name
+                    |${Main.splitChar * Main.splitTimes}
+                    |钱包
+                    |[GLOBAL]修改货币名称 [NAME]
+                    |[GLOBAL]修改货币单位 [NAME]
+                    |${Main.splitChar * Main.splitTimes}
+                    |货币名称: $moneyName
+                    |货币单位: $moneyUnit
+                """.trimMargin()
 
     private fun giveMoneyToEveryone( group : Long , change : Long )
     {
@@ -91,11 +91,14 @@ object Money : Handler("货币系统", "1.1")
             if( msg.member["check"] != date )
             {
                 val random = 0 randomTo 10000
+                val experience = 0 randomTo 50
+
 
                 msg.member.money += random
+                msg.member["exp"] = msg.member["exp", "0"].toLong() + experience
                 msg.member["check"] = date
 
-                msg.addMsg(Type.MSG, "签到成功~\n获得了...诶...$random$moneyUnit${moneyName}呢")
+                msg.addMsg(Type.MSG, "签到成功~\n获得了...诶...$random$moneyUnit${moneyName}呢\n获得经验$experience")
             }
             else msg.addMsg(Type.MSG, "你签到过了啦!")
         }

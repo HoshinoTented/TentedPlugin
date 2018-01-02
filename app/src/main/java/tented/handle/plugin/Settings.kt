@@ -55,6 +55,7 @@ object Settings : Handler("系统设置", "1.1")
                             |[GLOBAL]设置分隔符数量[COUNT]  >> ${Main.splitTimes}
                             |[GLOBAL]设置刷屏警告上限[NUMBER]  >> ${Main.warningCount}
                             |[GLOBAL]设置刷屏禁言上限[NUMBER]  >> ${Main.shutUpCount}
+                            |设置艾特提醒  >>  ${if(get(msg.group, "at") == "true") "开启" else "关闭"}
                             |退出插件
                             |${Main.splitChar * Main.splitTimes}
                         """.trimMargin()
@@ -89,6 +90,15 @@ object Settings : Handler("系统设置", "1.1")
                         Main[key] = value
 
                         globalSuccess(msg)
+                    }
+
+                    msg.msg == "设置艾特提醒" ->
+                    {
+                        val action = get(msg.group, "at") == "true"
+
+                        set(msg.group, "at", (! action).toString())
+
+                        msg.addMsg(Type.MSG, "成功${if(action) "关闭" else "开启"}艾特提醒")
                     }
 
                     msg.msg == "退出插件" -> System.exit(0)

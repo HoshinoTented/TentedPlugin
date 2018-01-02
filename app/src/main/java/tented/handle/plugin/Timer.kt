@@ -20,8 +20,7 @@ object Timer : Handler("整点报时", "1.0")
                                                      * 即使Set无序也不会怎么样, 报时系统还需要顺序???
                                                      */
 
-    val message : String
-            get() =
+    val message : String =
                 """
                     |$name
                     |${Main.splitChar * Main.splitTimes}
@@ -30,30 +29,28 @@ object Timer : Handler("整点报时", "1.0")
                     |${Main.splitChar * Main.splitTimes}
                 """.trimMargin()
 
-    val thread : Thread = Thread(
-                                    Runnable{
-                                                while( true )
-                                                {
-                                                    val date : Date = Date()
+    val thread = Thread {
+        while (true)
+        {
+            val date = Date()
 
-                                                    if( SimpleDateFormat("mm:ss").format(date) == "00:00")
-                                                    {
-                                                        val time : String = SimpleDateFormat("现在时间: yyyy年MM月dd日 HH时mm分ss秒").format(date)
-                                                        val msg : PluginMsg = PluginMsg()
+            if (SimpleDateFormat("mm:ss").format(date) == "00:00")
+            {
+                val time : String = SimpleDateFormat("现在时间: yyyy年MM月dd日 HH时mm分ss秒").format(date)
+                val msg = PluginMsg()
 
-                                                        msg.addMsg(Type.MSG, time)
+                msg.addMsg(Type.MSG, time)
 
-                                                        for( group in groupSet)
-                                                        {
-                                                            msg.group = group
-                                                            msg.send()
-                                                        }
-                                                    }
+                for (group in groupSet)
+                {
+                    msg.group = group
+                    msg.send()
+                }
+            }
 
-                                                    Thread.sleep(1000)
-                                                }
-                                            }
-                                )
+            Thread.sleep(1000)
+        }
+    }
 
     operator fun get( group : Long ) : Boolean = File.read(File.getPath("Timer.cfg"), group.toString(), "false") == "true"
     operator fun set( group : Long , mode : Boolean )

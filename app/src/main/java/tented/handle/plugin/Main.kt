@@ -14,6 +14,11 @@ import java.util.Date
 
 /**
  * Created by Hoshino Tented on 2017/12/24.
+ *
+ * 其实这个东西就放一些比较杂的
+ * 例如什么at提醒啊之类的
+ * emmmm虽然是Main
+ * 可是...功能并不Main
  */
 object Main : Handler("插件版本", "1.6")
 {
@@ -36,7 +41,7 @@ object Main : Handler("插件版本", "1.6")
 
                 builder.append("插件作者: 星野 天忆\n")
 
-                for( plugin in PluginLoader.pluginList ) builder.append("${plugin.name} 版本: ${plugin.version}\n")       //添加功能版本
+                for( plugin in PluginLoader.pluginArray ) builder.append("(${ if( PluginLoader.pluginList.contains(plugin) ) "已" else "未" }开启)${plugin.name} 版本: ${plugin.version}\n")       //添加功能版本
 
                 builder.append(splitChar * splitTimes + "\n已开启的插件: ${PluginLoader.pluginList.size}/${PluginLoader.pluginArray.size}\n本插件源码仓库: https://github.com/LimbolRain/TentedPlugin.git\n如果可以的话star一下啦...")
 
@@ -69,7 +74,9 @@ object Main : Handler("插件版本", "1.6")
             msg.msg == name -> msg.addMsg(Type.MSG, message)
             msg.ats.isNotEmpty() ->
             {
-                val message =
+                if( Settings[msg.group, "at"] == "true" )
+                {
+                    val message =
                         """
                             |****Tented*Handler****
                             |${msg.uinName}在${SimpleDateFormat("yyyy年MM月dd日 HH时mm分ss秒").format(Date())}at了你
@@ -78,7 +85,8 @@ object Main : Handler("插件版本", "1.6")
                             |****Tented*Handler****
                         """.trimMargin()
 
-                PluginMsg.send(type = PluginMsg.TYPE_SESS_MSG, group = msg.group, uin = msg.ats[0].uin, message = message)
+                    PluginMsg.send(type = PluginMsg.TYPE_SESS_MSG, group = msg.group, uin = msg.ats[0].uin, message = message)
+                }
             }
         }
 
