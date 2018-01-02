@@ -1,6 +1,5 @@
 package tented.handle.plugin
 
-import android.content.pm.PackageManager
 import com.saki.aidl.PluginMsg
 import com.saki.aidl.Type
 import tented.extra.getPath
@@ -11,13 +10,14 @@ import tented.handle.PluginLoader
 import tented.handle.plugin.ban.Banner
 import java.text.SimpleDateFormat
 import java.util.Date
+import java.util.regex.Pattern
 
 /**
  * Created by Hoshino Tented on 2017/12/24.
  *
  * 其实这个东西就放一些比较杂的
  * 例如什么at提醒啊之类的
- * emmmm虽然是Main
+ * 虽然是Main
  * 可是...功能并不Main
  */
 object Main : Handler("插件版本", "1.6")
@@ -71,7 +71,17 @@ object Main : Handler("插件版本", "1.6")
         when
         {
             msg.msg == "菜单" -> msg.addMsg (Type.MSG, Main.makeMenu())
-            msg.msg == name -> msg.addMsg(Type.MSG, message)
+            msg.msg == name ->
+            {
+                val matcher = Pattern.compile("(.+(\n)?){1,10}").matcher(message)
+
+                while (matcher.find())
+                {
+                    msg.addMsg(Type.MSG, matcher.group())
+                    msg.send()
+                    msg.clearMsg()
+                }
+            }
             msg.ats.isNotEmpty() ->
             {
                 if( Settings[msg.group, "at"] == "true" )
@@ -94,8 +104,11 @@ object Main : Handler("插件版本", "1.6")
 
         val message : MessageCount? = msgMap[msg.group]
 
-        if( msg.uin == message?.uin )       //如果发送者为上个消息包的发送者(隐含null判断
-        {
+        if( msg.uin == message?.uin )       //如果发送者为上个消息包的发送者(隐含null判断)
+        {                                   //为何隐含null判断?
+                                            //msg.uin是一个Int, 而message?.uin是一个Int?
+                                            //如果msg.uin == message?.uin, 就说明message?.uin是一个Int
+                                            //因此包含了null判断
             message.count ++        //消息包计数 + 1
 
             if( message.count >= Main.shutUpCount )     //警告线和禁言线判断

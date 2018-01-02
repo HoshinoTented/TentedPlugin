@@ -26,7 +26,8 @@ object PluginLoader
                                 tented.handle.plugin.SwitchSystem,
                                 tented.handle.plugin.game.Fishing,
                                 tented.handle.plugin.Member,
-                                tented.handle.plugin.game.Chess
+                                tented.handle.plugin.game.Chess,
+                                tented.handle.plugin.Ask
                              )
 
     val pluginList = ArrayList(pluginArray.toList())       //实际加载的一个集合, 和数组分开主要是实现开关系统
