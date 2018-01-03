@@ -1,4 +1,4 @@
-package tented.handle.exceptions
+package tented.game.exceptions
 
 /**
  * Created by Hoshino Tented on 2018/1/2.

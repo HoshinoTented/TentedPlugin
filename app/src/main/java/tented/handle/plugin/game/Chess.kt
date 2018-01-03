@@ -9,7 +9,7 @@ import tented.game.chess.Pos
 import tented.game.chess.exceptions.NoEmptyChessException
 import tented.game.exceptions.PlayerNotEnoughException
 import tented.handle.Handler
-import tented.handle.exceptions.HadGameException
+import tented.game.exceptions.HadGameException
 import tented.handle.plugin.Main
 
 /**
@@ -73,7 +73,7 @@ object Chess : Handler("井字之棋", "1.0")
                     msg.addMsg(Type.MSG, "游戏创建成功")
                 }
 
-                catch ( e : HadGameException )
+                catch ( e : HadGameException)
                 {
                     msg.addMsg(Type.MSG, "游戏创建失败: 游戏已存在")
                 }

@@ -46,7 +46,7 @@ object PluginLoader
      * 所以没什么用嘛!
      * 不过也可以关闭它本身噢(SwitchSystem)
      */
-    fun insertPlugins()             //目前大概也就是一个测试的阶段吧, 还得搞个默认的pluginList...
+    fun insertPlugins()
     {
         val file = java.io.File(tented.file.File.getPath("switch.cfg"))
         val properties = java.util.Properties()

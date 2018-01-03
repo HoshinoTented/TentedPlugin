@@ -180,7 +180,7 @@ class PluginMsg : Parcelable, Serializable
 
     override fun toString() : String
     {
-        val jsonObj : JSONObject = JSONObject()
+        val jsonObj = JSONObject()
 
         jsonObj.put("type", type)
         jsonObj.put("group", group)
