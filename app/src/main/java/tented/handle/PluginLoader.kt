@@ -16,7 +16,7 @@ object PluginLoader
                                 tented.handle.plugin.Money,
                                 tented.handle.plugin.Timer,
                                 tented.handle.plugin.Manager,
-                                tented.handle.plugin.translate.Translate,
+                                //tented.handle.plugin.translate.Translate,             出现接口异常, 暂时停止使用
                                 tented.handle.plugin.ban.Ban,
                                 tented.handle.plugin.photo.Photo,
                                 tented.handle.plugin.shop.system.SystemShop,

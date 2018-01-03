@@ -18,7 +18,7 @@ object Translation
         val getQueryLanguage : String = getLanguage(query)
         val to : String = if(getQueryLanguage == "zh") "en" else "zh"
 
-        val result : String = request.doPost("from=$getQueryLanguage&to=$to&query=${URLEncoder.encode(query, "UTF-8")}")
+        val result : String = request.doPost("from=$getQueryLanguage&to=$to&query=${URLEncoder.encode(query, "UTF-8")}&simple_means_flag=3&sign=54706.276099&token=57519e0e3dfd90cb80d349985cc1678a")
         val jsonObj : JSONObject = JSONObject(result)
 
         val data : JSONObject = jsonObj.getJSONObject("trans_result").getJSONArray("data").getJSONObject(0)
