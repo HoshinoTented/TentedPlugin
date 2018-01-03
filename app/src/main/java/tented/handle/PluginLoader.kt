@@ -1,5 +1,6 @@
 package tented.handle
 
+import com.saki.aidl.Type
 import tented.extra.getPath
 
 /**
@@ -28,7 +29,8 @@ object PluginLoader
                                 tented.handle.plugin.Member,
                                 tented.handle.plugin.game.Chess,
                                 tented.handle.plugin.Ask,
-                                tented.handle.plugin.Encode
+                                tented.handle.plugin.Encode,
+                                tented.handle.plugin.Drawer
                              )
 
     val pluginList = ArrayList(pluginArray.toList())       //实际加载的一个集合, 和数组分开主要是实现开关系统
