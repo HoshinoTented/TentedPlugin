@@ -6,6 +6,7 @@ import tented.extra.getMembers
 import tented.extra.getPath
 import tented.extra.randomTo
 import tented.extra.times
+import tented.extra.toInt
 import tented.file.File
 import tented.handle.Handler
 import java.io.BufferedWriter
@@ -93,12 +94,13 @@ object Money : Handler("货币系统", "1.1")
                 val random = 0 randomTo 10000
                 val experience = 0 randomTo 50
 
-
-                msg.member.money += random
-                msg.member["exp"] = msg.member["exp", "0"].toLong() + experience
+                msg.member.money += random * (msg.member.isVip().toInt() + 1)
+                msg.member["exp"] = msg.member["exp", "0"].toLong() + experience * (msg.member.isVip().toInt() + 1)
                 msg.member["check"] = date
 
                 msg.addMsg(Type.MSG, "签到成功~\n获得了...诶...$random$moneyUnit${moneyName}呢\n获得经验$experience")
+
+                if( msg.member.isVip() ) msg.addMsg(Type.MSG, "\n[VIP]金币和经验翻倍啦！！")
             }
             else msg.addMsg(Type.MSG, "你签到过了啦!")
         }

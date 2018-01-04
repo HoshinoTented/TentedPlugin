@@ -130,7 +130,9 @@ class ChessGame
             gamingPlayers = ArrayList(players)
             isStarted = true
 
-            if( Random().nextBoolean() ) gamingPlayers.reverse()        //随机一个玩家先手, 直接倒置集合就可以啦~
+            if( ! gamingPlayers[0].isVip() && gamingPlayers[1].isVip() || Random().nextBoolean()) gamingPlayers.reverse()       //如果第二个玩家是vip则强制先手
+                                                                                                                                //所以第一个玩家是不是vip决定了第二个玩家是否先手
+                                                                                                                                //如果两者都不是vip, 则进行随机玩家
 
             chess0 = gamingPlayers[0].chess
             chess1 = gamingPlayers[1].chess

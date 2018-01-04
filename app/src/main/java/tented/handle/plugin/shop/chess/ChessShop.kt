@@ -6,7 +6,6 @@ import tented.bag.Bag
 import tented.extra.getPath
 import tented.extra.times
 import tented.file.File
-import tented.game.chess.ChessPlayer
 import tented.handle.Handler
 import tented.handle.plugin.Main
 import tented.handle.plugin.Money

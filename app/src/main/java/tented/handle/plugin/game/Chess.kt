@@ -2,7 +2,9 @@ package tented.handle.plugin.game
 
 import com.saki.aidl.PluginMsg
 import com.saki.aidl.Type
+import tented.extra.randomTo
 import tented.extra.times
+import tented.extra.toInt
 import tented.game.chess.ChessGame
 import tented.game.chess.ChessPlayer
 import tented.game.chess.Pos
@@ -11,6 +13,7 @@ import tented.game.exceptions.PlayerNotEnoughException
 import tented.handle.Handler
 import tented.game.exceptions.HadGameException
 import tented.handle.plugin.Main
+import tented.handle.plugin.Money
 import java.util.Random
 
 /**
@@ -181,6 +184,14 @@ object Chess : Handler("井字之棋", "1.0")
                                     msg.addMsg(Type.MSG, "你胜利了")
 
                                     games.remove(msg.group)
+
+                                    val vip = msg.member.isVip()
+                                    val money = (0 randomTo 1000) * (vip.toInt() + 1)
+                                    msg.member.money += money
+
+                                    msg.addMsg(Type.MSG, "\n获得了$money${Money.moneyUnit}${Money.moneyName}")
+
+                                    if( vip ) msg.addMsg(Type.MSG, "\n[VIP]井字棋游戏金币翻倍")
                                 }
                             }
                             else msg.addMsg(Type.MSG, "下棋失败: 尚未轮到你下棋")
