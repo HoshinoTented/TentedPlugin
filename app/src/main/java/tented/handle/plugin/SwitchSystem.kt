@@ -2,6 +2,7 @@ package tented.handle.plugin
 
 import com.saki.aidl.PluginMsg
 import com.saki.aidl.Type
+import tented.extra.getPath
 import tented.extra.times
 import tented.handle.Handler
 
@@ -21,6 +22,9 @@ object SwitchSystem : Handler("插件开关", "1.0")
                 |请发送 插件版本
             """.trimMargin()
 
+    operator fun get(clazz : String) : Boolean = tented.file.File.read(tented.file.File.getPath("switch.cfg"), clazz, "true") == "true"
+    operator fun set(clazz : String, mod : Boolean) = tented.file.File.write(tented.file.File.getPath("switch.cfg"), clazz, mod.toString())
+
     override fun handle(msg : PluginMsg)
     {
         when
@@ -33,7 +37,7 @@ object SwitchSystem : Handler("插件开关", "1.0")
 
                 if( filterResult.isNotEmpty() )
                 {
-                    tented.handle.PluginLoader[filterResult[0].javaClass.name] = msg.msg.startsWith("开启")
+                    set(filterResult[0].javaClass.name, msg.msg.startsWith("开启"))
 
                     Settings.globalSuccess(msg)
                 }

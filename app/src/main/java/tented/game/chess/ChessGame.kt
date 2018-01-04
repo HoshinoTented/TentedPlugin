@@ -94,7 +94,7 @@ class ChessGame
              * 否则就只判断一条斜线
              */
 
-            fun checkLeftTile( pos : Pos ) : Boolean
+            fun checkLeftTile() : Boolean
             {
                 val poses = Pos.leftTiltPoses
                 val firstPos = poses[0]
@@ -102,7 +102,7 @@ class ChessGame
                 return firstPos[chessMap] == poses[1][chessMap] && firstPos[chessMap] == poses[2][chessMap]
             }
 
-            fun checkRightTilt( pos : Pos ) : Boolean
+            fun checkRightTilt() : Boolean
             {
                 val poses = Pos.rightTiltPoses
                 val firstPos = poses[0]
@@ -110,7 +110,7 @@ class ChessGame
                 return firstPos[chessMap] == poses[1][chessMap] && firstPos[chessMap] == poses[2][chessMap]
             }
 
-            return (if( pos.isLeftTilt ) checkLeftTile(pos) else false) || (if( pos.isRightTilt ) checkRightTilt(pos) else false)
+            return (if( pos.isLeftTilt ) checkLeftTile() else false) || (if( pos.isRightTilt ) checkRightTilt() else false)
         }
 
         var emptyChessCount = 0
@@ -133,6 +133,7 @@ class ChessGame
             if( ! gamingPlayers[0].isVip() && gamingPlayers[1].isVip() || Random().nextBoolean()) gamingPlayers.reverse()       //如果第二个玩家是vip则强制先手
                                                                                                                                 //所以第一个玩家是不是vip决定了第二个玩家是否先手
                                                                                                                                 //如果两者都不是vip, 则进行随机玩家
+                                                                                                                                //所以第一个玩家还是有优势的
 
             chess0 = gamingPlayers[0].chess
             chess1 = gamingPlayers[1].chess

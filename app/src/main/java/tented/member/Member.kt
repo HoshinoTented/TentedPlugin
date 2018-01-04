@@ -37,7 +37,7 @@ open class Member ( val group : Long , val uin : Long , val name : String? = nul
         set(value) = Data.save(File.getPath("$group/Bag/$uin.json"), value.toString())
 
     var vip : String
-        get() = get("vip", "0000/00/00")
+        get() = get("vip", "2018/01/04")            //别问我为什么是2018 01 04, 因为是在这一天写完vip系统的
         set(value) = set("vip", value)
 
     operator fun set(key : String, value : Any?) = File.write(File.getPath("$group/$uin/config.cfg"), key, value.toString())

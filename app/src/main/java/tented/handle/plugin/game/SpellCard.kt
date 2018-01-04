@@ -3,6 +3,7 @@ package tented.handle.plugin.game
 import com.saki.aidl.PluginMsg
 import com.saki.aidl.Type
 import tented.extra.times
+import tented.extra.toInt
 import tented.game.exceptions.PlayerDiedException
 import tented.game.exceptions.PlayerFrozenException
 import tented.game.spell.SpellCardPlayer
@@ -107,12 +108,16 @@ object SpellCard : Handler("符卡游戏", "1.0")
                 if(item != null)
                 {
                     val bag = msg.member.bag
+                    val vip = msg.member.isVip()
+
                     bag.add(cardId, 1)
 
                     msg.member.bag = bag
-                    msg.member.money -= item.info.getLong("price")
+                    msg.member.money -= (item.info.getLong("price") * if( vip ) 0.5F else 1F).toLong()
 
                     msg.addMsg(Type.MSG, "购买成功!")
+
+                    if( vip ) msg.addMsg(Type.MSG, "\n[VIP]符卡半价购买")
                 }
                 else msg.addMsg(Type.MSG, "符卡商店里没有id为$cardId 的符卡噢")
             }
@@ -129,6 +134,7 @@ object SpellCard : Handler("符卡游戏", "1.0")
                     builder.append(
                                         """
                                             |${card.name}(${card.id})
+                                            |价格: ${card.price}
                                             |伤害范围: ${card.lowHurt}~${card.highHurt}
                                             |${card.info.getString("info")}
                                             |${Main.splitChar * Main.splitTimes}

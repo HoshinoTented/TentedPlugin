@@ -1,6 +1,7 @@
 package tented.handle
 
 import com.saki.aidl.Type
+import tented.extra.createFiles
 import tented.extra.getPath
 
 /**
@@ -18,7 +19,7 @@ object PluginLoader
                                 tented.handle.plugin.Manager,
                                 //tented.handle.plugin.translate.Translate,             出现接口异常, 暂时停止使用
                                 tented.handle.plugin.ban.Ban,
-                                tented.handle.plugin.photo.Photo,
+                                //tented.handle.plugin.photo.Photo,                     同异常, 估计是处理异常, 不想去修复
                                 tented.handle.plugin.shop.system.SystemShop,
                                 tented.handle.plugin.Settings,
                                 tented.handle.plugin.wiki.BaiduWiki,
@@ -32,13 +33,11 @@ object PluginLoader
                                 tented.handle.plugin.Encode,
                                 tented.handle.plugin.Drawer,
                                 tented.handle.plugin.shop.chess.ChessShop,
-                                tented.handle.plugin.VIPSystem
+                                tented.handle.plugin.VIPSystem,
+                                tented.handle.plugin.Gal
                              )
 
     val pluginList = ArrayList(pluginArray.toList())       //实际加载的一个集合, 和数组分开主要是实现开关系统
-
-    operator fun get(clazz : String) : Boolean = tented.file.File.read(tented.file.File.getPath("switch.cfg"), clazz, "true") == "true"
-    operator fun set(clazz : String, mod : Boolean) = tented.file.File.write(tented.file.File.getPath("switch.cfg"), clazz, mod.toString())
 
     //fun pluginCount() : Int = pluginList.size       //获取插件数量, 目前用不到, 也没用...
 
@@ -53,11 +52,7 @@ object PluginLoader
         val file = java.io.File(tented.file.File.getPath("switch.cfg"))
         val properties = java.util.Properties()
 
-        if( ! file.exists() )
-        {
-            file.parentFile.mkdirs()
-            file.createNewFile()
-        }
+        file.createFiles()
 
         properties.load(java.io.FileInputStream(file))
         properties.keys.map { if(properties.getProperty(it.toString(), "true") == "false") pluginList.remove(Class.forName(it.toString()).getField("INSTANCE").get(null) as? Handler) }
@@ -73,7 +68,7 @@ object PluginLoader
 
         for ( handler in pluginList)        //迭代遍历所有的Handler子类
         {
-            msg.clearMsg()          //清楚消息
+            msg.clearMsg()          //清除消息
             handler.handle(msg)     //执行处理
             msg.send()              //发送消息, 所以只要在处理里面添加消息就好了
         }

@@ -14,12 +14,11 @@ import tented.handle.Handler
 import tented.game.exceptions.HadGameException
 import tented.handle.plugin.Main
 import tented.handle.plugin.Money
-import java.util.Random
 
 /**
  * Created by Hoshino Tented on 2018/1/2.
  */
-object Chess : Handler("井字之棋", "1.0")
+object Chess : Handler("井字之棋", "1.1")
 {
     private val games = HashMap<Long, ChessGame>()
 
@@ -32,7 +31,7 @@ object Chess : Handler("井字之棋", "1.0")
                 |加入井字棋
                 |开始井字棋
                 |显示棋盘
-                |下棋[POS]
+                |下棋[1-9]
                 |${Main.splitChar * Main.splitTimes}
             """.trimMargin()
 

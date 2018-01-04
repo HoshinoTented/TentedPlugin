@@ -20,7 +20,7 @@ import java.util.regex.Pattern
  * 虽然是Main
  * 可是...功能并不Main
  */
-object Main : Handler("插件版本", "1.6")
+object Main : Handler("插件版本", "1.7")
 {
     data class MessageCount( val uin : Long , var count : Int )      //只作为一个数据存储类而已
 
@@ -70,7 +70,7 @@ object Main : Handler("插件版本", "1.6")
     {
         when
         {
-            msg.msg == "菜单" -> msg.addMsg (Type.MSG, Main.makeMenu())
+            msg.msg == "菜单" || msg.msg == "功能" || msg.msg == "帮助" -> msg.addMsg (Type.MSG, Main.makeMenu())
             msg.msg == name ->
             {
                 val matcher = Pattern.compile("(.+(\n)?){1,10}").matcher(message)
