@@ -32,6 +32,20 @@ object SystemItems
                                         PluginMsg.send(group = msg.group, message = "${msg.member.name}对${member.name}使用了 烂苹果!!!\n损失了$lose${Money.moneyUnit}${Money.moneyName}")
                                     }
                                     else PluginMsg.send(group = msg.group, message = "使用失败了!!!而且 烂苹果 也消失不见了...")        //因为是先扣除, 再使用, 然而我又懒得去改, 所以
+                                },
+                        "item:theworld" to
+                                {
+                                    msg ->
+
+                                    Thread {
+                                        msg.member.shutGroup(true)
+
+                                        Thread.sleep(3000)
+
+                                        msg.member.shutGroup(false)
+                                    }.start()
+
+                                    PluginMsg.send(group = msg.group, message = "${msg.uinName}使用了 時符「ザ　ワールド」！！")
                                 }
                     )
 }

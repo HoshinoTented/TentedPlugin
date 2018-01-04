@@ -174,8 +174,7 @@ class PluginMsg : Parcelable, Serializable
         member = tented.member.Member(group, uin, uinName)
     }
 
-    fun send() : PluginMsg? = Demo.send(this)
-
+    fun send() : PluginMsg? = if( type == 0 && textMsg == "" ) null else Demo.send(this)        //如果是群消息而且消息为空的话就不发送了(免得别人刷屏然后机器人被ban了
     fun reAt() = this.addMsg(Type.AT, uin.toString() + "@" + uinName)
 
     override fun toString() : String

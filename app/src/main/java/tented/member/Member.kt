@@ -3,6 +3,7 @@ package tented.member
 import com.saki.aidl.PluginMsg
 import tented.bag.Bag
 import tented.extra.getPath
+import tented.extra.toInt
 import tented.file.File
 import tented.io.Data
 import java.io.Serializable
@@ -43,6 +44,8 @@ open class Member ( val group : Long , val uin : Long , val name : String? = nul
     fun remove() = PluginMsg.send(type = PluginMsg.TYPE_DELETE_MEMBER, group = group, uin = uin)
     fun rename( newName : String ) = PluginMsg.send(type = PluginMsg.TYPE_SET_MEMBER_CARD, group = group, uin = uin, title = newName)
     fun favourite( times : Int = 10 ) = PluginMsg.send(type = PluginMsg.TYPE_FAVOURITE, group = group, uin = uin, value = times)
+
+    fun shutGroup( mod : Boolean ) = PluginMsg.send(type = PluginMsg.TYPE_SET_GROUP_SHUTUP, group = group, value = (! mod).toInt())
 
     /**
      * 重写equals方法!!!

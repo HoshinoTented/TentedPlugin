@@ -4,6 +4,7 @@ import tented.extra.toInt
 import tented.game.chess.exceptions.NoEmptyChessException
 import tented.game.exceptions.PlayerNotEnoughException
 import tented.member.Member
+import java.util.Random
 
 /**
  * Created by Hoshino Tented on 2018/1/2.
@@ -13,11 +14,16 @@ class ChessGame
     companion object
     {
         val CHESS_EMPTY = '□'
-        val CHESS_0 = '○'
-        val CHESS_1 = '×'
+        //这个是默认的chess
+        var CHESS_0 = '○'
+        var CHESS_1 = '×'
     }
 
-    private lateinit var gamingPlayers : ArrayList<ChessPlayer>
+    lateinit var gamingPlayers : ArrayList<ChessPlayer>
+
+    //这个是玩家的ches
+    var chess0 = '○'
+    var chess1 = '×'
 
     val players = HashSet<ChessPlayer>()        //a set of players
     val chessMap = Array(
@@ -123,6 +129,11 @@ class ChessGame
         {
             gamingPlayers = ArrayList(players)
             isStarted = true
+
+            if( Random().nextBoolean() ) gamingPlayers.reverse()        //随机一个玩家先手, 直接倒置集合就可以啦~
+
+            chess0 = gamingPlayers[0].chess
+            chess1 = gamingPlayers[1].chess
         }
         else throw PlayerNotEnoughException(2)
     }

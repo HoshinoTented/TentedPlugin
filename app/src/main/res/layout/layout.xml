@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mainLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/background_light">
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/text"
@@ -12,8 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:text="@string/text"
-        android:textColor="@android:color/background_light" />
+        android:text="@string/text" />
 
     <Button
         android:id="@+id/jump"
@@ -22,9 +20,43 @@
         android:layout_below="@+id/text"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="57dp"
-        android:background="@android:color/background_light"
         android:text="Jump To V8"
         android:textColor="@android:color/background_dark" />
+
+    <EditText
+        android:id="@+id/group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:ems="10"
+        android:hint="群号"
+        android:inputType="textPersonName"
+        android:numeric="integer" />
+
+    <EditText
+        android:id="@+id/uin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/group"
+        android:ems="10"
+        android:hint="主人QQ"
+        android:inputType="textPersonName"
+        android:numeric="integer" />
+
+    <Button
+        android:id="@+id/master"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignBottom="@+id/uin"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_toEndOf="@+id/group"
+        android:layout_toRightOf="@+id/group"
+        android:text="添加/删除 主人" />
 
 
 </RelativeLayout>

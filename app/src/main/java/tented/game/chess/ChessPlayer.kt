@@ -1,6 +1,8 @@
 package tented.game.chess
 
+import tented.extra.getPath
 import tented.extra.toBoolean
+import tented.file.File
 import tented.game.chess.exceptions.HadChessException
 import tented.game.chess.exceptions.NoEmptyChessException
 import tented.member.Member
@@ -17,7 +19,9 @@ class ChessPlayer private constructor( group : Long , uin : Long , name : String
 
     lateinit var game : ChessGame
 
-    private val chess : Char get() = if( game.players.indexOf(this).toBoolean() ) ChessGame.CHESS_1 else ChessGame.CHESS_0
+    var chess : Char
+        get() = File.read(File.getPath("$group/Chess/$uin.cfg"), "chess", if( game.gamingPlayers.indexOf(this).toBoolean() ) ChessGame.CHESS_1 else ChessGame.CHESS_0)[0]
+        set(value) = File.write(File.getPath("$group/Chess/$uin.cfg"), "chess", value)
     val now : Boolean get() = game.players.indexOf(this).toBoolean() == game.nowGaming
 
     fun join( game : ChessGame ) : Boolean =
@@ -33,7 +37,7 @@ class ChessPlayer private constructor( group : Long , uin : Long , name : String
     fun setChess( pos : Pos ) : Boolean =
         if(pos.isEmpty(game.chessMap))
         {
-            if( chess == ChessGame.CHESS_0 || chess == ChessGame.CHESS_1 )
+            if(chess == game.chess0 || chess == game.chess1)
             {
                 pos[game.chessMap] = chess
                 game.next()

@@ -11,9 +11,12 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.Window
 import android.widget.Button
+import android.widget.EditText
 import android.widget.Toast
 import org.json.JSONObject
+import tented.extra.isNumber
 import tented.internet.Request
+import tented.member.Member
 
 /**
  * Created by Hoshino Tented on 2017/11/5.
@@ -27,6 +30,11 @@ class UI : Activity()
     //所有的控件对象
 
     private lateinit var jump : Button
+    private lateinit var master : Button
+
+    private lateinit var group : EditText
+    private lateinit var uin : EditText
+
 
     private var hasTentedDictionary : Boolean = false          //以后拿来写 与TentedDictionary 的交互, 现在先放在这里
     private var hasV8 : Boolean = false
@@ -36,6 +44,10 @@ class UI : Activity()
     private fun doInit()
     {
         this.jump = findViewById(R.id.jump) as Button
+        this.master = findViewById(R.id.master) as Button
+
+        this.group = findViewById(R.id.group) as EditText
+        this.uin = findViewById(R.id.uin) as EditText
 
         Thread {
             val request = Request("http://setqq.oss-cn-shanghai.aliyuncs.com/v8/update.json")
@@ -92,6 +104,7 @@ class UI : Activity()
                     }
                            )
 
+            alert.setCancelable(false)      //设置无法非正常退出
             alert.show()
         }
     }
@@ -105,10 +118,28 @@ class UI : Activity()
     {
         jump.setOnClickListener {
             _ ->
+
             val jumpRequest = Intent()
 
             jumpRequest.setClassName("com.setqq", "saki.ui.LoginActivity")
             startActivity(jumpRequest)
+        }
+
+        master.setOnClickListener {
+            _ ->
+
+            val group = this@UI.group.text.toString()
+            val uin = this@UI.uin.text.toString()
+
+            if( group.isNumber() && uin.isNumber() )
+            {
+                val member = Member(group.toLong(), uin.toLong(), null)
+
+                member.master = ! member.master
+
+                Toast.makeText(this@UI, "修改完毕", Toast.LENGTH_SHORT).show()
+            }
+            else Toast.makeText(this@UI, "群号或主人QQ号未填写或数据错误", Toast.LENGTH_SHORT).show()
         }
     }
 

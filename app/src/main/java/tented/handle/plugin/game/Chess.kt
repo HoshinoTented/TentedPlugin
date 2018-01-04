@@ -11,6 +11,7 @@ import tented.game.exceptions.PlayerNotEnoughException
 import tented.handle.Handler
 import tented.game.exceptions.HadGameException
 import tented.handle.plugin.Main
+import java.util.Random
 
 /**
  * Created by Hoshino Tented on 2018/1/2.
@@ -24,6 +25,7 @@ object Chess : Handler("井字之棋", "1.0")
                 |$name
                 |${Main.splitChar * Main.splitTimes}
                 |创建井字棋
+                |删除井字棋
                 |加入井字棋
                 |开始井字棋
                 |显示棋盘
@@ -77,6 +79,23 @@ object Chess : Handler("井字之棋", "1.0")
                 {
                     msg.addMsg(Type.MSG, "游戏创建失败: 游戏已存在")
                 }
+        }
+
+            msg.msg == "删除井字棋" ->
+            {
+                val game = games[msg.group]
+
+                if( game != null )
+                {
+                    if (game.contains(msg.member))
+                    {
+                        games.remove(msg.group)
+
+                        msg.addMsg(Type.MSG, "删除游戏完毕")
+                    }
+                    else msg.addMsg(Type.MSG, "删除游戏失败: 你不是游戏中的玩家")
+                }
+                else msg.addMsg(Type.MSG, "删除游戏失败: 游戏未创建")
             }
 
             msg.msg == "加入井字棋" ->
@@ -105,7 +124,7 @@ object Chess : Handler("井字之棋", "1.0")
                         {
                             game.start()
 
-                            msg.addMsg(Type.MSG, "开始游戏成功")
+                            msg.addMsg(Type.MSG, "开始游戏成功\n玩家${game.nowGamingPlayer().uin}先手")
                         }
 
                         catch ( e : PlayerNotEnoughException )
@@ -122,7 +141,7 @@ object Chess : Handler("井字之棋", "1.0")
             {
                 val game = games[msg.group]
 
-                if( game != null ) msg.addMsg(Type.MSG, game.toString())
+                if( game != null ) msg.addMsg(Type.MSG, game.toString() + "轮到${game.nowGamingPlayer().uin}下棋")
                 else msg.addMsg(Type.MSG, "加载棋盘失败: 游戏不存在")
             }
 
@@ -141,7 +160,7 @@ object Chess : Handler("井字之棋", "1.0")
                             if (msg.member == player)
                             {
                                 val pos = Pos.newInstance(msg.msg[2].toString().toInt() - 1)
-                                var wim : Boolean = false
+                                var wim = false
 
                                 try
                                 {
