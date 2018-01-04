@@ -1,6 +1,7 @@
 package tented.func
 
 import tented.extra.getPath
+import tented.file.File
 import java.io.FileInputStream
 import java.util.Properties
 
@@ -16,6 +17,8 @@ object Do
 
     fun serviceOnCreate()
     {
+        tented.shop.Shop.rootPath = File.getPath("")
+
         val file : java.io.File = java.io.File(tented.file.File.getPath("Timer.cfg"))
 
         if( file.exists() )
