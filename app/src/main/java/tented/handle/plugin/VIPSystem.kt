@@ -14,7 +14,7 @@ import java.util.Calendar
  */
 object VIPSystem : Handler("贵族系统", "1.0")
 {
-    val message =
+    private val message =
             """
                 |$name
                 |${Main.splitChar * Main.splitTimes}
@@ -23,11 +23,12 @@ object VIPSystem : Handler("贵族系统", "1.0")
                 |${Main.splitChar * Main.splitTimes}
             """.trimMargin()
 
-    val vip =
+    private val vip =
             """
                 |贵族特权...
                 |${Main.splitChar * Main.splitTimes}
                 |签到经验和金币翻倍
+                |签到获得额外VIP礼包
                 |井字棋游戏强制先手
                 |井字棋金币翻倍
                 |符卡半价购买

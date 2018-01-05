@@ -46,6 +46,16 @@ object SystemItems
                                     }.start()
 
                                     PluginMsg.send(group = msg.group, message = "${msg.uinName}使用了 時符「ザ　ワールド」！！")
+                                },
+                        "item:money" to
+                                {
+                                    msg ->
+
+                                    val money =  0 randomTo 1000
+
+                                    msg.member.money += money
+
+                                    PluginMsg.send(group = msg.group, message = "${msg.uinName}使用了金币礼包, 获得了$money${Money.moneyUnit}${Money.moneyName}")
                                 }
                     )
 }

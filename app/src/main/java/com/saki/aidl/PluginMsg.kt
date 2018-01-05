@@ -114,7 +114,7 @@ class PluginMsg : Parcelable, Serializable
     }
 
 
-    fun addMsg(type : Type, text : String) = addMsg(type.toString().toLowerCase(), text)
+    fun addMsg(type : Type, text : CharSequence) = addMsg(type.toString().toLowerCase(), text.toString())
     fun addMsg(key : String, text : String)
     {
         var index : ArrayList<String>? = data["index"]

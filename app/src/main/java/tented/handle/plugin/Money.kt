@@ -100,7 +100,16 @@ object Money : Handler("货币系统", "1.1")
 
                 msg.addMsg(Type.MSG, "签到成功~\n获得了...诶...$random$moneyUnit${moneyName}呢\n获得经验$experience")
 
-                if( msg.member.isVip() ) msg.addMsg(Type.MSG, "\n[VIP]金币和经验翻倍啦！！")
+                if( msg.member.isVip() )
+                {
+                    val bag = msg.member.bag
+
+                    bag.add("VIP礼包", 1)
+
+                    msg.member.bag = bag
+
+                    msg.addMsg(Type.MSG, "\n[VIP]金币和经验翻倍啦！！\n[VIP]获得额外礼包")
+                }
             }
             else msg.addMsg(Type.MSG, "你签到过了啦!")
         }

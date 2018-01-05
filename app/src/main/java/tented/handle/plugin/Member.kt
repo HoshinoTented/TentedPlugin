@@ -62,6 +62,7 @@ object Member : Handler("个人信息", "Beta")
                             |钱包: ${msg.member.money}${Money.moneyUnit}${Money.moneyName}
                             |经验: $exp
                             |等级: Lv.${level + 1} ${levelName[level]}
+                            |${ if( msg.member.isVip() ) "[VIP贵族]过期时间: ${msg.member.vip}" else "[普通用户]无特权" }
                             |${Main.splitChar * Main.splitTimes}
                         """.trimMargin()
 
