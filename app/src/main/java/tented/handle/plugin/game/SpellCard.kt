@@ -65,6 +65,7 @@ object SpellCard : Handler("符卡游戏", "1.0")
                         {
                             val result = thisPlayer.useCard(otherPlayer, card)
 
+                            Thread.sleep(200)      //别问我为什么要这么做, 不这样做的话, 会乱数据, 我也不知道哪里出了问题。。。估计是读写文件, 有一次偶然看到health键被移除了
                             if( result["missing"] == null )     //没有missing键, 代表对方没有躲避成功
                             {
                                 msg.addMsg(Type.MSG, "你造成了${result["hurt"]}点伤害\n${otherPlayer.name}的生命值: ${otherPlayer.health}/${otherPlayer.maxHealth}")

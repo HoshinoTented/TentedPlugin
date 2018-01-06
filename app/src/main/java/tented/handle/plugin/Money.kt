@@ -14,6 +14,7 @@ import java.io.FileInputStream
 import java.io.FileWriter
 import java.text.SimpleDateFormat
 import java.util.Date
+import java.util.Properties
 
 /**
  * Created by Hoshino Tented on 2017/12/24.
@@ -36,6 +37,7 @@ object Money : Handler("货币系统", "1.1")
                     |钱包
                     |[GLOBAL]修改货币名称 [NAME]
                     |[GLOBAL]修改货币单位 [NAME]
+                    |金币排行榜
                     |${Main.splitChar * Main.splitTimes}
                     |货币名称: $moneyName
                     |货币单位: $moneyUnit
@@ -71,6 +73,49 @@ object Money : Handler("货币系统", "1.1")
         writer.close()      //close, this step is very important!!! if not do, the money chance will no write into the file
     }
 
+    /**
+     * 排行榜
+     * @param properties 选择传入Properties对象而不是group : Long是为了节省资源, 免得二次实例化对象
+     */
+    private fun rank( properties : Properties ) : List<Any>
+    {
+        /**
+         * 互换值
+         */
+        fun ArrayList<Any>.changePlace( i :Int , j : Int )
+        {
+            val temp = get(i)
+
+            set(i, get(j))
+            set(j, temp)
+        }
+
+        fun ArrayList<Any>.rank( properties : Properties )
+        {
+            var n = size - 2
+
+            while( n > -1 )
+            {
+                (0..n).forEach {
+                    if( properties.getProperty(get(it).toString(), "0").toLong() > properties.getProperty(get(it + 1).toString(), "0").toLong() )
+                        changePlace(it, it + 1)
+                }
+
+                n --
+            }
+        }
+
+        val members = ArrayList(properties.keys)
+
+        members.rank(properties)
+
+        var from = members.size - 10
+
+        if( from < 0 ) from = 0
+
+        return members.subList(from, members.size)
+    }
+
     override fun handle(msg : PluginMsg)
     {
         if( msg.msg == name )
@@ -91,11 +136,11 @@ object Money : Handler("货币系统", "1.1")
 
             if( msg.member["check"] != date )
             {
-                val random = 0 randomTo 10000
-                val experience = 0 randomTo 50
+                val random = (0 randomTo 10000) * (msg.member.isVip().toInt() + 1)
+                val experience = (0 randomTo 50) * (msg.member.isVip().toInt() + 1)
 
-                msg.member.money += random * (msg.member.isVip().toInt() + 1)
-                msg.member["exp"] = msg.member["exp", "0"].toLong() + experience * (msg.member.isVip().toInt() + 1)
+                msg.member.money += random
+                msg.member["exp"] = msg.member["exp", "0"].toLong() + experience
                 msg.member["check"] = date
 
                 msg.addMsg(Type.MSG, "签到成功~\n获得了...诶...$random$moneyUnit${moneyName}呢\n获得经验$experience")
@@ -112,6 +157,27 @@ object Money : Handler("货币系统", "1.1")
                 }
             }
             else msg.addMsg(Type.MSG, "你签到过了啦!")
+        }
+
+        else if( msg.msg == "金币排行榜" )
+        {
+            val file = java.io.File(File.getPath("${msg.group}/Money.cfg"))
+            val properties = Properties()
+
+            if (file.exists())
+            {
+                properties.load(FileInputStream(file))
+
+                val builder = StringBuilder()
+
+                for ((index, uin) in rank(properties).reversed().withIndex())
+                {
+                    builder.appendln("第${index + 1}名 : $uin  >>  ${properties.getProperty(uin.toString(), "0")}")
+                }
+
+                msg.addMsg(Type.MSG, builder)
+            }
+            else msg.addMsg(Type.MSG, "没有数据")
         }
 
         else if( msg.member.master )

@@ -1,6 +1,5 @@
 package tented.handle
 
-import com.saki.aidl.Type
 import tented.extra.createFiles
 import tented.extra.getPath
 

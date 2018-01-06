@@ -8,6 +8,7 @@ import tented.file.File
 import tented.io.Data
 import java.io.Serializable
 import java.text.SimpleDateFormat
+import java.util.Calendar
 import java.util.Date
 
 /**
@@ -48,12 +49,14 @@ open class Member ( val group : Long , val uin : Long , val name : String? = nul
 
     fun isVip() : Boolean
     {
-        val dateArray = SimpleDateFormat("yyyy/MM/dd").format(Date()).split('/')
         val timeArray = vip.split('/')
 
-        dateArray.withIndex().map { if( it.value.toInt() > timeArray[it.index].toInt() ) return false }
+        val now = Calendar.getInstance()
+        val time = Calendar.getInstance()
 
-        return true
+        time.set(timeArray[0].toInt(), timeArray[1].toInt(), timeArray[2].toInt())
+
+        return time.after(now)
     }
 
     fun shut( time : Int ) = PluginMsg.send(type = PluginMsg.TYPE_SET_MEMBER_SHUTUP, group = group, uin = uin, value = time * 60)

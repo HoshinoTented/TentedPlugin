@@ -35,7 +35,6 @@ class UI : Activity()
     private lateinit var group : EditText
     private lateinit var uin : EditText
 
-
     private var hasTentedDictionary : Boolean = false          //以后拿来写 与TentedDictionary 的交互, 现在先放在这里
     private var hasV8 : Boolean = false
 
@@ -152,7 +151,7 @@ class UI : Activity()
         fun waitingSecondClick()
         {
             Thread {
-                Thread.sleep(3000)
+                Thread.sleep(2500)
 
                 clickedBack = false
             }.start()
@@ -171,7 +170,7 @@ class UI : Activity()
         {
             clickedBack = false
 
-            finish()
+            finish()            //仅仅退出界面, 因为还有Service什么的。。。
         }
     }
 

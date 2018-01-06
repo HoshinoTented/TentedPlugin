@@ -55,14 +55,16 @@ object Member : Handler("个人信息", "Beta")
             {
                 val exp = msg.member["exp", "0"].toLong()
                 val level = level(exp)
+                val isVip = msg.member.isVip()
+
                 val message =
                         """
                             |$name
                             |${Main.splitChar * Main.splitTimes}
                             |钱包: ${msg.member.money}${Money.moneyUnit}${Money.moneyName}
                             |经验: $exp
-                            |等级: Lv.${level + 1} ${levelName[level]}
-                            |${ if( msg.member.isVip() ) "[VIP贵族]过期时间: ${msg.member.vip}" else "[普通用户]无特权" }
+                            |等级: Lv.${level + 1} ${if(isVip) "尊贵贵族" else levelName[level]}
+                            |${ if( isVip ) "[VIP贵族]过期时间: ${msg.member.vip}" else "[普通用户]无特权" }
                             |${Main.splitChar * Main.splitTimes}
                         """.trimMargin()
 
