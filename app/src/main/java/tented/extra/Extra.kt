@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.PorterDuff
 import com.saki.aidl.PluginMsg
+import org.json.JSONObject
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import java.io.FileOutputStream
@@ -16,9 +17,22 @@ import java.io.ObjectOutputStream
  * 这个文件就放一些普通的拓展而已
  */
 
-fun getMembers( group : Long ) : List<Long> = PluginMsg.send(type = PluginMsg.TYPE_GET_GROUP_MEMBER, group = group)!!.data["member"]!!.map { java.lang.Long.parseLong(it) }
+inline fun <reified T : Any> T.description() : String
+{
+    val jsonObj = JSONObject()
 
-fun deepClone( obj : Any ) : Any
+    javaClass.declaredFields.forEach {
+        if( it != null )
+        {
+            it.isAccessible = true
+            jsonObj.put(it.name, it.get(this))
+        }
+    }
+
+    return jsonObj.toString()
+}
+
+inline fun <reified T : Any> T.deepClone( obj : Any ) : T
 {
     val bo = ByteArrayOutputStream()
     val oo = ObjectOutputStream(bo)
@@ -28,8 +42,10 @@ fun deepClone( obj : Any ) : Any
     val bi = ByteArrayInputStream(bo.toByteArray())
     val oi = ObjectInputStream(bi)
 
-    return oi.readObject()
+    return oi.readObject() as T
 }
+
+fun getMembers( group : Long ) : List<Long> = PluginMsg.send(type = PluginMsg.TYPE_GET_GROUP_MEMBER, group = group)!!.data["member"]!!.map { java.lang.Long.parseLong(it) }
 
 fun doDraw(input : String, textSize : Float = 54F, textColor : Int = Color.rgb(0x33, 0xb5, 0xe5))
 {

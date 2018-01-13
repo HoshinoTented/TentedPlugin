@@ -71,7 +71,7 @@ object Manager : Handler("群管系统", "1.0")
 
                     msg.msg.matches(Regex("改@.+ .+")) ->
                     {
-                        val member : tented.member.Member = msg.ats[0]
+                        val member : tented.util.Member = msg.ats[0]
                         val index : Int = (member.name?.length ?: 0) +  2
 
                         val newName : String = msg.msg.substring(index)

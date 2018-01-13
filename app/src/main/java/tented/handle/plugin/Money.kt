@@ -19,7 +19,7 @@ import java.util.Properties
 /**
  * Created by Hoshino Tented on 2017/12/24.
  */
-object Money : Handler("货币系统", "1.1")
+object Money : Handler("货币系统", "1.2")
 {
     var moneyUnit : String
         get() = File.read(File.getPath("config.cfg"), "money::unit", "枚")
@@ -125,7 +125,7 @@ object Money : Handler("货币系统", "1.1")
 
         else if( msg.msg.matches(Regex("钱包(@.+)?")) )
         {
-            val member : tented.member.Member = if( msg.ats.isNotEmpty() ) msg.ats[0] else msg.member
+            val member : tented.util.Member = if( msg.ats.isNotEmpty() ) msg.ats[0] else msg.member
 
             msg.addMsg(Type.MSG, "${member.name}的钱包...\n${Main.splitChar * 9}\n$moneyName: 有${member.money}${moneyUnit}呢")
         }

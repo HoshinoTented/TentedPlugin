@@ -7,7 +7,7 @@ import tented.game.spell.cards.Card
 import tented.game.spell.exceptions.NoCardFoundException
 import tented.game.exceptions.PlayerDiedException
 import tented.game.exceptions.PlayerFrozenException
-import tented.member.Member
+import tented.util.Member
 import kotlin.reflect.KProperty
 
 /**

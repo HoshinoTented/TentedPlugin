@@ -5,7 +5,7 @@ import tented.extra.toBoolean
 import tented.file.File
 import tented.game.chess.exceptions.HadChessException
 import tented.game.chess.exceptions.NoEmptyChessException
-import tented.member.Member
+import tented.util.Member
 
 /**
  * Created by Hoshino Tented on 2018/1/2.

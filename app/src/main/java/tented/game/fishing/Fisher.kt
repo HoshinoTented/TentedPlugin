@@ -3,7 +3,7 @@ package tented.game.fishing
 import tented.extra.randomTo
 import tented.game.fishing.exceptions.NoFishException
 import tented.game.fishing.exceptions.NoFishingException
-import tented.member.Member
+import tented.util.Member
 import kotlin.reflect.KProperty
 
 /**

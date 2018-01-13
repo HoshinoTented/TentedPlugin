@@ -12,7 +12,7 @@ import tented.game.fishing.exceptions.NoFishingException
 import tented.handle.Handler
 import tented.handle.plugin.Main
 import tented.handle.plugin.Money
-import tented.member.Member
+import tented.util.Member
 
 /**
  * Created by Hoshino Tented on 2018/1/1.

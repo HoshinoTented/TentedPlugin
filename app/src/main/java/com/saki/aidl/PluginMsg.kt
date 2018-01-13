@@ -74,8 +74,8 @@ class PluginMsg : Parcelable, Serializable
     lateinit var xml : String
     lateinit var json : String
 
-    lateinit var member : tented.member.Member//使用lateinit关键字       // = tented.member.Member.EMPTY          //干脆搞一个member对象下去得了, 不然Kotlin的null判断很烦, 而且就算放一个空Member下去也改不了什么...
-    var ats : List<tented.member.Member> = arrayListOf()
+    lateinit var member : tented.util.Member//使用lateinit关键字       // = tented.member.Member.EMPTY          //干脆搞一个member对象下去得了, 不然Kotlin的null判断很烦, 而且就算放一个空Member下去也改不了什么...
+    var ats : List<tented.util.Member> = arrayListOf()
     var textMsg : String
         get() = getTextMsg(Type.MSG)
         set(value) = addMsg(Type.MSG, value)
@@ -169,12 +169,12 @@ class PluginMsg : Parcelable, Serializable
                                         val uin : Long = java.lang.Long.parseLong(it.substring(0, index))
                                         val name : String = it.substring(index + 1)
 
-                                        tented.member.Member(this.group, uin, name)
+                                        tented.util.Member(this.group, uin, name)
                                     } ?: ats
-        member = tented.member.Member(group, uin, uinName)
+        member = tented.util.Member(group, uin, uinName)
     }
 
-    fun send() : PluginMsg? = if( type == 0 && textMsg == "" ) null else Demo.send(this)        //如果是群消息而且消息为空的话就不发送了(免得别人刷屏然后机器人被ban了
+    fun send() : PluginMsg? = if( type == 0 && ! ( getTextMsg(Type.MSG) != "" || getTextMsg(Type.XML) != "" || getTextMsg(Type.JSON) != "") ) null else Demo.send(this)        //如果是群消息而且消息为空的话就不发送了(免得别人刷屏然后机器人被ban了
     fun reAt() = this.addMsg(Type.AT, uin.toString() + "@" + uinName)
 
     override fun toString() : String

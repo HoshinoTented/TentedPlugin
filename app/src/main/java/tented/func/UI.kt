@@ -16,7 +16,7 @@ import android.widget.Toast
 import org.json.JSONObject
 import tented.extra.isNumber
 import tented.internet.Request
-import tented.member.Member
+import tented.util.Member
 
 /**
  * Created by Hoshino Tented on 2017/11/5.

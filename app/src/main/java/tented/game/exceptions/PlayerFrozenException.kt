@@ -1,6 +1,6 @@
 package tented.game.exceptions
 
-import tented.member.Member
+import tented.util.Member
 
 /**
  * Created by Hoshino Tented on 2017/12/29.

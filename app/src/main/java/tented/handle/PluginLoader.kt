@@ -10,33 +10,35 @@ import tented.extra.getPath
  */
 object PluginLoader
 {
-    val pluginArray = arrayOf(  //所有的Handler子类的数组
-                                tented.handle.plugin.Main,
-                                tented.handle.plugin.Master,
-                                tented.handle.plugin.Money,
-                                tented.handle.plugin.Timer,
-                                tented.handle.plugin.Manager,
-                                //tented.handle.plugin.translate.Translate,             出现接口异常, 暂时停止使用
-                                tented.handle.plugin.ban.Ban,
-                                //tented.handle.plugin.photo.Photo,                     同异常, 估计是处理异常, 不想去修复
-                                tented.handle.plugin.shop.system.SystemShop,
-                                tented.handle.plugin.Settings,
-                                tented.handle.plugin.wiki.BaiduWiki,
-                                tented.handle.plugin.CodeViewer,
-                                tented.handle.plugin.game.SpellCard,
-                                tented.handle.plugin.SwitchSystem,
-                                tented.handle.plugin.game.Fishing,
-                                tented.handle.plugin.Member,
-                                tented.handle.plugin.game.Chess,
-                                tented.handle.plugin.Ask,
-                                tented.handle.plugin.Encode,
-                                tented.handle.plugin.Drawer,
-                                tented.handle.plugin.shop.chess.ChessShop,
-                                tented.handle.plugin.VIPSystem,
-                                tented.handle.plugin.Gal,
-                                tented.handle.plugin.gift.GiftSystem,
-                                tented.handle.plugin.gift.GiftSystem.GiftShop
-                             )
+    val pluginArray : Array<Handler> = arrayOf(     //所有的Handler子类的数组
+                                                    tented.handle.plugin.Main,
+                                                    tented.handle.plugin.Master,
+                                                    tented.handle.plugin.Money,
+                                                    tented.handle.plugin.Timer,
+                                                    tented.handle.plugin.Manager,
+                                                    //tented.handle.plugin.translate.Translate,             出现接口异常, 暂时停止使用
+                                                    tented.handle.plugin.ban.Ban,
+                                                    //tented.handle.plugin.photo.Photo,                     同异常, 估计是处理异常, 不想去修复
+                                                    tented.handle.plugin.shop.system.SystemShop,
+                                                    tented.handle.plugin.Settings,
+                                                    tented.handle.plugin.wiki.BaiduWiki,
+                                                    tented.handle.plugin.CodeViewer,
+                                                    tented.handle.plugin.game.SpellCard,
+                                                    tented.handle.plugin.SwitchSystem,
+                                                    tented.handle.plugin.game.Fishing,
+                                                    tented.handle.plugin.Member,
+                                                    tented.handle.plugin.game.Chess,
+                                                    tented.handle.plugin.Ask,
+                                                    tented.handle.plugin.Encode,
+                                                    tented.handle.plugin.Drawer,
+                                                    tented.handle.plugin.shop.chess.ChessShop,
+                                                    tented.handle.plugin.VIPSystem,
+                                                    tented.handle.plugin.Gal,
+                                                    tented.handle.plugin.gift.GiftSystem,
+                                                    tented.handle.plugin.gift.GiftSystem.GiftShop,
+                                                    tented.handle.plugin.PingAddress,
+                                                    tented.handle.plugin.music.Music
+                                              )
 
     val pluginList = ArrayList(pluginArray.toList())       //实际加载的一个集合, 和数组分开主要是实现开关系统
 

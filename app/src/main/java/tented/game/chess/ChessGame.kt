@@ -3,7 +3,7 @@ package tented.game.chess
 import tented.extra.toInt
 import tented.game.chess.exceptions.NoEmptyChessException
 import tented.game.exceptions.PlayerNotEnoughException
-import tented.member.Member
+import tented.util.Member
 import java.util.Random
 
 /**
