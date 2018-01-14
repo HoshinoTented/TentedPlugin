@@ -26,12 +26,12 @@ object Ban : Handler("违禁系统", "1.2")
     {
         if( msg.member.master ) return false                //Master will never be shut up
 
-        val touches : List<String> = tented.handle.plugin.ban.Banner.getWords(msg.group).filter { msg.msg.matches(Regex(".*$it.*")) }
+        val touches : List<String> = tented.handle.plugin.ban.Banner.getWords(msg.group).filter { msg.msg.matches(Regex("(?s)(?i).*$it.*")) }       //加入(?s)(?i)模式匹配符
 
         return  if( touches.isNotEmpty() )
         {
             val time : Int = touches.size * tented.handle.plugin.ban.Banner[msg.group]
-            val builder : StringBuilder = StringBuilder("${msg.member.name}\n${"-" * 9}\n你触犯了以下违禁词...\n")
+            val builder = StringBuilder("${msg.member.name}\n${"-" * 9}\n你触犯了以下违禁词...\n")
 
             for( word in touches ) builder.append(">>$word<<\n")
 

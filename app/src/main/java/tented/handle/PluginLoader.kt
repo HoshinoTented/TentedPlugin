@@ -2,6 +2,7 @@ package tented.handle
 
 import tented.extra.createFiles
 import tented.extra.getPath
+import tented.test.test
 
 /**
  * Created by Hoshino Tented on 2017/12/24.
@@ -67,6 +68,8 @@ object PluginLoader
      */
     fun handleMessage( msg : com.saki.aidl.PluginMsg )
     {
+        test()
+
         if( ! tented.handle.plugin.Settings.doInit(msg) || tented.handle.plugin.ban.Ban.checkBan(msg) ) return
 
         for ( handler in pluginList)        //迭代遍历所有的Handler子类

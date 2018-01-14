@@ -16,6 +16,7 @@ import android.widget.Toast
 import org.json.JSONObject
 import tented.extra.isNumber
 import tented.internet.Request
+import tented.test.test
 import tented.util.Member
 
 /**
@@ -182,7 +183,7 @@ class UI : Activity()
 
         //finish()        //立即关闭界面, 千万不要以为是闪退噢
         //Toast.makeText(this, "哎呀。。。出现了一点小故障呜。。\n联系一下插件作者吧？不过还是先看下源码比较好吧。。。\n", Toast.LENGTH_LONG).show()                //报出虚假的信息
-                                                                                                                                                                    //好皮啊我。。。
+
         doInit()
         doLoad()
 
