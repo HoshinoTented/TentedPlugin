@@ -2,7 +2,6 @@ package tented.handle.plugin
 
 import com.saki.aidl.PluginMsg
 import com.saki.aidl.Type
-import tented.extra.delete
 import tented.extra.doDraw
 import tented.extra.getPath
 import tented.extra.times

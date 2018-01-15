@@ -8,6 +8,8 @@ import tented.file.File
  */
 object Banner
 {
+    //这个set和get都是群的一个禁言的时长
+    //影响范围是违禁系统的刷屏检测
     operator fun get( group : Long ) : Int = Integer.parseInt(File.read(File.getPath("$group/config.cfg"), "ban", "10"))
     operator fun set( group : Long , time : Int ) = File.write(File.getPath("$group/config.cfg"), "ban", time.toString())
 

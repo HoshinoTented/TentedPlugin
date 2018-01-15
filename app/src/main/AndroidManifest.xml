@@ -19,7 +19,9 @@
             </intent-filter>
         </service>
         <!-- 插件UI注册 -->
-        <activity android:name="tented.func.UI">
+        <activity
+            android:name="tented.func.UI"
+            android:theme="@style/TitleStyle" >
             <intent-filter >
                 <!-- 主程序跳转 -->
                 <action android:name="saki.setqq.plugin.v8.main"/>

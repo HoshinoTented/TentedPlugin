@@ -13,7 +13,9 @@ import java.util.Date
 import java.util.regex.Pattern
 
 /**
- * Created by Hoshino Tented on 2017/12/24.
+ * Created by Hos
+ *
+ * hino Tented on 2017/12/24.
  *
  * 其实这个东西就放一些比较杂的
  * 例如什么at提醒啊之类的
@@ -25,6 +27,7 @@ object Main : Handler("插件版本", "1.7")
     data class MessageCount( val uin : Long , var count : Int )      //只作为一个数据存储类而已
 
     private val msgMap = HashMap<Long, MessageCount>()      //存储各群上一条消息的发送者, 作为一个缓存吧
+    private val middleIcon : String = File.read(File.getPath("config.cfg"), "midIcon", 10024.toChar())
 
     //像这些什么分隔符之类的, 都是一开始就载入, 不然每一次get都要读取一次, 很卡的
     val splitTimes : Long = File.read(File.getPath("config.cfg"), "st", "9").toLong()
@@ -57,9 +60,9 @@ object Main : Handler("插件版本", "1.7")
 
         for( (index, element) in tented.handle.PluginLoader.pluginList.withIndex() )
         {
-            builder.append(element.name)
+            builder.append("${index + 1}.${element.name}")
 
-            if( index % 2 == 0 ) builder.append("   ")
+            if( index % 2 == 0 ) builder.append(middleIcon)
             else builder.append("\n")
         }
 

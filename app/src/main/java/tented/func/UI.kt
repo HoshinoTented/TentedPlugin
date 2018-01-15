@@ -3,20 +3,17 @@ package tented.func
 import com.tented.demo.kotlin.R
 import android.app.Activity
 import android.app.AlertDialog
-import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
-import android.view.Window
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import org.json.JSONObject
 import tented.extra.isNumber
 import tented.internet.Request
-import tented.test.test
 import tented.util.Member
 
 /**
@@ -80,7 +77,7 @@ class UI : Activity()
             alert.setButton(
                     AlertDialog.BUTTON_POSITIVE,
                     "下载",
-                    DialogInterface.OnClickListener {
+                    {
                         _, _ ->
 
                         val intent = Intent()
@@ -97,7 +94,7 @@ class UI : Activity()
             alert.setButton(
                     AlertDialog.BUTTON_NEGATIVE,
                     "退出",
-                    DialogInterface.OnClickListener {
+                    {
                         _, _ ->
 
                         System.exit(0)          //直接退出, 毫不留情
@@ -119,10 +116,19 @@ class UI : Activity()
         jump.setOnClickListener {
             _ ->
 
+            /*
             val jumpRequest = Intent()
 
             jumpRequest.setClassName("com.setqq", "saki.ui.LoginActivity")
             startActivity(jumpRequest)
+            */
+
+            val alert = AlertDialog.Builder(this).create()
+
+            alert.setTitle("DO NOT TOUCH ME!")
+            alert.setMessage("不要碰我！！！")
+
+            alert.show()
         }
 
         master.setOnClickListener {
@@ -178,8 +184,8 @@ class UI : Activity()
     override fun onCreate(bundle: Bundle?)
     {
         super.onCreate(bundle)
-        requestWindowFeature(Window.FEATURE_NO_TITLE)
-        setContentView(R.layout.layout)
+        //requestWindowFeature(Window.FEATURE_NO_TITLE)     去除标题栏
+        setContentView(R.layout.main_layout)
 
         //finish()        //立即关闭界面, 千万不要以为是闪退噢
         //Toast.makeText(this, "哎呀。。。出现了一点小故障呜。。\n联系一下插件作者吧？不过还是先看下源码比较好吧。。。\n", Toast.LENGTH_LONG).show()                //报出虚假的信息

@@ -65,7 +65,7 @@ class Demo : Service()
          */
         @Throws(RemoteException::class)
         fun send(msg: PluginMsg): PluginMsg? =
-                if (connection != null && connection!!.service != null) connection!!.service!!.handlerMessage(msg)
+                if (connection != null && connection!!.service != null) connection!!.service!!.handlerMessage(msg) ?: PluginMsg.EMPTY
                 else null
     }
 

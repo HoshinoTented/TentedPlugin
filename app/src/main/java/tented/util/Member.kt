@@ -2,6 +2,7 @@ package tented.util
 
 import com.saki.aidl.PluginMsg
 import tented.bag.Bag
+import tented.extra.description
 import tented.extra.getPath
 import tented.extra.toInt
 import tented.file.File
@@ -70,10 +71,9 @@ open class Member ( val group : Long , val uin : Long , val name : String? = nul
     override fun equals(other : Any?) : Boolean =
             when(other)
             {
-                null -> false
                 is Member -> other.group == group && other.uin == uin
 
                 else -> false
             }
-    override fun toString() : String = "{\"group\":$group, \"uin\":$uin, \"name\":\"$name\"}"
+    override fun toString() : String = description()
 }

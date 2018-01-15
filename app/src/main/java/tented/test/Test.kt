@@ -8,11 +8,17 @@ import com.saki.aidl.PluginMsg
  * @date 2018/1/14 16:03
  */
 
-fun test()
+fun test( msg : PluginMsg )
 {
     /*
     PluginMsg(PluginMsg.TYPE_GET_GROUP_LIST).send()?.data?.get("troop")?.forEach {
         println("[GROUP]$it")
+    }
+    */
+
+    /*
+    msg.msg.forEach {
+        println(it.toInt())
     }
     */
 }

@@ -31,11 +31,11 @@ object Ban : Handler("违禁系统", "1.2")
         return  if( touches.isNotEmpty() )
         {
             val time : Int = touches.size * tented.handle.plugin.ban.Banner[msg.group]
-            val builder = StringBuilder("${msg.member.name}\n${"-" * 9}\n你触犯了以下违禁词...\n")
+            val builder = StringBuilder("${msg.member.name}\n${Main.splitChar * Main.splitTimes}\n你触犯了以下违禁词...\n")
 
             for( word in touches ) builder.append(">>$word<<\n")
 
-            builder.append("被禁言了${time}分钟\n${"-" * Main.splitTimes}")
+            builder.append("被禁言了${time}分钟\n${Main.splitChar * Main.splitTimes}")
 
             msg.member.shut(time)
 

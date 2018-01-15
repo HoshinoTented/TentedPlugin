@@ -15,6 +15,8 @@ class PluginMsg : Parcelable, Serializable
 {
     companion object
     {
+        val EMPTY = PluginMsg()
+
         //必须提供一个名为CREATOR的static final属性 该属性需要实现android.os.Parcelable.Creator<T>接口
         @JvmField
         val CREATOR : Parcelable.Creator<PluginMsg> = object : Parcelable.Creator<PluginMsg>

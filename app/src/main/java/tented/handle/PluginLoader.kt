@@ -2,7 +2,6 @@ package tented.handle
 
 import tented.extra.createFiles
 import tented.extra.getPath
-import tented.test.test
 
 /**
  * Created by Hoshino Tented on 2017/12/24.
@@ -38,7 +37,8 @@ object PluginLoader
                                                     tented.handle.plugin.gift.GiftSystem,
                                                     tented.handle.plugin.gift.GiftSystem.GiftShop,
                                                     tented.handle.plugin.PingAddress,
-                                                    tented.handle.plugin.music.Music
+                                                    tented.handle.plugin.music.Music,
+                                                    tented.handle.plugin.NumberCall
                                               )
 
     val pluginList = ArrayList(pluginArray.toList())       //实际加载的一个集合, 和数组分开主要是实现开关系统
@@ -68,15 +68,16 @@ object PluginLoader
      */
     fun handleMessage( msg : com.saki.aidl.PluginMsg )
     {
-        test()
+        tented.test.test(msg)           //测试用的函数
 
         if( ! tented.handle.plugin.Settings.doInit(msg) || tented.handle.plugin.ban.Ban.checkBan(msg) ) return
 
-        for ( handler in pluginList)        //迭代遍历所有的Handler子类
+        for ( handler in pluginList )        //迭代遍历所有的Handler子类
         {
             msg.clearMsg()          //清除消息
             handler.handle(msg)     //执行处理
-            msg.send()              //发送消息, 所以只要在处理里面添加消息就好了
+            if(msg.send() != null) return              //发送消息, 所以只要在处理里面添加消息就好了
+            //加这个判断主要是为了减少不必要的资源消耗。。。
         }
     }
 }

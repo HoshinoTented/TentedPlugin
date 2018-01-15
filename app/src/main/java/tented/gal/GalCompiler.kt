@@ -44,10 +44,10 @@ class GalCompiler constructor( val scripts : Set<GalScript> )
         }
     }
 
-    inline fun handle( input : String , handleLambda : (GalScript) -> Unit )
-    {
-        for( script in scripts ) if( input == script.title ) handleLambda(script)
-    }
+    inline fun handle( input : String , handleLambda : (GalScript) -> Unit ) =
+        scripts.forEach {
+            if (input == it.title) handleLambda(it)
+        }
 
     override fun toString() : String = scripts.toString()
 }
