@@ -4,6 +4,7 @@ import com.saki.aidl.PluginMsg
 import com.saki.aidl.Type
 import tented.extra.getMembers
 import tented.extra.getPath
+import tented.extra.random
 import tented.extra.randomTo
 import tented.extra.times
 import tented.extra.toInt
@@ -79,10 +80,7 @@ object Money : Handler("货币系统", "1.2")
      */
     private fun rank( properties : Properties ) : List<Any>
     {
-        /**
-         * 互换值
-         */
-        fun ArrayList<Any>.changePlace( i :Int , j : Int )
+        fun ArrayList<Any>.swap( i :Int , j : Int )
         {
             val temp = get(i)
 
@@ -98,7 +96,7 @@ object Money : Handler("货币系统", "1.2")
             {
                 (0..n).forEach {
                     if( properties.getProperty(get(it).toString(), "0").toLong() > properties.getProperty(get(it + 1).toString(), "0").toLong() )
-                        changePlace(it, it + 1)
+                        swap(it, it + 1)
                 }
 
                 n --
@@ -156,7 +154,7 @@ object Money : Handler("货币系统", "1.2")
                     msg.addMsg(Type.MSG, "\n[VIP]金币和经验翻倍啦！！\n[VIP]获得额外礼包")
                 }
             }
-            else msg.addMsg(Type.MSG, "你签到过了啦!")
+            else msg.addMsg(Type.MSG, listOf("你签到过了啦。。呜。。", "我才不会去理重复签到的人呢。。哼~", "签到成功~\n诶不对。。。失败了。。", "不理你。。。不理你。。。").random())
         }
 
         else if( msg.msg == "金币排行榜" )

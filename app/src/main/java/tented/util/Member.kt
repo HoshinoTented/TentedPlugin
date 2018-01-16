@@ -55,7 +55,7 @@ open class Member ( val group : Long , val uin : Long , val name : String? = nul
 
         time.set(timeArray[0].toInt(), timeArray[1].toInt(), timeArray[2].toInt())
 
-        return time.after(now)
+        return now.after(time)
     }
 
     fun shut( time : Int ) = PluginMsg.send(type = PluginMsg.TYPE_SET_MEMBER_SHUTUP, group = group, uin = uin, value = time * 60)

@@ -2,5 +2,6 @@
 
     <string name="app_name">Tented Plugin</string>
     <string name="text">Hello World!</string>
+    <string name="jumpButton">JUMP TO V8</string>
 
 </resources>

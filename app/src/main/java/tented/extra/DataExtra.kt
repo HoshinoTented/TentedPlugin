@@ -30,6 +30,12 @@ fun String.matchGroups(regex : String) : Array<String>
     else arrayOf()
 }
 
+fun <T> List<T>.random() : T =
+        if( isNotEmpty() ) get((0 randomTo size).toInt())
+        else throw IllegalArgumentException("List should be not empty")
+
+fun <T> Iterable<T>.toStringList() : List<String> = map { it.toString() }
+
 operator fun String.times(times : Number) : String
 {
     if( times.toLong() < 0 ) throw IllegalArgumentException("times: $times can not lower than zero")

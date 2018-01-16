@@ -129,6 +129,8 @@ class UI : Activity()
             alert.setMessage("不要碰我！！！")
 
             alert.show()
+
+            jump.text = "NO!!!"
         }
 
         master.setOnClickListener {

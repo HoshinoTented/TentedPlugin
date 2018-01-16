@@ -85,6 +85,22 @@ object Main : Handler("插件版本", "1.7")
                     msg.clearMsg()
                 }
             }
+
+            msg.member.master ->
+            {
+                when
+                {
+                    msg.msg == "重置" ->
+                    {
+                        msg.send("开始删除本群的所有配置...(不包括全局配置)")
+
+                        File.delete(File.getPath(msg.group.toString()))
+
+                        msg.addMsg(Type.MSG, "删除完毕")
+                    }
+                }
+            }
+
             msg.ats.isNotEmpty() ->
             {
                 if( Settings[msg.group, "at"] == "true" )

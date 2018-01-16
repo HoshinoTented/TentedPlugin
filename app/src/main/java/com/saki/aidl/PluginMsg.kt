@@ -177,6 +177,12 @@ class PluginMsg : Parcelable, Serializable
     }
 
     fun send() : PluginMsg? = if( type == 0 && ! ( getTextMsg(Type.MSG) != "" || getTextMsg(Type.XML) != "" || getTextMsg(Type.JSON) != "") ) null else Demo.send(this)        //如果是群消息而且消息为空的话就不发送了(免得别人刷屏然后机器人被ban了
+    fun send( message : String )
+    {
+        addMsg(Type.MSG, message)
+        send()
+        clearMsg()
+    }
     fun reAt() = this.addMsg(Type.AT, uin.toString() + "@" + uinName)
 
     override fun toString() : String

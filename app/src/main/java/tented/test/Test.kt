@@ -1,6 +1,7 @@
 package tented.test
 
 import com.saki.aidl.PluginMsg
+import tented.extra.description
 
 /**
  * Test
@@ -21,4 +22,6 @@ fun test( msg : PluginMsg )
         println(it.toInt())
     }
     */
+
+    saki.demo.Demo.debug(msg.description())
 }
