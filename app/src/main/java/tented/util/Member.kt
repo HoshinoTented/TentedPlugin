@@ -15,11 +15,6 @@ import java.util.Calendar
  */
 open class Member ( val group : Long , val uin : Long , val name : String? = null ) : Serializable       //copyable
 {
-    companion object
-    {
-        val EMPTY : Member = Member(0, 0)       //empty object, 1.5+ will be useless
-    }
-
     var money : Long
         get() = getMoney("Money")
         set(value) = setMoney("Money", value)
@@ -75,4 +70,6 @@ open class Member ( val group : Long , val uin : Long , val name : String? = nul
 
                 else -> false
             }
+
+    override fun toString() : String = description()
 }

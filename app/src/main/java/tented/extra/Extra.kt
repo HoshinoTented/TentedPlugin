@@ -7,11 +7,13 @@ import android.graphics.Paint
 import android.graphics.PorterDuff
 import com.saki.aidl.PluginMsg
 import org.json.JSONObject
+import tented.annotations.NotProperty
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import java.io.FileOutputStream
 import java.io.ObjectInputStream
 import java.io.ObjectOutputStream
+import java.lang.reflect.Modifier
 
 /**
  * 这个文件就放一些普通的拓展而已
@@ -22,7 +24,7 @@ inline fun <reified T : Any> T.description() : String
     val jsonObj = JSONObject()
 
     javaClass.declaredFields.forEach {
-        if( it != null )
+        if( it != null && ! Modifier.isStatic(it.modifiers) && ! it.isAnnotationPresent(NotProperty::class.java) )        //获取非静态的对象, 毕竟是描述嘛~           然后还要排除非属性的字段
         {
             it.isAccessible = true
             jsonObj.put(it.name, it.get(this))

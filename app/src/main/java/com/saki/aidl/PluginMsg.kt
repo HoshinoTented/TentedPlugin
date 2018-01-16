@@ -9,6 +9,7 @@ import android.os.Parcelable
 import org.json.JSONObject
 
 import saki.demo.Demo
+import tented.annotations.NotProperty
 import java.io.Serializable
 
 class PluginMsg : Parcelable, Serializable
@@ -72,12 +73,12 @@ class PluginMsg : Parcelable, Serializable
     var title : String? = null
     var data = HashMap<String, ArrayList<String>>()
 
-    lateinit var msg : String
-    lateinit var xml : String
-    lateinit var json : String
+    @NotProperty lateinit var msg : String
+    @NotProperty lateinit var xml : String
+    @NotProperty lateinit var json : String
 
-    lateinit var member : tented.util.Member//使用lateinit关键字       // = tented.member.Member.EMPTY          //干脆搞一个member对象下去得了, 不然Kotlin的null判断很烦, 而且就算放一个空Member下去也改不了什么...
-    var ats : List<tented.util.Member> = arrayListOf()
+    @NotProperty lateinit var member : tented.util.Member//使用lateinit关键字       // = tented.member.Member.EMPTY          //干脆搞一个member对象下去得了, 不然Kotlin的null判断很烦, 而且就算放一个空Member下去也改不了什么...
+    @NotProperty var ats : List<tented.util.Member> = arrayListOf()
     var textMsg : String
         get() = getTextMsg(Type.MSG)
         set(value) = addMsg(Type.MSG, value)
