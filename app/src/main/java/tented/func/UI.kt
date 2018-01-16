@@ -22,6 +22,10 @@ import tented.util.Member
 
 class UI : Activity()
 {
+    companion object
+    {
+        var launched : Boolean = false
+    }
 
     private lateinit var v8DownloadUrl : String
 
@@ -40,11 +44,11 @@ class UI : Activity()
 
     private fun doInit()
     {
-        this.jump = findViewById(R.id.jump) as Button
-        this.master = findViewById(R.id.master) as Button
+        this.jump = findViewById(R.id.jump)
+        this.master = findViewById(R.id.master)
 
-        this.group = findViewById(R.id.group) as EditText
-        this.uin = findViewById(R.id.uin) as EditText
+        this.group = findViewById(R.id.group)
+        this.uin = findViewById(R.id.uin)
 
         Thread {
             val request = Request("http://setqq.oss-cn-shanghai.aliyuncs.com/v8/update.json")
@@ -188,6 +192,14 @@ class UI : Activity()
         super.onCreate(bundle)
         //requestWindowFeature(Window.FEATURE_NO_TITLE)     去除标题栏
         setContentView(R.layout.main_layout)
+
+        UI.launched = true
+
+        requestPermission(this)     //申请必要的权限
+
+        noPermission(this).forEach {        //验证权限
+            requestAgain(this, it)
+        }
 
         //finish()        //立即关闭界面, 千万不要以为是闪退噢
         //Toast.makeText(this, "哎呀。。。出现了一点小故障呜。。\n联系一下插件作者吧？不过还是先看下源码比较好吧。。。\n", Toast.LENGTH_LONG).show()                //报出虚假的信息

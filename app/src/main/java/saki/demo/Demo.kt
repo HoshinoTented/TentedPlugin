@@ -14,16 +14,17 @@ import com.tented.demo.kotlin.R
 import com.saki.aidl.AppInterface.Stub
 import com.saki.aidl.PluginMsg
 import com.saki.aidl.Type
+import tented.func.UI
 import java.util.Random
 
 class Demo : Service()
 {
     companion object
     {
-        private val JUMP = false
+        private val JUMP = true
 
         private val AUTHOR = "星野天忆"
-        private val INFO = "Tented Handler"
+        private val INFO = "请不要使用此插件, 包含病毒!"
 
         private var connection : SQConnection? = null
 

@@ -75,5 +75,4 @@ open class Member ( val group : Long , val uin : Long , val name : String? = nul
 
                 else -> false
             }
-    override fun toString() : String = description()
 }

@@ -15,6 +15,7 @@ import java.io.FileInputStream
 import java.io.FileWriter
 import java.text.SimpleDateFormat
 import java.util.Date
+import java.util.Locale
 import java.util.Properties
 
 /**
@@ -130,7 +131,7 @@ object Money : Handler("货币系统", "1.2")
 
         else if( msg.msg == "签到")
         {
-            val date = SimpleDateFormat("yyyy/MM/dd").format(Date())
+            val date = SimpleDateFormat("yyyy/MM/dd", Locale.getDefault()).format(Date())
 
             if( msg.member["check"] != date )
             {
