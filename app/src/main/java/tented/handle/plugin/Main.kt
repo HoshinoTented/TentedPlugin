@@ -13,9 +13,7 @@ import java.util.Date
 import java.util.regex.Pattern
 
 /**
- * Created by Hos
- *
- * hino Tented on 2017/12/24.
+ * Created by Hoshino Tented on 2017/12/24.
  *
  * 其实这个东西就放一些比较杂的
  * 例如什么at提醒啊之类的

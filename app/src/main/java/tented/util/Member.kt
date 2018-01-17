@@ -15,6 +15,8 @@ import java.util.Calendar
  */
 open class Member ( val group : Long , val uin : Long , val name : String? = null ) : Serializable       //copyable
 {
+    //怒删EMPTY, 搞得我description四递归。。。
+
     var money : Long
         get() = getMoney("Money")
         set(value) = setMoney("Money", value)
@@ -48,18 +50,20 @@ open class Member ( val group : Long , val uin : Long , val name : String? = nul
         val now = Calendar.getInstance()
         val time = Calendar.getInstance()
 
-        time.set(timeArray[0].toInt(), timeArray[1].toInt(), timeArray[2].toInt())
+        time.set(timeArray[0].toInt(), timeArray[1].toInt() - 1, timeArray[2].toInt())
 
-        return now.after(time)
+        return time.after(now)
     }
 
-    fun shut( time : Int ) = PluginMsg.send(type = PluginMsg.TYPE_SET_MEMBER_SHUTUP, group = group, uin = uin, value = time * 60)
+    fun shut( time : Int ) = PluginMsg.send(type = PluginMsg.TYPE_SET_MEMBER_SHUT, group = group, uin = uin, value = time * 60)
     fun remove() = PluginMsg.send(type = PluginMsg.TYPE_DELETE_MEMBER, group = group, uin = uin)
     fun rename( newName : String ) = PluginMsg.send(type = PluginMsg.TYPE_SET_MEMBER_CARD, group = group, uin = uin, title = newName)
     fun favourite( times : Int = 10 ) = PluginMsg.send(type = PluginMsg.TYPE_FAVOURITE, group = group, uin = uin, value = times)
 
-    fun shutGroup( mod : Boolean ) = PluginMsg.send(type = PluginMsg.TYPE_SET_GROUP_SHUTUP, group = group, value = (! mod).toInt())
+    fun shutGroup( mod : Boolean ) = PluginMsg.send(type = PluginMsg.TYPE_SET_GROUP_SHUT, group = group, value = (! mod).toInt())
 
+    override fun hashCode() : Int = 31 * group.hashCode() + uin.hashCode()
+    override fun toString() : String = description()
     /**
      * 重写equals方法!!!
      */
@@ -71,5 +75,4 @@ open class Member ( val group : Long , val uin : Long , val name : String? = nul
                 else -> false
             }
 
-    override fun toString() : String = description()
 }

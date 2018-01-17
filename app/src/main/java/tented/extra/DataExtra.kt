@@ -35,6 +35,16 @@ fun <T> List<T>.random() : T =
         else throw IllegalArgumentException("List should be not empty")
 
 fun <T> Iterable<T>.toStringList() : List<String> = map { it.toString() }
+fun <T> Iterable<T>.hold() : String
+{
+    val builder = StringBuilder()
+
+    forEach {
+        builder.append(it.toString())
+    }
+
+    return builder.toString()
+}
 
 operator fun String.times(times : Number) : String
 {

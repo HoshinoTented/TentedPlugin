@@ -6,10 +6,9 @@ import java.util.HashMap
 import android.os.Parcel
 import android.os.Parcelable
 
-import org.json.JSONObject
-
 import saki.demo.Demo
 import tented.annotations.NotProperty
+import tented.extra.description
 import java.io.Serializable
 
 class PluginMsg : Parcelable, Serializable
@@ -40,7 +39,7 @@ class PluginMsg : Parcelable, Serializable
             return msg.send()
         }
 
-        val TYPE_DEBUG = -1 //控制台消息
+        val TYPE_CONSOLE = -1 //控制台消息
         val TYPE_GROUP_MSG = 0 //群消息
         val TYPE_BYDDY_MSG = 1 //好友消息
         val TYPE_DIS_MSG = 2 //讨论组消息
@@ -52,8 +51,8 @@ class PluginMsg : Parcelable, Serializable
         val TYPE_GET_MEMBER_INFO = 14 //成员信息
         val TYPE_FAVOURITE = 8 //点赞
         val TYPE_SET_MEMBER_CARD = 9 //设置群名片
-        val TYPE_SET_MEMBER_SHUTUP = 10 //成员禁言
-        val TYPE_SET_GROUP_SHUTUP = 11 //群禁言
+        val TYPE_SET_MEMBER_SHUT = 10 //成员禁言
+        val TYPE_SET_GROUP_SHUT = 11 //群禁言
         val TYPE_DELETE_MEMBER = 12 //删除群成员
         val TYPE_AGREE_JOIN = 13 //同意入群
         val TYPE_GET_LOGIN_ACCOUNT = 15 //获取机器人QQ
@@ -186,21 +185,5 @@ class PluginMsg : Parcelable, Serializable
     }
     fun reAt() = this.addMsg(Type.AT, uin.toString() + "@" + uinName)
 
-    override fun toString() : String
-    {
-        val jsonObj = JSONObject()
-
-        jsonObj.put("type", type)
-        jsonObj.put("group", group)
-        jsonObj.put("code", code)
-        jsonObj.put("uin", uin)
-        jsonObj.put("time", time)
-        jsonObj.put("value", value)
-        jsonObj.put("groupName", groupName)
-        jsonObj.put("uinName", uinName)
-        jsonObj.put("title", title)
-        jsonObj.put("data", data)
-
-        return jsonObj.toString()
-    }
+    override fun toString() : String = description()
 }

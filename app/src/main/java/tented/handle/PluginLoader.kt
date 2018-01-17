@@ -38,7 +38,8 @@ object PluginLoader
                                                     tented.handle.plugin.gift.GiftSystem.GiftShop,
                                                     tented.handle.plugin.PingAddress,
                                                     tented.handle.plugin.music.Music,
-                                                    tented.handle.plugin.NumberCall
+                                                    tented.handle.plugin.Task,
+                                                    tented.handle.plugin.NumberCall     //这个数字召唤得放最后, 一定!!!
                                               )
 
     val pluginList = ArrayList(pluginArray.toList())       //实际加载的一个集合, 和数组分开主要是实现开关系统

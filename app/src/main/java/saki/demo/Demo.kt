@@ -14,7 +14,6 @@ import com.tented.demo.kotlin.R
 import com.saki.aidl.AppInterface.Stub
 import com.saki.aidl.PluginMsg
 import com.saki.aidl.Type
-import tented.func.UI
 import java.util.Random
 
 class Demo : Service()
@@ -32,7 +31,7 @@ class Demo : Service()
 
         fun debug(obj: Any?) : Any?
         {
-            PluginMsg.send(PluginMsg.TYPE_DEBUG, message = obj.toString())
+            PluginMsg.send(PluginMsg.TYPE_CONSOLE, message = obj.toString())
             return obj
         }
 

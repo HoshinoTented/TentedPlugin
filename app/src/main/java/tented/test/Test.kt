@@ -11,17 +11,5 @@ import tented.extra.description
 
 fun test( msg : PluginMsg )
 {
-    /*
-    PluginMsg(PluginMsg.TYPE_GET_GROUP_LIST).send()?.data?.get("troop")?.forEach {
-        println("[GROUP]$it")
-    }
-    */
-
-    /*
-    msg.msg.forEach {
-        println(it.toInt())
-    }
-    */
-
     saki.demo.Demo.debug(msg.description())
 }
