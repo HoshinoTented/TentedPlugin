@@ -16,11 +16,18 @@ import java.util.Timer
 
 object Task : Handler("延时提醒", "1.0")
 {
-    class TimerTask( val group : Long , val message : String ) : java.util.TimerTask()
+    class TimerTask( val member : tented.util.Member , val message : String ) : java.util.TimerTask()
     {
         override fun run()
         {
-            PluginMsg.send(group = group, message = message)
+            val msg = PluginMsg()
+
+            msg.group = member.group
+
+            msg.addMsg(Type.AT, "${member.uin}@${member.name}")
+            msg.addMsg(Type.MSG, " $message")
+
+            msg.send()
         }
     }
 
@@ -54,7 +61,7 @@ object Task : Handler("延时提醒", "1.0")
                     {
                         msg.member.money = newMoney
 
-                        Timer().schedule(TimerTask(msg.group, message.hold()), calendar.time)
+                        Timer().schedule(TimerTask(msg.member, message.hold()), calendar.time)
 
                         msg.addMsg(Type.MSG, "设置成功啦~")
                     }

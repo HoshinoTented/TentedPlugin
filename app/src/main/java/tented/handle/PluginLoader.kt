@@ -39,6 +39,7 @@ object PluginLoader
                                                     tented.handle.plugin.PingAddress,
                                                     tented.handle.plugin.music.Music,
                                                     tented.handle.plugin.Task,
+                                                    tented.handle.plugin.HashSerial,
                                                     tented.handle.plugin.NumberCall     //这个数字召唤得放最后, 一定!!!
                                               )
 
