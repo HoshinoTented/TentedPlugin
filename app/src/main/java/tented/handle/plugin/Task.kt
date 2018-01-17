@@ -5,7 +5,6 @@ import com.saki.aidl.Type
 import tented.extra.hold
 import tented.extra.times
 import tented.handle.Handler
-import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Timer
 
