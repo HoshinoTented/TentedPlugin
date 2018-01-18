@@ -138,7 +138,12 @@ class UI : AppCompatActivity()              //因为theme继承的是AppCompat�
             {
                 R.id.master -> setFragment(this, MasterFragment())
 
-                R.id.home, R.id.other -> setFragment(this, HomeFragment())
+                R.id.home, R.id.other ->
+                {
+                    Toast.makeText(this@UI, listOf("这个选项还没有做完的说。。。", "诶诶诶。。不要乱点了啦!", "空空如也的说。。", "什么都没有了啦!不要再看了啦。。。").random(), Toast.LENGTH_SHORT).show()
+
+                    setFragment(this, HomeFragment())
+                }
 
                 else -> false
             }
