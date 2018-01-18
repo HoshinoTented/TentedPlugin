@@ -33,6 +33,7 @@ class UI : AppCompatActivity()              //因为theme继承的是AppCompat�
     //所有的控件对象
 
     private lateinit var jump : Button
+    private lateinit var melon : Button
 
     private lateinit var navigation : BottomNavigationView
 
@@ -44,6 +45,8 @@ class UI : AppCompatActivity()              //因为theme继承的是AppCompat�
     private fun doInit()
     {
         this.navigation = findViewById(R.id.navigation)
+
+        this.melon = findViewById(R.id.melon)
         this.jump = findViewById(R.id.jump)
 
         Thread {
@@ -59,10 +62,15 @@ class UI : AppCompatActivity()              //因为theme继承的是AppCompat�
         fun containsPackage( packages : List<PackageInfo> , packageName : String ) : Boolean = packages.filter { it.packageName == packageName }.isNotEmpty()
 
         val packageManager = packageManager
-        val packages = packageManager.getInstalledPackages(PackageManager.GET_UNINSTALLED_PACKAGES)
+        val packages = packageManager.getInstalledPackages(PackageManager.MATCH_UNINSTALLED_PACKAGES)
 
         hasTentedDictionary = containsPackage(packages, "com.tented.dictionary.kotlin")
         hasV8 = containsPackage(packages, "com.setqq")
+
+        Toast.makeText(this,
+                (if( hasTentedDictionary ) hasTentedDictionaryAnswers else hasNotTentedDictionaryAnswers).random(),
+                Toast.LENGTH_SHORT
+                      ).show()
     }
 
     private fun doTips()
@@ -72,7 +80,7 @@ class UI : AppCompatActivity()              //因为theme继承的是AppCompat�
             val alert = AlertDialog.Builder(this).create()
 
             alert.setTitle("无法找到v8...")
-            alert.setMessage("我们无法在你的应用列表里找到SQV8主程序\n是否要立即下载?")
+            alert.setMessage(hasNotV8Answers.random())
 
             alert.setButton(
                     AlertDialog.BUTTON_POSITIVE,
@@ -130,7 +138,7 @@ class UI : AppCompatActivity()              //因为theme继承的是AppCompat�
 
             alert.show()
 
-            jump.text = listOf("NO!!!", "やめで!!!", "不要碰!!!").random()
+            jump.text = jumpV8Answers.random()
         }
 
         navigation.setOnNavigationItemSelectedListener {
@@ -140,7 +148,7 @@ class UI : AppCompatActivity()              //因为theme继承的是AppCompat�
 
                 R.id.home, R.id.other ->
                 {
-                    Toast.makeText(this@UI, listOf("这个选项还没有做完的说。。。", "诶诶诶。。不要乱点了啦!", "空空如也的说。。", "什么都没有了啦!不要再看了啦。。。").random(), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@UI, fragmentChangeAnswers.random(), Toast.LENGTH_SHORT).show()
 
                     setFragment(this, HomeFragment())
                 }
@@ -149,6 +157,9 @@ class UI : AppCompatActivity()              //因为theme继承的是AppCompat�
             }
         }
 
+        melon.setOnClickListener {
+            Toast.makeText(this, clickedMelonAnswers.random(), Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun onBackPressed()

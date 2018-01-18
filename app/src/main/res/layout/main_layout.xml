@@ -4,13 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="tented.func.ui.UI"
-    android:background="@drawable/cirno_eating_melon">
+    android:background="@drawable/cirno_eating_melon"
+    tools:context="tented.func.ui.UI">
 
     <RelativeLayout
         android:id="@+id/context"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/melon"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_above="@+id/jump"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="128dp"
+        android:background="#00ffffff" />
 
     <Button
         android:id="@+id/jump"
