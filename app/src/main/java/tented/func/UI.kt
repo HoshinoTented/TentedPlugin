@@ -7,12 +7,15 @@ import android.content.Intent
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import org.json.JSONObject
 import tented.extra.isNumber
+import tented.extra.random
 import tented.internet.Request
 import tented.util.Member
 
@@ -20,7 +23,7 @@ import tented.util.Member
  * Created by Hoshino Tented on 2017/11/5.
  */
 
-class UI : Activity()
+class UI : AppCompatActivity()              //因为theme继承的是AppCompat的主题, 所以Activity也得更改成继承AppCompatActivity, 不然标题栏就会消失喵。。。
 {
     companion object
     {
@@ -134,7 +137,7 @@ class UI : Activity()
 
             alert.show()
 
-            jump.text = "NO!!!"
+            jump.text = listOf("NO!!!", "やめで!!!", "不要碰!!!").random()
         }
 
         master.setOnClickListener {
@@ -191,6 +194,7 @@ class UI : Activity()
     {
         super.onCreate(bundle)
         //requestWindowFeature(Window.FEATURE_NO_TITLE)     去除标题栏
+
         setContentView(R.layout.main_layout)
 
         UI.launched = true

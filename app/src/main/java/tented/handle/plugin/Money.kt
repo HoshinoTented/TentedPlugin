@@ -14,6 +14,7 @@ import java.io.BufferedWriter
 import java.io.FileInputStream
 import java.io.FileWriter
 import java.text.SimpleDateFormat
+import java.util.Collections.swap
 import java.util.Date
 import java.util.Locale
 import java.util.Properties
@@ -81,14 +82,6 @@ object Money : Handler("货币系统", "1.2")
      */
     private fun rank( properties : Properties ) : List<Any>
     {
-        fun ArrayList<Any>.swap( i :Int , j : Int )
-        {
-            val temp = get(i)
-
-            set(i, get(j))
-            set(j, temp)
-        }
-
         fun ArrayList<Any>.rank( properties : Properties )
         {
             var n = size - 2
@@ -97,7 +90,7 @@ object Money : Handler("货币系统", "1.2")
             {
                 (0..n).forEach {
                     if( properties.getProperty(get(it).toString(), "0").toLong() > properties.getProperty(get(it + 1).toString(), "0").toLong() )
-                        swap(it, it + 1)
+                        swap(this, it, it + 1)
                 }
 
                 n --

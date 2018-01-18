@@ -78,7 +78,7 @@ object PluginLoader
         {
             msg.clearMsg()          //清除消息
             handler.handle(msg)     //执行处理
-            /*if(msg.send() != null) return*/msg.send()              //发送消息, 所以只要在处理里面添加消息就好了
+            /*if(msg.send() != null) return*/ msg.send()              //发送消息, 所以只要在处理里面添加消息就好了
             //加这个判断主要是为了减少不必要的资源消耗。。。
             //感觉加了好傻。。还是不加了
         }
