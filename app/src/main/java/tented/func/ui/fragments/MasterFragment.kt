@@ -9,7 +9,10 @@ import android.widget.EditText
 import android.widget.Toast
 import com.tented.demo.kotlin.R
 import tented.extra.isNumber
+import tented.extra.random
 import tented.func.ui.Fragment
+import tented.func.ui.masterCommitException
+import tented.func.ui.masterCommitSuccess
 import tented.util.Member
 
 /**
@@ -35,8 +38,6 @@ class MasterFragment : Fragment()
     private fun setListeners()
     {
         master.setOnClickListener {
-            _ ->
-
             val group = group.text.toString()
             val uin = uin.text.toString()
 
@@ -46,9 +47,9 @@ class MasterFragment : Fragment()
 
                 member.master = ! member.master
 
-                Toast.makeText(activity, "修改完毕", Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, masterCommitSuccess.random(), Toast.LENGTH_SHORT).show()
             }
-            else Toast.makeText(activity, "群号或主人QQ号未填写或数据错误", Toast.LENGTH_SHORT).show()
+            else Toast.makeText(activity, masterCommitException.random(), Toast.LENGTH_SHORT).show()
         }
     }
 

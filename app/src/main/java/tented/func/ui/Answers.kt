@@ -43,3 +43,23 @@ val clickedMelonAnswers = listOf(
         "手机里好热啊。。快融化了。。\n赶紧吃块冰凉的西瓜~",
         "嗯。。西瓜好甜的说~"
                                 )
+
+val willExit = listOf(
+        "诶诶诶。。。要走了吗。。。",
+        "要先离开了吗?那。。不送的说",
+        "呜。。要离开琪露诺了吗。。希望只是一不小心碰到的返回键。。"
+                     )
+
+val exited = listOf(
+        "那。。。再见啦~",
+        "啦啦啦~诶。。人呢。。?",
+        "按了两下返回键诶。。那。。就是说~\n拜拜啦。。。"
+                   )
+
+val masterCommitException = listOf(
+        "好像。。有地方没有填好来着。。?"
+                                  )
+
+val masterCommitSuccess = listOf(
+        "当当~修改成功啦~"
+                                )

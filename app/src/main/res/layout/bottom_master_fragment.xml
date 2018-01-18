@@ -11,9 +11,8 @@
         android:background="@drawable/edit_shape"
         android:ems="10"
         android:gravity="center"
-        android:hint="群号"
-        android:inputType="textPersonName"
-        android:numeric="integer"
+        android:hint="@string/master_group"
+        android:inputType="number"
         android:textColor="@color/main_color"
         android:textColorHint="@android:color/darker_gray" />
 
@@ -26,9 +25,8 @@
         android:background="@drawable/edit_shape"
         android:ems="10"
         android:gravity="center"
-        android:hint="主人QQ"
-        android:inputType="textPersonName"
-        android:numeric="integer"
+        android:hint="@string/master_uin"
+        android:inputType="number"
         android:textColor="@color/title_color"
         android:textColorHint="@android:color/darker_gray" />
 
@@ -41,7 +39,7 @@
         android:layout_alignParentTop="true"
         android:layout_toEndOf="@+id/group"
         android:background="@drawable/button_selector"
-        android:text="添加/删除 主人"
+        android:text="@string/master_commit"
         android:textColor="@color/main_color" />
 
 </RelativeLayout>

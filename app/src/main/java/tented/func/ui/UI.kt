@@ -30,6 +30,9 @@ class UI : AppCompatActivity()              //因为theme继承的是AppCompat�
 
     private lateinit var v8DownloadUrl : String
 
+    private lateinit var masterFragment : MasterFragment        //调单例模式(object)就会弹出个什么。。。constructor must be public的错误。。。还得打注解, 很难看...所以就手动单例了
+    private lateinit var homeFragment : HomeFragment
+
     //所有的控件对象
 
     private lateinit var jump : Button
@@ -44,6 +47,11 @@ class UI : AppCompatActivity()              //因为theme继承的是AppCompat�
 
     private fun doInit()
     {
+        this.masterFragment = MasterFragment()
+        this.homeFragment = HomeFragment()
+
+        setFragment(this, masterFragment)
+
         this.navigation = findViewById(R.id.navigation)
 
         this.melon = findViewById(R.id.melon)
@@ -144,13 +152,13 @@ class UI : AppCompatActivity()              //因为theme继承的是AppCompat�
         navigation.setOnNavigationItemSelectedListener {
             when( it.itemId )
             {
-                R.id.master -> setFragment(this, MasterFragment())
+                R.id.master -> setFragment(this, masterFragment)
 
                 R.id.home, R.id.other ->
                 {
                     Toast.makeText(this@UI, fragmentChangeAnswers.random(), Toast.LENGTH_SHORT).show()
 
-                    setFragment(this, HomeFragment())
+                    setFragment(this, homeFragment)
                 }
 
                 else -> false
@@ -179,7 +187,7 @@ class UI : AppCompatActivity()              //因为theme继承的是AppCompat�
 
         if( ! clickedBack )
         {
-            Toast.makeText(this, "再按一次返回键退出", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, willExit.random(), Toast.LENGTH_SHORT).show()
 
             clickedBack = true
 
@@ -189,6 +197,8 @@ class UI : AppCompatActivity()              //因为theme继承的是AppCompat�
         else
         {
             clickedBack = false
+
+            Toast.makeText(this, exited.random(), Toast.LENGTH_SHORT).show()
 
             finish()            //仅仅退出界面, 因为还有Service什么的。。。
         }
@@ -209,12 +219,11 @@ class UI : AppCompatActivity()              //因为theme继承的是AppCompat�
             requestAgain(this, it)
         }
 
-        setFragment(this, MasterFragment())
-
         //finish()        //立即关闭界面, 千万不要以为是闪退噢
         //Toast.makeText(this, "哎呀。。。出现了一点小故障呜。。\n联系一下插件作者吧？不过还是先看下源码比较好吧。。。\n", Toast.LENGTH_LONG).show()                //报出虚假的信息
 
         doInit()
+
         doLoad()
 
         doTips()

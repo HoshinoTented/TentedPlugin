@@ -12,7 +12,7 @@ import tented.func.ui.Fragment
  * @author Hoshino Tented
  * @date 2018/1/19 3:35
  */
-class HomeFragment :Fragment()
+class HomeFragment : Fragment()
 {
     override fun onCreateView(inflater : LayoutInflater?, container : ViewGroup?, savedInstanceState : Bundle?) : View? =
         if( inflater != null )
