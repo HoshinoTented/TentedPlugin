@@ -1,4 +1,4 @@
-package tented.func
+package tented.func.ui
 
 import android.Manifest
 import android.app.Activity
@@ -8,7 +8,6 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
-import android.support.v4.content.PermissionChecker
 
 /**
  * Permission
@@ -49,7 +48,7 @@ fun requestAgain(context : Activity, permission : String)
     val alert = AlertDialog.Builder(context).create()
 
     alert.setTitle("缺少权限...需要到权限管理器手动授权")
-    alert.setMessage(permission)
+    alert.setMessage(permission + "\n如果您已授权, 则请重启本插件")
 
     alert.setButton(
             AlertDialog.BUTTON_POSITIVE,

@@ -1,23 +1,21 @@
-package tented.func
+package tented.func.ui
 
 import com.tented.demo.kotlin.R
-import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
+import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
 import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import org.json.JSONObject
-import tented.extra.isNumber
 import tented.extra.random
+import tented.func.ui.fragments.HomeFragment
+import tented.func.ui.fragments.MasterFragment
 import tented.internet.Request
-import tented.util.Member
 
 /**
  * Created by Hoshino Tented on 2017/11/5.
@@ -35,10 +33,8 @@ class UI : AppCompatActivity()              //因为theme继承的是AppCompat�
     //所有的控件对象
 
     private lateinit var jump : Button
-    private lateinit var master : Button
 
-    private lateinit var group : EditText
-    private lateinit var uin : EditText
+    private lateinit var navigation : BottomNavigationView
 
     private var hasTentedDictionary : Boolean = false          //以后拿来写 与TentedDictionary 的交互, 现在先放在这里
     private var hasV8 : Boolean = false
@@ -47,11 +43,8 @@ class UI : AppCompatActivity()              //因为theme继承的是AppCompat�
 
     private fun doInit()
     {
+        this.navigation = findViewById(R.id.navigation)
         this.jump = findViewById(R.id.jump)
-        this.master = findViewById(R.id.master)
-
-        this.group = findViewById(R.id.group)
-        this.uin = findViewById(R.id.uin)
 
         Thread {
             val request = Request("http://setqq.oss-cn-shanghai.aliyuncs.com/v8/update.json")
@@ -140,22 +133,17 @@ class UI : AppCompatActivity()              //因为theme继承的是AppCompat�
             jump.text = listOf("NO!!!", "やめで!!!", "不要碰!!!").random()
         }
 
-        master.setOnClickListener {
-            _ ->
-
-            val group = this@UI.group.text.toString()
-            val uin = this@UI.uin.text.toString()
-
-            if( group.isNumber() && uin.isNumber() )
+        navigation.setOnNavigationItemSelectedListener {
+            when( it.itemId )
             {
-                val member = Member(group.toLong(), uin.toLong(), null)
+                R.id.master -> setFragment(this, MasterFragment())
 
-                member.master = ! member.master
+                R.id.home, R.id.other -> setFragment(this, HomeFragment())
 
-                Toast.makeText(this@UI, "修改完毕", Toast.LENGTH_SHORT).show()
+                else -> false
             }
-            else Toast.makeText(this@UI, "群号或主人QQ号未填写或数据错误", Toast.LENGTH_SHORT).show()
         }
+
     }
 
     override fun onBackPressed()
@@ -197,13 +185,15 @@ class UI : AppCompatActivity()              //因为theme继承的是AppCompat�
 
         setContentView(R.layout.main_layout)
 
-        UI.launched = true
+        launched = true
 
         requestPermission(this)     //申请必要的权限
 
         noPermission(this).forEach {        //验证权限
             requestAgain(this, it)
         }
+
+        setFragment(this, MasterFragment())
 
         //finish()        //立即关闭界面, 千万不要以为是闪退噢
         //Toast.makeText(this, "哎呀。。。出现了一点小故障呜。。\n联系一下插件作者吧？不过还是先看下源码比较好吧。。。\n", Toast.LENGTH_LONG).show()                //报出虚假的信息

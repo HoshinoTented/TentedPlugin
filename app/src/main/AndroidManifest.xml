@@ -21,7 +21,7 @@
         </service>
         <!-- 插件UI注册 -->
         <activity
-            android:name="tented.func.UI"
+            android:name="tented.func.ui.UI"
             android:label="@string/app_name">
             <intent-filter >
                 <!-- 主程序跳转 -->
