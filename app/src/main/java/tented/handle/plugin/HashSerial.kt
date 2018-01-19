@@ -24,11 +24,13 @@ object HashSerial : Handler("哈希序列", "1.0")
         return serialCode.toString()
     }
 
-    override fun handle(msg : PluginMsg)
+    override fun handle(msg : PluginMsg) : Boolean
     {
         when
         {
             msg.msg == name -> msg.addMsg(Type.MSG, makeHashSerialNumber())
         }
+
+        return true
     }
 }

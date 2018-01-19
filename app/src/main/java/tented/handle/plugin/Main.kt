@@ -67,7 +67,7 @@ object Main : Handler("插件版本", "1.7")
         return builder.substring(0, builder.length - 1)
     }
 
-    override fun handle(msg : PluginMsg)
+    override fun handle(msg : PluginMsg) : Boolean
     {
         when
         {
@@ -138,6 +138,8 @@ object Main : Handler("插件版本", "1.7")
             else if( message.count >= Main.warningCount ) msg.addMsg(Type.MSG, "小心一点噢!已经连续发送了${message.count}条消息了!")
         }
         else msgMap[msg.group] = MessageCount(msg.uin, 1)       //如果不是就覆盖
+
+        return true
     }
 
 }

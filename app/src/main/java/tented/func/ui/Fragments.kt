@@ -18,10 +18,15 @@ typealias FragmentManager = android.app.FragmentManager
 typealias FragmentTransaction = android.app.FragmentTransaction
 typealias Fragment = android.app.Fragment
 
+/**
+ * 设置Fragment
+ * @param activity 调用这个函数的Activity
+ * @param layoutEntity 要设置的Fragment实例
+ * @return 总是true
+ */
 fun setFragment( activity : Activity , layoutEntity : Fragment ) : Boolean
 {
-    val manager : FragmentManager = activity.fragmentManager
-    val transaction : FragmentTransaction = manager.beginTransaction()
+    val transaction : FragmentTransaction = activity.fragmentManager.beginTransaction()
 
     transaction.replace(R.id.context, layoutEntity)
     transaction.commit()

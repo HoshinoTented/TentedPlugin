@@ -20,7 +20,7 @@ object Translate : Handler("百度翻译", "1.0")
                 |${Main.splitChar * Main.splitTimes}
             """.trimMargin()
 
-    override fun handle(msg : PluginMsg)
+    override fun handle(msg : PluginMsg) : Boolean
     {
         if( msg.msg == name )
         {
@@ -42,5 +42,7 @@ object Translate : Handler("百度翻译", "1.0")
 
             msg.addMsg(Type.MSG, "语言代码...\n请求: $query\n${Main.splitChar * Main.splitTimes}\n返回: $result")
         }
+
+        return true
     }
 }

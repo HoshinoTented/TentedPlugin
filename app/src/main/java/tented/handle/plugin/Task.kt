@@ -40,7 +40,7 @@ object Task : Handler("延时提醒", "1.0")
                 |一次设置消耗10000${Money.moneyUnit}${Money.moneyName}哦~~~
             """.trimMargin()
 
-    override fun handle(msg : PluginMsg)
+    override fun handle(msg : PluginMsg) : Boolean
     {
         when
         {
@@ -70,5 +70,7 @@ object Task : Handler("延时提醒", "1.0")
                 else msg.addMsg(Type.MSG, "你没有足够的${Money.moneyName}来着。。。")
             }
         }
+
+        return true
     }
 }

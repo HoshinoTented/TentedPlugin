@@ -47,7 +47,7 @@ object Member : Handler("个人信息", "Beta")
                 else -> throw IllegalArgumentException("$experience is not in the range")
             }
 
-    override fun handle(msg : PluginMsg)
+    override fun handle(msg : PluginMsg) : Boolean
     {
         when
         {
@@ -71,6 +71,8 @@ object Member : Handler("个人信息", "Beta")
                 msg.addMsg(Type.MSG, message)
             }
         }
+
+        return true
     }
 
 }

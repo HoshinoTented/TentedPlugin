@@ -40,7 +40,7 @@ object Settings : Handler("系统设置", "1.1")
     fun globalSuccess( msg : PluginMsg ) = msg.addMsg(Type.MSG, "操作成功, 重启插件后生效\n此次操作为全局操作")
 
 
-    override fun handle(msg : PluginMsg)
+    override fun handle(msg : PluginMsg) : Boolean
     {
         when            //使用when可能更好?毕竟Kotlin的when支持布尔值
         {
@@ -104,6 +104,8 @@ object Settings : Handler("系统设置", "1.1")
                     msg.msg == "退出插件" -> System.exit(0)
                 }
         }
+
+        return true
     }
 
 }

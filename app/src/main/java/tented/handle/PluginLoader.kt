@@ -77,10 +77,12 @@ object PluginLoader
         for ( handler in pluginList )        //迭代遍历所有的Handler子类
         {
             msg.clearMsg()          //清除消息
-            handler.handle(msg)     //执行处理
+            val `continue` = handler.handle(msg)     //执行处理
             /*if(msg.send() != null) return*/ msg.send()              //发送消息, 所以只要在处理里面添加消息就好了
             //加这个判断主要是为了减少不必要的资源消耗。。。
             //感觉加了好傻。。还是不加了
+
+            if( ! `continue` ) break        //接受 Handler.handle( msg : PluginMsg ) 的返回值, 判断是否继续
         }
     }
 }

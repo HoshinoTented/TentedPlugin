@@ -39,7 +39,7 @@ object VIPSystem : Handler("贵族系统", "1.0")
     operator fun get( group : Long ) : Long = File.read(File.getPath("$group/Vip.cfg"), "money", 10000).toLong()
     operator fun set( group : Long , value : Long ) = File.read(File.getPath("$group/Vip.cfg"), "money", value)
 
-    override fun handle(msg : PluginMsg)
+    override fun handle(msg : PluginMsg) : Boolean
     {
         when
         {
@@ -65,5 +65,7 @@ object VIPSystem : Handler("贵族系统", "1.0")
                 else msg.addMsg(Type.MSG, "${Money.moneyName}不够$used${Money.moneyUnit}哦")
             }
         }
+
+        return true
     }
 }

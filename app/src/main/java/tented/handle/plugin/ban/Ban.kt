@@ -48,7 +48,7 @@ object Ban : Handler("违禁系统", "1.2")
         else false
     }
 
-    override fun handle(msg : PluginMsg)
+    override fun handle(msg : PluginMsg) : Boolean
     {
         if( msg.msg == name )
         {
@@ -104,5 +104,7 @@ object Ban : Handler("违禁系统", "1.2")
                 msg.addMsg(Type.MSG, "设置完毕")
             }
         }
+
+        return true
     }
 }

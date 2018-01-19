@@ -20,5 +20,10 @@ package tented.handle
 
 abstract class Handler(val name : String, val version : String)
 {
-    abstract fun handle(msg : com.saki.aidl.PluginMsg)
+    /**
+     * 处理方法
+     * @param msg 接受处理的PluginMsg对象
+     * @return 返回一个布尔值, 表示是否继续进行处理
+     */
+    abstract fun handle(msg : com.saki.aidl.PluginMsg) : Boolean
 }

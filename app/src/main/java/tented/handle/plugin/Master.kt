@@ -40,7 +40,7 @@ object Master : Handler("主人系统", "1.0")
         return arrayListOf()
     }
 
-    override fun handle(msg : PluginMsg)
+    override fun handle(msg : PluginMsg) : Boolean
     {
         if (msg.msg == name)
         {
@@ -84,5 +84,6 @@ object Master : Handler("主人系统", "1.0")
             }
         }
 
+        return true
     }
 }

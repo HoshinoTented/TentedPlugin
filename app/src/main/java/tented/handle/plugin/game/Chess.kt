@@ -42,7 +42,7 @@ object Chess : Handler("井字之棋", "1.1")
         else throw HadGameException
     }
 
-    override fun handle(msg : PluginMsg)
+    override fun handle(msg : PluginMsg) : Boolean
     {
         when
         {
@@ -202,5 +202,7 @@ object Chess : Handler("井字之棋", "1.1")
                 else msg.addMsg(Type.MSG, "下棋失败: 游戏不存在")
             }
         }
+
+        return true
     }
 }

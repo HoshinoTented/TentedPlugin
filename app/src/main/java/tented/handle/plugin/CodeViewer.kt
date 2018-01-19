@@ -38,7 +38,7 @@ object CodeViewer : Handler("代码查看", "1.0")           //xml和json代码�
     }
 
 
-    override fun handle(msg : PluginMsg)
+    override fun handle(msg : PluginMsg) : Boolean
     {
         doView(msg)
 
@@ -46,6 +46,8 @@ object CodeViewer : Handler("代码查看", "1.0")           //xml和json代码�
         {
             msg.msg == name -> msg.addMsg(Type.MSG, message)
         }
+
+        return true
     }
 
 }

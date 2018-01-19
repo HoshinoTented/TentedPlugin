@@ -51,7 +51,7 @@ object Fishing : Handler("钓鱼游戏", "1.0")
         msg.send()
     }
 
-    override fun handle(msg : PluginMsg)
+    override fun handle(msg : PluginMsg) : Boolean
     {
         when
         {
@@ -124,5 +124,7 @@ object Fishing : Handler("钓鱼游戏", "1.0")
                 else msg.addMsg(Type.MSG, "你背包里没有id为${id}的鱼噢...")
             }
         }
+
+        return true
     }
 }

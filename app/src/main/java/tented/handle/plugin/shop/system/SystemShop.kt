@@ -29,7 +29,7 @@ object SystemShop : Handler("系统商店", "1.1")
     operator fun get(group : Long) : Shop = Shop(tented.file.File.getPath("$group/Shop/shop.json"))
     operator fun set(group : Long , shop : Shop) = Data.save(tented.file.File.getPath("$group/Shop/shop.json"), shop.toString())
 
-    override fun handle(msg : PluginMsg)
+    override fun handle(msg : PluginMsg) : Boolean
     {
         if( msg.msg == name )
         {
@@ -128,5 +128,7 @@ object SystemShop : Handler("系统商店", "1.1")
                 else msg.addMsg(Type.MSG, "你没有这个物品了啦!!!")
             }
         }
+
+        return true
     }
 }

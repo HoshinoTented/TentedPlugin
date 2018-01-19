@@ -40,7 +40,7 @@ object NumberCall : Handler("数字召唤", "1.0")
         else false
     }
 
-    override fun handle(msg : PluginMsg)
+    override fun handle(msg : PluginMsg) : Boolean
     {
         if( msg.msg.isNumber() )
         {
@@ -48,5 +48,7 @@ object NumberCall : Handler("数字召唤", "1.0")
 
             msg.clearMsg()
         }
+
+        return true
     }
 }

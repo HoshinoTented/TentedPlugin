@@ -17,7 +17,7 @@ import tented.shop.Shop
  */
 object ChessShop : Handler("井棋商店", "1.0")
 {
-    override fun handle(msg : PluginMsg)
+    override fun handle(msg : PluginMsg) : Boolean
     {
         when
         {
@@ -100,5 +100,7 @@ object ChessShop : Handler("井棋商店", "1.0")
                 else msg.addMsg(Type.MSG, "使用井字棋失败: 背包内没有id为${id}的棋子")
             }
         }
+
+        return true
     }
 }

@@ -42,7 +42,7 @@ object SpellCard : Handler("符卡游戏", "1.0")
         if( extra["hardAttack"] != null ) msg.addMsg(Type.MSG, "\n你的攻击暴击了, 对${other.name}造成了${extra["hardAttack"]}点额外伤害")
     }
 
-    override fun handle(msg : PluginMsg)
+    override fun handle(msg : PluginMsg) : Boolean
     {
         when
         {
@@ -164,5 +164,7 @@ object SpellCard : Handler("符卡游戏", "1.0")
                 msg.addMsg(Type.MSG, info)
             }
         }
+
+        return true
     }
 }

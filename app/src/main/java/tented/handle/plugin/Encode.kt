@@ -35,7 +35,7 @@ object Encode : Handler("加密系统", "1.0")
         return xorEncode(str, key)
     }
 
-    override fun handle(msg : PluginMsg)
+    override fun handle(msg : PluginMsg) : Boolean
     {
         when
         {
@@ -55,5 +55,7 @@ object Encode : Handler("加密系统", "1.0")
                 msg.addMsg(Type.MSG, MD5Encoder.encode(word).toUpperCase())
             }
         }
+
+        return true
     }
 }

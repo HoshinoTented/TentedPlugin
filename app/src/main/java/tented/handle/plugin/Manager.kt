@@ -27,7 +27,7 @@ object Manager : Handler("群管系统", "1.0")
         msg.addMsg(Type.MSG, "操作成功")
     }
 
-    override fun handle(msg : PluginMsg)
+    override fun handle(msg : PluginMsg) : Boolean
     {
         if( msg.msg == name )
         {
@@ -83,5 +83,7 @@ object Manager : Handler("群管系统", "1.0")
                 }
             }
         }
+
+        return true
     }
 }

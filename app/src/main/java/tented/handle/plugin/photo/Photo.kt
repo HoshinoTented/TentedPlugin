@@ -19,7 +19,7 @@ object Photo : Handler("百度搜图", "1.0")
                 |${Main.splitChar * Main.splitTimes}
             """.trimMargin()
 
-    override fun handle(msg : PluginMsg)
+    override fun handle(msg : PluginMsg) : Boolean
     {
         if( msg.msg == name )
         {
@@ -33,5 +33,7 @@ object Photo : Handler("百度搜图", "1.0")
 
             msg.addMsg(Type.IMAGE, url)
         }
+
+        return true
     }
 }

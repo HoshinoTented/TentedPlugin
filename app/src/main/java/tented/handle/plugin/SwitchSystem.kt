@@ -25,7 +25,7 @@ object SwitchSystem : Handler("插件开关", "1.0")
     operator fun get(clazz : String) : Boolean = tented.file.File.read(tented.file.File.getPath("switch.cfg"), clazz, "true") == "true"
     operator fun set(clazz : String, mod : Boolean) = tented.file.File.write(tented.file.File.getPath("switch.cfg"), clazz, mod.toString())
 
-    override fun handle(msg : PluginMsg)
+    override fun handle(msg : PluginMsg) : Boolean
     {
         when
         {
@@ -44,5 +44,7 @@ object SwitchSystem : Handler("插件开关", "1.0")
                 else msg.addMsg(Type.MSG, "没有找到名为 $pluginName 的插件")
             }
         }
+
+        return true
     }
 }

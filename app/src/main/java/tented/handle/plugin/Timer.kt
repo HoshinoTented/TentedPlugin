@@ -60,7 +60,7 @@ object Timer : Handler("整点报时", "1.0")
         groupSet.add(group)
     }
 
-    override fun handle(msg : PluginMsg)
+    override fun handle(msg : PluginMsg) : Boolean
     {
         if( msg.msg == name )
         {
@@ -78,5 +78,7 @@ object Timer : Handler("整点报时", "1.0")
                 msg.addMsg(Type.MSG, "报时已$action")
             }
         }
+
+        return true
     }
 }

@@ -108,7 +108,7 @@ object Money : Handler("货币系统", "1.2")
         return members.subList(from, members.size)
     }
 
-    override fun handle(msg : PluginMsg)
+    override fun handle(msg : PluginMsg) : Boolean
     {
         if( msg.msg == name )
         {
@@ -193,6 +193,8 @@ object Money : Handler("货币系统", "1.2")
                 msg.addMsg(Type.MSG, "操作完毕")
             }
         }
+
+        return true
     }
 
 }

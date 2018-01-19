@@ -25,7 +25,7 @@ object Music : Handler("点歌系统", "1.0")
                 |${Main.splitChar * Main.splitTimes}
             """.trimMargin()
 
-    override fun handle(msg : PluginMsg)
+    override fun handle(msg : PluginMsg) : Boolean
     {
         when
         {
@@ -57,5 +57,7 @@ object Music : Handler("点歌系统", "1.0")
                 else msg.addMsg(Type.MSG, "点歌失败: 没有搜索结果")
             }
         }
+
+        return true
     }
 }

@@ -22,7 +22,7 @@ object PingAddress : Handler("Ping!", "1.0")
                 |${Main.splitChar * Main.splitTimes}
             """.trimMargin()
 
-    override fun handle(msg : PluginMsg)
+    override fun handle(msg : PluginMsg) : Boolean
     {
         when
         {
@@ -47,6 +47,8 @@ object PingAddress : Handler("Ping!", "1.0")
                 msg.addMsg(Type.MSG, builder)
             }
         }
+
+        return true
     }
 
 }

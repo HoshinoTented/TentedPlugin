@@ -23,7 +23,7 @@ object Gal : Handler("文字冒险", "1.0")
                 |${Main.splitChar * Main.splitTimes}
             """.trimMargin()
 
-    override fun handle(msg : PluginMsg)
+    override fun handle(msg : PluginMsg) : Boolean
     {
         when
         {
@@ -57,5 +57,7 @@ object Gal : Handler("文字冒险", "1.0")
                                             )
             }
         }
+
+        return true
     }
 }

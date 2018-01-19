@@ -26,7 +26,7 @@ object Ask : Handler("问答系统", "1.0")
     operator fun get( group : Long, key : String ) = File.read(File.getPath("$group/Ask.cfg"), key, "")
     operator fun set( group : Long, key : String, value : String ) = File.write(File.getPath("$group/Ask.cfg"), key, value)
 
-    override fun handle(msg : PluginMsg)
+    override fun handle(msg : PluginMsg) : Boolean
     {
         msg.addMsg(Type.MSG, get(msg.group, msg.msg))
         msg.send()
@@ -56,5 +56,7 @@ object Ask : Handler("问答系统", "1.0")
                 }
             }
         }
+
+        return true
     }
 }

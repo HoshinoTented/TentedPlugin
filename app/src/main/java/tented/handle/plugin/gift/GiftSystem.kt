@@ -37,7 +37,7 @@ object GiftSystem : Handler("礼包系统", "1.0")
     {
         operator fun get( group : Long ) : Shop = Shop(File.getPath("$group/Shop/gifts.json"))
 
-        override fun handle(msg : PluginMsg)
+        override fun handle(msg : PluginMsg) : Boolean
         {
             when
             {
@@ -96,6 +96,8 @@ object GiftSystem : Handler("礼包系统", "1.0")
                     else msg.addMsg(Type.MSG, "没有在礼包商店找到id为${id}的礼包")
                 }
             }
+
+            return true
         }
     }
 
@@ -108,7 +110,7 @@ object GiftSystem : Handler("礼包系统", "1.0")
                 |${Main.splitChar * Main.splitTimes}
             """.trimMargin()
 
-    override fun handle(msg : PluginMsg)
+    override fun handle(msg : PluginMsg) : Boolean
     {
         when
         {
@@ -165,5 +167,7 @@ object GiftSystem : Handler("礼包系统", "1.0")
                 else msg.addMsg(Type.MSG, "使用失败: 背包里没有id为${id}的物品哦")
             }
         }
+
+        return true
     }
 }
