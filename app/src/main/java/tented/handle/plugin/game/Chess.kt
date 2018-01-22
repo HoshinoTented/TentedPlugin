@@ -2,9 +2,9 @@ package tented.handle.plugin.game
 
 import com.saki.aidl.PluginMsg
 import com.saki.aidl.Type
-import tented.extra.randomTo
-import tented.extra.times
-import tented.extra.toInt
+import tented.util.randomTo
+import tented.util.times
+import tented.util.toInt
 import tented.game.chess.ChessGame
 import tented.game.chess.ChessPlayer
 import tented.game.chess.Pos

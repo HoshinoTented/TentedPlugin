@@ -2,18 +2,21 @@ package tented.handle.plugin
 
 import com.saki.aidl.PluginMsg
 import com.saki.aidl.Type
-import tented.extra.getMembers
-import tented.extra.getPath
-import tented.extra.random
-import tented.extra.randomTo
-import tented.extra.times
-import tented.extra.toInt
+import tented.util.getMembers
+import tented.util.getPath
+import tented.util.random
+import tented.util.randomTo
+import tented.util.times
+import tented.util.toInt
 import tented.file.File
 import tented.handle.Handler
+import tented.util.dateEquals
+import tented.util.getCalendarInstance
 import java.io.BufferedWriter
 import java.io.FileInputStream
 import java.io.FileWriter
 import java.text.SimpleDateFormat
+import java.util.Calendar
 import java.util.Collections.swap
 import java.util.Date
 import java.util.Locale
@@ -124,20 +127,34 @@ object Money : Handler("货币系统", "1.2")
 
         else if( msg.msg == "签到")
         {
-            val date = SimpleDateFormat("yyyy/MM/dd", Locale.getDefault()).format(Date())
+            //val date = SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.getDefault()).format(Date())
+            val check = getCalendarInstance(msg.member["check", "2018/01/23 02:48:00"])
+            val now = Calendar.getInstance()
 
-            if( msg.member["check"] != date )
+            if( ! check.dateEquals(now) )
             {
+                {   //连续签到的一个动作
+                    now.add(Calendar.DAY_OF_MONTH, -1)
+
+                    msg.member["continue"] = if( check.dateEquals(now) ) msg.member["continue"].toInt() + 1 else 1
+
+                    now.add(Calendar.DAY_OF_MONTH, 1)       //记得加回来, 因为下面还有check的赋值
+                }()
+
+                val `continue` = msg.member["continue"].toInt()
+                val extraMoney = Math.pow(`continue`.toDouble(), 2.0).toInt()
                 val random = (0 randomTo 10000) * (msg.member.isVip().toInt() + 1)
                 val experience = (0 randomTo 50) * (msg.member.isVip().toInt() + 1)
 
+
                 msg.member.money += random
+                msg.member.money += extraMoney      //额外获得的金币是不被vip特权影响的
                 msg.member["exp"] = msg.member["exp", "0"].toLong() + experience
-                msg.member["check"] = date
+                msg.member["check"] = SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(now.time)
 
-                msg.addMsg(Type.MSG, "签到成功~\n获得了...诶...$random$moneyUnit${moneyName}呢\n获得经验$experience")
+                msg.addMsg(Type.MSG, "签到成功~\n获得了...诶...$random$moneyUnit${moneyName}呢\n获得经验$experience\n连续签到了${msg.member["continue"]}天, 额外获得了$extraMoney${Money.moneyUnit}${Money.moneyName}")
 
-                if( msg.member.isVip() )
+                if( msg.member.isVip() )        //vip特权
                 {
                     val bag = msg.member.bag
 

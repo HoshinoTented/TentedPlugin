@@ -4,8 +4,8 @@ import com.saki.aidl.PluginMsg
 import com.saki.aidl.Type
 import org.json.JSONObject
 import tented.bag.Bag
-import tented.extra.getPath
-import tented.extra.times
+import tented.util.getPath
+import tented.util.times
 import tented.handle.Handler
 import tented.handle.plugin.Main
 import tented.handle.plugin.Money

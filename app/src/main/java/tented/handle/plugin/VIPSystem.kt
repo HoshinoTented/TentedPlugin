@@ -2,8 +2,8 @@ package tented.handle.plugin
 
 import com.saki.aidl.PluginMsg
 import com.saki.aidl.Type
-import tented.extra.getPath
-import tented.extra.times
+import tented.util.getPath
+import tented.util.times
 import tented.file.File
 import tented.handle.Handler
 import java.text.SimpleDateFormat

@@ -1,6 +1,6 @@
 package tented.func
 
-import tented.extra.getPath
+import tented.util.getPath
 import tented.file.File
 import java.io.FileInputStream
 import java.util.Properties

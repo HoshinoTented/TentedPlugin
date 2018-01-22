@@ -2,9 +2,6 @@ package tented.util
 
 import com.saki.aidl.PluginMsg
 import tented.bag.Bag
-import tented.extra.description
-import tented.extra.getPath
-import tented.extra.toInt
 import tented.file.File
 import tented.io.Data
 import java.io.Serializable
@@ -42,6 +39,8 @@ open class Member ( val group : Long , val uin : Long , val name : String? = nul
 
     private fun getMoney( type : String ) : Long = File.read(File.getPath("$group/$type.cfg"), this.uin.toString(), "0").toLong()
     private fun setMoney( type : String , value : Long ) = File.write(File.getPath("$group/$type.cfg"), this.uin.toString(), value.toString())
+
+    fun enoughMoney( money : Long ) = this.money >= money
 
     fun isVip() : Boolean
     {

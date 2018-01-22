@@ -2,7 +2,7 @@ package tented.handle.plugin
 
 import com.saki.aidl.PluginMsg
 import com.saki.aidl.Type
-import tented.extra.times
+import tented.util.times
 import tented.handle.Handler
 
 /**

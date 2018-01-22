@@ -2,8 +2,7 @@ package tented.handle.plugin.game
 
 import com.saki.aidl.PluginMsg
 import com.saki.aidl.Type
-import tented.extra.times
-import tented.extra.toInt
+import tented.util.times
 import tented.game.exceptions.PlayerDiedException
 import tented.game.exceptions.PlayerFrozenException
 import tented.game.spell.SpellCardPlayer

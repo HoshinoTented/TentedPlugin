@@ -1,7 +1,7 @@
 package tented.handle.plugin
 
 import com.saki.aidl.PluginMsg
-import tented.extra.isNumber
+import tented.util.isNumber
 import tented.handle.Handler
 import tented.handle.PluginLoader
 

@@ -1,6 +1,6 @@
 package tented.handle.plugin.ban
 
-import tented.extra.getPath
+import tented.util.getPath
 import tented.file.File
 
 /**

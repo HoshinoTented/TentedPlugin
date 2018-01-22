@@ -1,7 +1,7 @@
 package tented.test
 
 import com.saki.aidl.PluginMsg
-import tented.extra.description
+import tented.util.description
 
 /**
  * Test

@@ -1,4 +1,4 @@
-package tented.extra
+package tented.util
 
 import android.graphics.Bitmap
 import android.graphics.Canvas

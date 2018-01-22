@@ -8,8 +8,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.tented.demo.kotlin.R
-import tented.extra.isNumber
-import tented.extra.random
+import tented.util.isNumber
+import tented.util.random
 import tented.func.ui.Fragment
 import tented.func.ui.masterCommitException
 import tented.func.ui.masterCommitSuccess

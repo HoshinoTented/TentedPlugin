@@ -1,7 +1,7 @@
 package tented.game.spell.cards
 
 import org.json.JSONObject
-import tented.extra.toUnit
+import tented.util.toUnit
 import tented.shop.Item
 
 /**

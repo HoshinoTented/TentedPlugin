@@ -1,5 +1,6 @@
-package tented.extra
+package tented.util
 
+import java.util.Calendar
 import java.util.regex.Pattern
 
 /**
@@ -44,6 +45,39 @@ fun <T> Iterable<T>.hold() : String
     }
 
     return builder.toString()
+}
+
+/**
+ * 只比较日期
+ * 我也不知道为什么要写这个方法
+ * @param calendar 比较的指定对象
+ * @return 日期是否相同(年月日)
+ */
+fun Calendar.dateEquals( calendar : Calendar ) : Boolean
+{
+    setOf(
+            Calendar.YEAR,
+            Calendar.MONTH,
+            Calendar.DAY_OF_MONTH
+         ).forEach {
+        if( get(it) != calendar.get(it) ) return false
+    }
+
+    return true
+}
+
+fun getCalendarInstance( date :String ) : Calendar
+{
+    val matcher = Pattern.compile("([0-9]{4})/([0-9]{2})/([0-9]{2}) ([0-9]{2}):([0-9]{2}):([0-9]{2})").matcher(date)
+
+    return if( matcher.matches() )
+    {
+        val calendar = Calendar.getInstance()
+
+        calendar.set(matcher.group(1).toInt(), matcher.group(2).toInt() - 1, matcher.group(3).toInt(), matcher.group(4).toInt(), matcher.group(5).toInt(), matcher.group(6).toInt())
+        calendar
+    }
+    else throw NumberFormatException("format is wrong")
 }
 
 operator fun String.times(times : Number) : String

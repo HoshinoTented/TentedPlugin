@@ -1,7 +1,7 @@
 package tented.game.spell
 
-import tented.extra.getPath
-import tented.extra.randomTo
+import tented.util.getPath
+import tented.util.randomTo
 import tented.file.File
 import tented.game.spell.cards.Card
 import tented.game.spell.exceptions.NoCardFoundException

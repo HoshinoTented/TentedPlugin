@@ -1,7 +1,7 @@
 package tented.handle.plugin.shop.system
 
 import com.saki.aidl.PluginMsg
-import tented.extra.randomTo
+import tented.util.randomTo
 import tented.handle.plugin.Money
 
 /**

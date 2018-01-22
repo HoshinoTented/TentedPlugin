@@ -8,7 +8,7 @@ import android.os.Parcelable
 
 import saki.demo.Demo
 import tented.annotations.NotProperty
-import tented.extra.description
+import tented.util.description
 import java.io.Serializable
 
 class PluginMsg : Parcelable, Serializable

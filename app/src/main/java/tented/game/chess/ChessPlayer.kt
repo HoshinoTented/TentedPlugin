@@ -1,7 +1,7 @@
 package tented.game.chess
 
-import tented.extra.getPath
-import tented.extra.toBoolean
+import tented.util.getPath
+import tented.util.toBoolean
 import tented.file.File
 import tented.game.chess.exceptions.HadChessException
 import tented.game.chess.exceptions.NoEmptyChessException

@@ -4,9 +4,9 @@ import com.saki.aidl.PluginMsg
 import com.saki.aidl.Type
 import org.json.JSONArray
 import org.json.JSONObject
-import tented.extra.getPath
-import tented.extra.randomTo
-import tented.extra.times
+import tented.util.getPath
+import tented.util.randomTo
+import tented.util.times
 import tented.file.File
 import tented.handle.Handler
 import tented.handle.plugin.Main

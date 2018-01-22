@@ -1,6 +1,6 @@
 package tented.game.chess
 
-import tented.extra.toInt
+import tented.util.toInt
 import tented.game.chess.exceptions.NoEmptyChessException
 import tented.game.exceptions.PlayerNotEnoughException
 import tented.util.Member

@@ -1,6 +1,6 @@
 package tented.game.fishing
 
-import tented.extra.getPath
+import tented.util.getPath
 import tented.file.File
 import tented.shop.Shop
 

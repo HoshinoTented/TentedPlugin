@@ -3,7 +3,7 @@ package tented.handle.plugin.music
 import com.saki.aidl.PluginMsg
 import com.saki.aidl.Type
 import saki.demo.Demo
-import tented.extra.times
+import tented.util.times
 import tented.handle.Handler
 import tented.handle.plugin.Main
 

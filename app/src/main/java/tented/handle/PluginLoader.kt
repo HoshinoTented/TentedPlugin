@@ -1,7 +1,7 @@
 package tented.handle
 
-import tented.extra.createFiles
-import tented.extra.getPath
+import tented.util.createFiles
+import tented.util.getPath
 
 /**
  * Created by Hoshino Tented on 2017/12/24.
@@ -40,6 +40,7 @@ object PluginLoader
                                                     tented.handle.plugin.music.Music,
                                                     tented.handle.plugin.Task,
                                                     tented.handle.plugin.HashSerial,
+                                                    tented.handle.plugin.guessing.FingerGuess,
                                                     tented.handle.plugin.NumberCall     //这个数字召唤得放最后, 一定!!!
                                               )
 

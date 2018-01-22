@@ -3,7 +3,7 @@ package tented.handle.plugin.game
 import com.saki.aidl.PluginMsg
 import com.saki.aidl.Type
 import tented.bag.Bag
-import tented.extra.times
+import tented.util.times
 import tented.game.fishing.Fish
 import tented.game.fishing.FishShop
 import tented.game.fishing.Fisher

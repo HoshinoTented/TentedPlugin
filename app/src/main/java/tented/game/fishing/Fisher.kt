@@ -1,6 +1,6 @@
 package tented.game.fishing
 
-import tented.extra.randomTo
+import tented.util.randomTo
 import tented.game.fishing.exceptions.NoFishException
 import tented.game.fishing.exceptions.NoFishingException
 import tented.util.Member

@@ -12,7 +12,7 @@ import android.support.v7.app.AppCompatActivity
 import android.widget.Button
 import android.widget.Toast
 import org.json.JSONObject
-import tented.extra.random
+import tented.util.random
 import tented.func.ui.fragments.HomeFragment
 import tented.func.ui.fragments.MasterFragment
 import tented.internet.Request

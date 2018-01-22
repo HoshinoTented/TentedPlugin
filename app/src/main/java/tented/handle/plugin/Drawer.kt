@@ -2,9 +2,9 @@ package tented.handle.plugin
 
 import com.saki.aidl.PluginMsg
 import com.saki.aidl.Type
-import tented.extra.doDraw
-import tented.extra.getPath
-import tented.extra.times
+import tented.util.doDraw
+import tented.util.getPath
+import tented.util.times
 import tented.file.File
 import tented.handle.Handler
 
@@ -22,7 +22,7 @@ object Drawer : Handler("绘图系统", "1.0")
                 |${Main.splitChar * Main.splitTimes}
             """.trimMargin()
 
-    override fun handle(msg : PluginMsg)
+    override fun handle(msg : PluginMsg) : Boolean
     {
         when
         {
@@ -44,5 +44,7 @@ object Drawer : Handler("绘图系统", "1.0")
                 msg.addMsg(Type.IMAGE, File.getPath("temp/$hashCode.png"))
             }
         }
+
+        return true
     }
 }
