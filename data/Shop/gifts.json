@@ -1,0 +1,21 @@
+{
+    "code":200,
+    "items":
+            [
+                {
+                    "id":"VIP礼包",
+                    "name":"VIP礼包",
+                    "price":999999,
+                    "info":"贵族每日签到获得的额外礼包, 羡慕就去买个贵族吧?",
+                    "gifts":
+                            [
+                                {
+                                    "id":"fish:dragon", "probability":100, "count":50
+                                },
+                                {
+                                    "id":"VIP礼包", "probability":50, "count":1
+                                }
+                            ]
+                }
+            ]
+}

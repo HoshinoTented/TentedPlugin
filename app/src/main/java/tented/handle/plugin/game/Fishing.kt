@@ -100,28 +100,32 @@ object Fishing : Handler("钓鱼游戏", "1.0")
                 }
             }
 
-            msg.msg.matches(Regex("卖鱼.+")) ->
+            msg.msg.matches(Regex("卖鱼.+( [0-9]+)?")) ->
             {
-                val id = msg.msg.substring(2)
+                val spaceIndex = msg.msg.lastIndexOf(' ')
+                val id = msg.msg.substring(2, if( spaceIndex != -1 ) spaceIndex else msg.msg.length )
                 val bag = msg.member.bag
 
-                if( bag.remove(id, 1) )
+                val count = if( spaceIndex == -1 ) 1 else msg.msg.substring(spaceIndex + 1).toInt()
+
+                if( bag.remove(id, count.toLong()) )
                 {
                     val fish = FishShop[msg.group].getItemById(id)
 
                     if( fish != null )
                     {
                         val price = fish.info.getLong("price")
+                        val newMoney = price * count
 
-                        msg.member.money += price
+                        msg.member.money += newMoney
 
-                        msg.addMsg(Type.MSG, "出售成功~获得了$price${Money.moneyUnit}${Money.moneyName}呐")
+                        msg.addMsg(Type.MSG, "出售成功~获得了$newMoney${Money.moneyUnit}${Money.moneyName}呐")
                     }
                     else msg.addMsg(Type.MSG, "你怎么可以笨到把别的东西当成鱼来卖啊...\n虽然卖出去了...可是没有拿到钱啊...")
 
                     msg.member.bag = bag        //因为删除失败了, 所以下面的那个就不需要保存了, 优化性能
                 }
-                else msg.addMsg(Type.MSG, "你背包里没有id为${id}的鱼噢...")
+                else msg.addMsg(Type.MSG, "你背包里id为${id}的鱼不足${count}条了啦")
             }
         }
 

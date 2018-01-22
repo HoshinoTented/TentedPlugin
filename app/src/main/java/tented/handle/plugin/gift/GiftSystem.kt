@@ -23,7 +23,8 @@ object GiftSystem : Handler("礼包系统", "1.0")
      * {
      *      "id":"id", "name":"name", "price":price, "info":"info", "gifts":
      *      [
-     *          {"id":"id", "probability":probability(0~100), "count":count(max count)}
+     *          {"id":"id", "probability":probability(0~100), "count":count(max count)}...
+     *                奖品ID              中奖几率                      最大获得数
      *      ]
      * }
      */
