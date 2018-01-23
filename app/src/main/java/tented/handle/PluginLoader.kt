@@ -41,6 +41,7 @@ object PluginLoader
                                                     tented.handle.plugin.Task,
                                                     tented.handle.plugin.HashSerial,
                                                     tented.handle.plugin.guessing.FingerGuess,
+                                                    tented.handle.plugin.tuling.Talk,
                                                     tented.handle.plugin.NumberCall     //这个数字召唤得放最后, 一定!!!
                                               )
 

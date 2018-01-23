@@ -6,12 +6,17 @@
 
     <!-- Bottom Navigation Text -->
     <string name="navigation_master">Master</string>
-    <string name="navigation_home">Home</string>
+    <string name="navigation_tuling">TuLing</string>
     <string name="navigation_other">Other</string>
 
     <!-- Master Fragment Text -->
     <string name="master_group">群号</string>
     <string name="master_uin">主人QQ</string>
     <string name="master_commit">添加/删除 主人</string>
+
+    <!-- TuLing Fragment Text -->
+    <string name="edit_hint">图灵ApiKey</string>
+    <string name="commit_button">添加/删除 Key</string>
+    <string name="keys_button">显示所有Key</string>
 
 </resources>

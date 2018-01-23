@@ -8,18 +8,20 @@ import com.tented.demo.kotlin.R
 import tented.func.ui.Fragment
 
 /**
- * HomeFragment
+ * OtherFragment
  * @author Hoshino Tented
- * @date 2018/1/19 3:35
+ * @date 2018/1/24 4:09
  */
-class HomeFragment : Fragment()
+class OtherFragment : Fragment()
 {
     override fun onCreateView(inflater : LayoutInflater?, container : ViewGroup?, savedInstanceState : Bundle?) : View? =
-        if( inflater != null )
-        {
-            inflater.inflate(R.layout.bottom_home_fragment, container, false)
+            if( inflater != null )
+            {
+                val view = inflater.inflate(R.layout.bottom_other_fragment, container, false)
 
-            //TODO something...
-        }
-        else null
+                //TODO something
+
+                view
+            }
+            else null
 }

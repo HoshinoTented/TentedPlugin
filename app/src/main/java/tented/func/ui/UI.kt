@@ -13,8 +13,9 @@ import android.widget.Button
 import android.widget.Toast
 import org.json.JSONObject
 import tented.util.random
-import tented.func.ui.fragments.HomeFragment
+import tented.func.ui.fragments.TuLingFragment
 import tented.func.ui.fragments.MasterFragment
+import tented.func.ui.fragments.OtherFragment
 import tented.internet.Request
 
 /**
@@ -31,7 +32,8 @@ class UI : AppCompatActivity()              //因为theme继承的是AppCompat�
     private lateinit var v8DownloadUrl : String
 
     private lateinit var masterFragment : MasterFragment        //调单例模式(object)就会弹出个什么。。。constructor must be public的错误。。。还得打注解, 很难看...所以就手动单例了
-    private lateinit var homeFragment : HomeFragment
+    private lateinit var tuLingFragment : TuLingFragment
+    private lateinit var otherFragment : OtherFragment
 
     //所有的控件对象
 
@@ -48,7 +50,8 @@ class UI : AppCompatActivity()              //因为theme继承的是AppCompat�
     private fun doInit()
     {
         this.masterFragment = MasterFragment()
-        this.homeFragment = HomeFragment()
+        this.tuLingFragment = TuLingFragment()
+        this.otherFragment = OtherFragment()
 
         setFragment(this, masterFragment)
 
@@ -153,12 +156,12 @@ class UI : AppCompatActivity()              //因为theme继承的是AppCompat�
             when( it.itemId )
             {
                 R.id.master -> setFragment(this, masterFragment)
-
-                R.id.home, R.id.other ->
+                R.id.home -> setFragment(this, tuLingFragment)
+                R.id.other ->
                 {
                     Toast.makeText(this@UI, fragmentChangeAnswers.random(), Toast.LENGTH_SHORT).show()
 
-                    setFragment(this, homeFragment)
+                    setFragment(this, otherFragment)
                 }
 
                 else -> false
@@ -223,13 +226,9 @@ class UI : AppCompatActivity()              //因为theme继承的是AppCompat�
         //Toast.makeText(this, "哎呀。。。出现了一点小故障呜。。\n联系一下插件作者吧？不过还是先看下源码比较好吧。。。\n", Toast.LENGTH_LONG).show()                //报出虚假的信息
 
         doInit()
-
         doLoad()
-
         doTips()
-
         doUI()
-
         doSetListener()
     }
 }

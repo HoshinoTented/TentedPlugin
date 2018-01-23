@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/apiKey"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_shape"
+        android:gravity="center"
+        android:hint="@string/edit_hint" />
+
+    <Button
+        android:id="@+id/commit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/apiKey"
+        android:background="@drawable/button_shape"
+        android:text="@string/commit_button" />
+
+    <Button
+        android:id="@+id/keys"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/commit"
+        android:background="@drawable/button_shape"
+        android:text="@string/keys_button"/>
+
+</RelativeLayout>
