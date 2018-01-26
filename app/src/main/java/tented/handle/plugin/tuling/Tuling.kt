@@ -72,8 +72,10 @@ val handle : (JSONObject, PluginMsg) -> Unit =
 fun invoke( key : String , msg : PluginMsg , handle : (JSONObject, PluginMsg) -> Unit)=
         handle(
                 JSONObject(
-                        Request("$API?key=$key&info=${msg.msg.replace("@${msg.ats[0].name}", "")}&userid=${msg.group}${msg.uin}")        //这里使用group和uin混合作为userId
-                                .doGet()
+                        {
+                            val url = "$API?key=$key&info=${msg.msg}&userid=${msg.uin}"
+                            String(Http().get(url, true, url, 3000, 15000))
+                        }()
                           ),
                 msg
               )

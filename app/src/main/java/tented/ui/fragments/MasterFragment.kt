@@ -1,4 +1,4 @@
-package tented.func.ui.fragments
+package tented.ui.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,9 +10,9 @@ import android.widget.Toast
 import com.tented.demo.kotlin.R
 import tented.util.isNumber
 import tented.util.random
-import tented.func.ui.Fragment
-import tented.func.ui.masterCommitException
-import tented.func.ui.masterCommitSuccess
+import tented.ui.Fragment
+import tented.ui.masterCommitException
+import tented.ui.masterCommitSuccess
 import tented.util.Member
 
 /**

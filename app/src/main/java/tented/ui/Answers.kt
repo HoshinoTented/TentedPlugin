@@ -1,4 +1,4 @@
-package tented.func.ui
+package tented.ui
 
 /**
  * Answers

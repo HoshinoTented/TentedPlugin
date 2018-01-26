@@ -1,5 +1,6 @@
-package tented.func.ui
+package tented.ui.activities
 
+import android.app.Activity
 import com.tented.demo.kotlin.R
 import android.app.AlertDialog
 import android.content.Intent
@@ -13,16 +14,28 @@ import android.widget.Button
 import android.widget.Toast
 import org.json.JSONObject
 import tented.util.random
-import tented.func.ui.fragments.TuLingFragment
-import tented.func.ui.fragments.MasterFragment
-import tented.func.ui.fragments.OtherFragment
+import tented.ui.fragments.TuLingFragment
+import tented.ui.fragments.MasterFragment
+import tented.ui.fragments.OtherFragment
 import tented.internet.Request
+import tented.ui.clickedMelonAnswers
+import tented.ui.exited
+import tented.ui.fragmentChangeAnswers
+import tented.ui.hasNotTentedDictionaryAnswers
+import tented.ui.hasNotV8Answers
+import tented.ui.hasTentedDictionaryAnswers
+import tented.ui.jumpV8Answers
+import tented.ui.noPermission
+import tented.ui.requestAgain
+import tented.ui.requestPermission
+import tented.ui.setFragment
+import tented.ui.willExit
 
 /**
  * Created by Hoshino Tented on 2017/11/5.
  */
 
-class UI : AppCompatActivity()              //因为theme继承的是AppCompat的主题, 所以Activity也得更改成继承AppCompatActivity, 不然标题栏就会消失喵。。。
+class MainActivity : AppCompatActivity()              //因为theme继承的是AppCompat的主题, 所以Activity也得更改成继承AppCompatActivity, 不然标题栏就会消失喵。。。
 {
     companion object
     {
@@ -159,7 +172,7 @@ class UI : AppCompatActivity()              //因为theme继承的是AppCompat�
                 R.id.home -> setFragment(this, tuLingFragment)
                 R.id.other ->
                 {
-                    Toast.makeText(this@UI, fragmentChangeAnswers.random(), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@MainActivity, fragmentChangeAnswers.random(), Toast.LENGTH_SHORT).show()
 
                     setFragment(this, otherFragment)
                 }
@@ -202,7 +215,6 @@ class UI : AppCompatActivity()              //因为theme继承的是AppCompat�
             clickedBack = false
 
             Toast.makeText(this, exited.random(), Toast.LENGTH_SHORT).show()
-
             finish()            //仅仅退出界面, 因为还有Service什么的。。。
         }
     }

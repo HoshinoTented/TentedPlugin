@@ -1,4 +1,4 @@
-package tented.func.ui.fragments
+package tented.ui.fragments
 
 import android.app.AlertDialog
 import android.os.Bundle
@@ -10,7 +10,7 @@ import android.widget.EditText
 import android.widget.Toast
 import com.tented.demo.kotlin.R
 import tented.file.File
-import tented.func.ui.Fragment
+import tented.ui.Fragment
 import tented.util.getPath
 
 /**

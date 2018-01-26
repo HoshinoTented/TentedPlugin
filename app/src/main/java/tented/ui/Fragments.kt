@@ -1,4 +1,4 @@
-package tented.func.ui
+package tented.ui
 
 import android.app.Activity
 import com.tented.demo.kotlin.R

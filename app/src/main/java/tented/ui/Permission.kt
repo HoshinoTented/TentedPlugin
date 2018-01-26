@@ -1,4 +1,4 @@
-package tented.func.ui
+package tented.ui
 
 import android.Manifest
 import android.app.Activity
@@ -15,9 +15,10 @@ import android.support.v4.content.ContextCompat
  * @date 2018/1/17 3:12
  */
 
-private val permissions : Array<String> = arrayOf(
-        Manifest.permission.WRITE_EXTERNAL_STORAGE
-                                                 )
+private val permissions : Array<String> =
+        arrayOf(
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+               )
 
 /**
  * 返回未获取到的权限

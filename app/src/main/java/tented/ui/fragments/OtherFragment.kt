@@ -1,11 +1,11 @@
-package tented.func.ui.fragments
+package tented.ui.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.tented.demo.kotlin.R
-import tented.func.ui.Fragment
+import tented.ui.Fragment
 
 /**
  * OtherFragment
