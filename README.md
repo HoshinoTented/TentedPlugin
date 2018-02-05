@@ -23,3 +23,7 @@ File, InternetRequest和ShopSystem都有...<br>
 这个破工程应该没有版权吧<br>
 就算有...也随便吧emmm<br>
 也不是很在意
+
+## 不遵循Apache2.0开源协议
+?????  
+.....  
