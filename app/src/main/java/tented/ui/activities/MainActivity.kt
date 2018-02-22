@@ -1,6 +1,5 @@
 package tented.ui.activities
 
-import android.app.Activity
 import com.tented.demo.kotlin.R
 import android.app.AlertDialog
 import android.content.Intent

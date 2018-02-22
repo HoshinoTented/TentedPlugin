@@ -13,7 +13,6 @@ import android.os.Bundle
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory
 import android.support.v7.app.AppCompatActivity
-import android.view.Window
 import android.widget.ImageView
 import com.tented.demo.kotlin.R
 import java.lang.Math.max
@@ -81,8 +80,13 @@ class LoadingActivity : AppCompatActivity()
                 0F, 360F, false, paint
                       )
 
-        icon.setImageDrawable(BitmapDrawable(newBitmap))
+        icon.setImageDrawable(BitmapDrawable(resources, newBitmap))
     }
+
+    /**
+     * 拦截返回键
+     */
+    override fun onBackPressed() = Unit
 
     override fun onCreate(savedInstanceState : Bundle?)
     {
